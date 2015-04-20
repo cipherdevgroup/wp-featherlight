@@ -1,6 +1,6 @@
 {
   "name": "wpsitecare/wp-featherlight",
-  "description": "Categorize your content within wp-admin using admin-specific labels.",
+  "description": "An ultra lightweight jQuery lightbox for WordPress images and galleries.",
   "type": "wordpress-plugin",
   "homepage" : "http://www.wpsitecare.com",
   "license" : "GPL-2.0+",
