@@ -44,11 +44,14 @@ class WP_Featherlight_Scripts {
 	/**
 	 * Load all required CSS files on the front end.
 	 *
+	 * Developers can disable our CSS by filtering wp_featherlight_load_css to
+	 * false within their theme or plugin.
+	 *
 	 * @since  0.1.0
 	 * @access public
 	 * @return void
 	 */
-	function load_css() {
+	public function load_css() {
 		if ( ! apply_filters( 'wp_featherlight_load_css', true ) ) {
 			return;
 		}
@@ -63,27 +66,55 @@ class WP_Featherlight_Scripts {
 	/**
 	 * Load all required JavaScript files on the front end.
 	 *
-	 * @since  0.1.0
-	 * @access public
-	 * @return void
-	 */
-	function load_js() {
-		if ( ! apply_filters( 'wp_featherlight_load_js', true ) ) {
-			return;
-		}
-		$this->load_debug_js();
-		$this->load_packed_js();
-	}
-
-	/**
-	 * Load the default packed and minified version of our JavaScript files.
+	 * Developers can disable our JS by filtering wp_featherlight_load_js to
+	 * false within their theme or plugin.
 	 *
 	 * @since  0.1.0
 	 * @access public
 	 * @return void
 	 */
-	function load_packed_js() {
+	public function load_js() {
+		if ( ! apply_filters( 'wp_featherlight_load_js', true ) ) {
+			return;
+		}
+		$this->load_packed_js();
+		$this->load_unpacked_js();
+	}
+
+	/**
+	 * Helper function to determine whether or not to load a packed version of
+	 * our JavaScript libraries on the front end.
+	 *
+	 * Developers can filter wp_featherlight_enable_packed_js to false if they
+	 * are loading any of the following libraries in their theme or plugin:
+	 *
+	 * http://noelboss.github.io/featherlight/
+	 * http://noelboss.github.io/featherlight/gallery.html
+	 * http://hammerjs.github.io/
+	 *
+	 * @since  0.1.0
+	 * @access protected
+	 * @return bool
+	 */
+	protected function enable_packed_js() {
+		// Never pack JS files if SCRIPT_DEBUG is enabled.
 		if ( empty( $this->suffix ) ) {
+			return false;
+		}
+		return apply_filters( 'wp_featherlight_enable_packed_js', true );
+	}
+
+	/**
+	 * Load the packed and minified version of our JavaScript files. This is the
+	 * preferred loading method as it saves us from adding a bunch of http
+	 * requests, but it could create conflicts with some plugins and themes.
+	 *
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
+	 */
+	public function load_packed_js() {
+		if ( ! $this->enable_packed_js() ) {
 			return;
 		}
 		wp_enqueue_script(
@@ -96,14 +127,16 @@ class WP_Featherlight_Scripts {
 	}
 
 	/**
-	* Load the full un-minified version of our JavaScript files for debugging.
+	 * Load all of our JS files individually to for maximum compatibility.
+	 *
+	 * @todo Add logic to use minified versions of scripts when not debugging.
 	 *
 	 * @since  0.1.0
 	 * @access public
 	 * @return void
 	 */
-	function load_debug_js() {
-		if ( ! empty( $this->suffix ) ) {
+	public function load_unpacked_js() {
+		if ( $this->enable_packed_js() ) {
 			return;
 		}
 		$url = WP_FEATHERLIGHT_URL . 'js/src/';
