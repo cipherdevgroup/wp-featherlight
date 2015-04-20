@@ -90,7 +90,7 @@ class WP_Featherlight_Scripts {
 	 *
 	 * http://noelboss.github.io/featherlight/
 	 * http://noelboss.github.io/featherlight/gallery.html
-	 * http://hammerjs.github.io/
+	 * https://github.com/marcandre/detect_swipe
 	 *
 	 * @since  0.1.0
 	 * @access protected
@@ -141,16 +141,16 @@ class WP_Featherlight_Scripts {
 		}
 		$url = WP_FEATHERLIGHT_URL . 'js/src/';
 		wp_enqueue_script(
-			'hammer',
-			$url . 'vendor/hammer.js',
-			array(),
+			'jquery-detect-swipe',
+			$url . 'vendor/jquery.detect_swipe.js',
+			array( 'jquery' ),
 			'2.0.4',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight',
 			$url . 'vendor/featherlight.js',
-			array( 'jquery' ),
+			array( 'jquery-detect-swipe' ),
 			'1.2.3',
 			true
 		);
