@@ -88,7 +88,7 @@ class WP_Featherlight_Scripts {
 		}
 		wp_enqueue_script(
 			'wp-featherlight',
-			WP_FEATHERLIGHT_URL . 'js/dist/wpFeatherlight.pkgd.js',
+			WP_FEATHERLIGHT_URL . "js/dist/wpFeatherlight.pkgd{$this->suffix}.js",
 			array( 'jquery' ),
 			WP_FEATHERLIGHT_VERSION,
 			true

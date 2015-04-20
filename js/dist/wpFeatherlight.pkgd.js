@@ -1,1 +1,3214 @@
-!function(t,e,n,i){"use strict";function r(t,e,n){return setTimeout(h(t,n),e)}function s(t,e,n){return Array.isArray(t)?(o(t,n[e],n),!0):!1}function o(t,e,n){var r;if(t)if(t.forEach)t.forEach(e,n);else if(t.length!==i)for(r=0;r<t.length;)e.call(n,t[r],r,t),r++;else for(r in t)t.hasOwnProperty(r)&&e.call(n,t[r],r,t)}function a(t,e,n){for(var r=Object.keys(e),s=0;s<r.length;)(!n||n&&t[r[s]]===i)&&(t[r[s]]=e[r[s]]),s++;return t}function c(t,e){return a(t,e,!0)}function u(t,e,n){var i,r=e.prototype;i=t.prototype=Object.create(r),i.constructor=t,i._super=r,n&&a(i,n)}function h(t,e){return function(){return t.apply(e,arguments)}}function l(t,e){return typeof t==ht?t.apply(e?e[0]||i:i,e):t}function p(t,e){return t===i?e:t}function f(t,e,n){o(m(e),function(e){t.addEventListener(e,n,!1)})}function d(t,e,n){o(m(e),function(e){t.removeEventListener(e,n,!1)})}function v(t,e){for(;t;){if(t==e)return!0;t=t.parentNode}return!1}function g(t,e){return t.indexOf(e)>-1}function m(t){return t.trim().split(/\s+/g)}function y(t,e,n){if(t.indexOf&&!n)return t.indexOf(e);for(var i=0;i<t.length;){if(n&&t[i][n]==e||!n&&t[i]===e)return i;i++}return-1}function T(t){return Array.prototype.slice.call(t,0)}function w(t,e,n){for(var i=[],r=[],s=0;s<t.length;){var o=e?t[s][e]:t[s];y(r,o)<0&&i.push(t[s]),r[s]=o,s++}return n&&(i=e?i.sort(function(t,n){return t[e]>n[e]}):i.sort()),i}function E(t,e){for(var n,r,s=e[0].toUpperCase()+e.slice(1),o=0;o<ct.length;){if(n=ct[o],r=n?n+s:e,r in t)return r;o++}return i}function C(){return dt++}function b(t){var e=t.ownerDocument;return e.defaultView||e.parentWindow}function _(t,e){var n=this;this.manager=t,this.callback=e,this.element=t.element,this.target=t.options.inputTarget,this.domHandler=function(e){l(t.options.enable,[t])&&n.handler(e)},this.init()}function I(t){var e,n=t.options.inputClass;return new(e=n?n:mt?j:yt?Y:gt?H:M)(t,x)}function x(t,e,n){var i=n.pointers.length,r=n.changedPointers.length,s=e&_t&&i-r===0,o=e&(xt|At)&&i-r===0;n.isFirst=!!s,n.isFinal=!!o,s&&(t.session={}),n.eventType=e,A(t,n),t.emit("hammer.input",n),t.recognize(n),t.session.prevInput=n}function A(t,e){var n=t.session,i=e.pointers,r=i.length;n.firstInput||(n.firstInput=S(e)),r>1&&!n.firstMultiple?n.firstMultiple=S(e):1===r&&(n.firstMultiple=!1);var s=n.firstInput,o=n.firstMultiple,a=o?o.center:s.center,c=e.center=O(i);e.timeStamp=ft(),e.deltaTime=e.timeStamp-s.timeStamp,e.angle=N(a,c),e.distance=z(a,c),$(n,e),e.offsetDirection=F(e.deltaX,e.deltaY),e.scale=o?P(o.pointers,i):1,e.rotation=o?k(o.pointers,i):0,D(n,e);var u=t.element;v(e.srcEvent.target,u)&&(u=e.srcEvent.target),e.target=u}function $(t,e){var n=e.center,i=t.offsetDelta||{},r=t.prevDelta||{},s=t.prevInput||{};(e.eventType===_t||s.eventType===xt)&&(r=t.prevDelta={x:s.deltaX||0,y:s.deltaY||0},i=t.offsetDelta={x:n.x,y:n.y}),e.deltaX=r.x+(n.x-i.x),e.deltaY=r.y+(n.y-i.y)}function D(t,e){var n,r,s,o,a=t.lastInterval||e,c=e.timeStamp-a.timeStamp;if(e.eventType!=At&&(c>bt||a.velocity===i)){var u=a.deltaX-e.deltaX,h=a.deltaY-e.deltaY,l=R(c,u,h);r=l.x,s=l.y,n=pt(l.x)>pt(l.y)?l.x:l.y,o=F(u,h),t.lastInterval=e}else n=a.velocity,r=a.velocityX,s=a.velocityY,o=a.direction;e.velocity=n,e.velocityX=r,e.velocityY=s,e.direction=o}function S(t){for(var e=[],n=0;n<t.pointers.length;)e[n]={clientX:lt(t.pointers[n].clientX),clientY:lt(t.pointers[n].clientY)},n++;return{timeStamp:ft(),pointers:e,center:O(e),deltaX:t.deltaX,deltaY:t.deltaY}}function O(t){var e=t.length;if(1===e)return{x:lt(t[0].clientX),y:lt(t[0].clientY)};for(var n=0,i=0,r=0;e>r;)n+=t[r].clientX,i+=t[r].clientY,r++;return{x:lt(n/e),y:lt(i/e)}}function R(t,e,n){return{x:e/t||0,y:n/t||0}}function F(t,e){return t===e?$t:pt(t)>=pt(e)?t>0?Dt:St:e>0?Ot:Rt}function z(t,e,n){n||(n=kt);var i=e[n[0]]-t[n[0]],r=e[n[1]]-t[n[1]];return Math.sqrt(i*i+r*r)}function N(t,e,n){n||(n=kt);var i=e[n[0]]-t[n[0]],r=e[n[1]]-t[n[1]];return 180*Math.atan2(r,i)/Math.PI}function k(t,e){return N(e[1],e[0],Pt)-N(t[1],t[0],Pt)}function P(t,e){return z(e[0],e[1],Pt)/z(t[0],t[1],Pt)}function M(){this.evEl=jt,this.evWin=Wt,this.allow=!0,this.pressed=!1,_.apply(this,arguments)}function j(){this.evEl=qt,this.evWin=Ht,_.apply(this,arguments),this.store=this.manager.session.pointerEvents=[]}function W(){this.evTarget=Ut,this.evWin=Gt,this.started=!1,_.apply(this,arguments)}function X(t,e){var n=T(t.touches),i=T(t.changedTouches);return e&(xt|At)&&(n=w(n.concat(i),"identifier",!0)),[n,i]}function Y(){this.evTarget=Qt,this.targetIds={},_.apply(this,arguments)}function q(t,e){var n=T(t.touches),i=this.targetIds;if(e&(_t|It)&&1===n.length)return i[n[0].identifier]=!0,[n,n];var r,s,o=T(t.changedTouches),a=[],c=this.target;if(s=n.filter(function(t){return v(t.target,c)}),e===_t)for(r=0;r<s.length;)i[s[r].identifier]=!0,r++;for(r=0;r<o.length;)i[o[r].identifier]&&a.push(o[r]),e&(xt|At)&&delete i[o[r].identifier],r++;return a.length?[w(s.concat(a),"identifier",!0),a]:void 0}function H(){_.apply(this,arguments);var t=h(this.handler,this);this.touch=new Y(this.manager,t),this.mouse=new M(this.manager,t)}function L(t,e){this.manager=t,this.set(e)}function U(t){if(g(t,ee))return ee;var e=g(t,ne),n=g(t,ie);return e&&n?ne+" "+ie:e||n?e?ne:ie:g(t,te)?te:Jt}function G(t){this.id=C(),this.manager=null,this.options=c(t||{},this.defaults),this.options.enable=p(this.options.enable,!0),this.state=re,this.simultaneous={},this.requireFail=[]}function B(t){return t&ue?"cancel":t&ae?"end":t&oe?"move":t&se?"start":""}function Q(t){return t==Rt?"down":t==Ot?"up":t==Dt?"left":t==St?"right":""}function Z(t,e){var n=e.manager;return n?n.get(t):t}function K(){G.apply(this,arguments)}function V(){K.apply(this,arguments),this.pX=null,this.pY=null}function J(){K.apply(this,arguments)}function tt(){G.apply(this,arguments),this._timer=null,this._input=null}function et(){K.apply(this,arguments)}function nt(){K.apply(this,arguments)}function it(){G.apply(this,arguments),this.pTime=!1,this.pCenter=!1,this._timer=null,this._input=null,this.count=0}function rt(t,e){return e=e||{},e.recognizers=p(e.recognizers,rt.defaults.preset),new st(t,e)}function st(t,e){e=e||{},this.options=c(e,rt.defaults),this.options.inputTarget=this.options.inputTarget||t,this.handlers={},this.session={},this.recognizers=[],this.element=t,this.input=I(this),this.touchAction=new L(this,this.options.touchAction),ot(this,!0),o(e.recognizers,function(t){var e=this.add(new t[0](t[1]));t[2]&&e.recognizeWith(t[2]),t[3]&&e.requireFailure(t[3])},this)}function ot(t,e){var n=t.element;o(t.options.cssProps,function(t,i){n.style[E(n.style,i)]=e?t:""})}function at(t,n){var i=e.createEvent("Event");i.initEvent(t,!0,!0),i.gesture=n,n.target.dispatchEvent(i)}var ct=["","webkit","moz","MS","ms","o"],ut=e.createElement("div"),ht="function",lt=Math.round,pt=Math.abs,ft=Date.now,dt=1,vt=/mobile|tablet|ip(ad|hone|od)|android/i,gt="ontouchstart"in t,mt=E(t,"PointerEvent")!==i,yt=gt&&vt.test(navigator.userAgent),Tt="touch",wt="pen",Et="mouse",Ct="kinect",bt=25,_t=1,It=2,xt=4,At=8,$t=1,Dt=2,St=4,Ot=8,Rt=16,Ft=Dt|St,zt=Ot|Rt,Nt=Ft|zt,kt=["x","y"],Pt=["clientX","clientY"];_.prototype={handler:function(){},init:function(){this.evEl&&f(this.element,this.evEl,this.domHandler),this.evTarget&&f(this.target,this.evTarget,this.domHandler),this.evWin&&f(b(this.element),this.evWin,this.domHandler)},destroy:function(){this.evEl&&d(this.element,this.evEl,this.domHandler),this.evTarget&&d(this.target,this.evTarget,this.domHandler),this.evWin&&d(b(this.element),this.evWin,this.domHandler)}};var Mt={mousedown:_t,mousemove:It,mouseup:xt},jt="mousedown",Wt="mousemove mouseup";u(M,_,{handler:function(t){var e=Mt[t.type];e&_t&&0===t.button&&(this.pressed=!0),e&It&&1!==t.which&&(e=xt),this.pressed&&this.allow&&(e&xt&&(this.pressed=!1),this.callback(this.manager,e,{pointers:[t],changedPointers:[t],pointerType:Et,srcEvent:t}))}});var Xt={pointerdown:_t,pointermove:It,pointerup:xt,pointercancel:At,pointerout:At},Yt={2:Tt,3:wt,4:Et,5:Ct},qt="pointerdown",Ht="pointermove pointerup pointercancel";t.MSPointerEvent&&(qt="MSPointerDown",Ht="MSPointerMove MSPointerUp MSPointerCancel"),u(j,_,{handler:function(t){var e=this.store,n=!1,i=t.type.toLowerCase().replace("ms",""),r=Xt[i],s=Yt[t.pointerType]||t.pointerType,o=s==Tt,a=y(e,t.pointerId,"pointerId");r&_t&&(0===t.button||o)?0>a&&(e.push(t),a=e.length-1):r&(xt|At)&&(n=!0),0>a||(e[a]=t,this.callback(this.manager,r,{pointers:e,changedPointers:[t],pointerType:s,srcEvent:t}),n&&e.splice(a,1))}});var Lt={touchstart:_t,touchmove:It,touchend:xt,touchcancel:At},Ut="touchstart",Gt="touchstart touchmove touchend touchcancel";u(W,_,{handler:function(t){var e=Lt[t.type];if(e===_t&&(this.started=!0),this.started){var n=X.call(this,t,e);e&(xt|At)&&n[0].length-n[1].length===0&&(this.started=!1),this.callback(this.manager,e,{pointers:n[0],changedPointers:n[1],pointerType:Tt,srcEvent:t})}}});var Bt={touchstart:_t,touchmove:It,touchend:xt,touchcancel:At},Qt="touchstart touchmove touchend touchcancel";u(Y,_,{handler:function(t){var e=Bt[t.type],n=q.call(this,t,e);n&&this.callback(this.manager,e,{pointers:n[0],changedPointers:n[1],pointerType:Tt,srcEvent:t})}}),u(H,_,{handler:function(t,e,n){var i=n.pointerType==Tt,r=n.pointerType==Et;if(i)this.mouse.allow=!1;else if(r&&!this.mouse.allow)return;e&(xt|At)&&(this.mouse.allow=!0),this.callback(t,e,n)},destroy:function(){this.touch.destroy(),this.mouse.destroy()}});var Zt=E(ut.style,"touchAction"),Kt=Zt!==i,Vt="compute",Jt="auto",te="manipulation",ee="none",ne="pan-x",ie="pan-y";L.prototype={set:function(t){t==Vt&&(t=this.compute()),Kt&&(this.manager.element.style[Zt]=t),this.actions=t.toLowerCase().trim()},update:function(){this.set(this.manager.options.touchAction)},compute:function(){var t=[];return o(this.manager.recognizers,function(e){l(e.options.enable,[e])&&(t=t.concat(e.getTouchAction()))}),U(t.join(" "))},preventDefaults:function(t){if(!Kt){var e=t.srcEvent,n=t.offsetDirection;if(this.manager.session.prevented)return void e.preventDefault();var i=this.actions,r=g(i,ee),s=g(i,ie),o=g(i,ne);return r||s&&n&Ft||o&&n&zt?this.preventSrc(e):void 0}},preventSrc:function(t){this.manager.session.prevented=!0,t.preventDefault()}};var re=1,se=2,oe=4,ae=8,ce=ae,ue=16,he=32;G.prototype={defaults:{},set:function(t){return a(this.options,t),this.manager&&this.manager.touchAction.update(),this},recognizeWith:function(t){if(s(t,"recognizeWith",this))return this;var e=this.simultaneous;return t=Z(t,this),e[t.id]||(e[t.id]=t,t.recognizeWith(this)),this},dropRecognizeWith:function(t){return s(t,"dropRecognizeWith",this)?this:(t=Z(t,this),delete this.simultaneous[t.id],this)},requireFailure:function(t){if(s(t,"requireFailure",this))return this;var e=this.requireFail;return t=Z(t,this),-1===y(e,t)&&(e.push(t),t.requireFailure(this)),this},dropRequireFailure:function(t){if(s(t,"dropRequireFailure",this))return this;t=Z(t,this);var e=y(this.requireFail,t);return e>-1&&this.requireFail.splice(e,1),this},hasRequireFailures:function(){return this.requireFail.length>0},canRecognizeWith:function(t){return!!this.simultaneous[t.id]},emit:function(t){function e(e){n.manager.emit(n.options.event+(e?B(i):""),t)}var n=this,i=this.state;ae>i&&e(!0),e(),i>=ae&&e(!0)},tryEmit:function(t){return this.canEmit()?this.emit(t):void(this.state=he)},canEmit:function(){for(var t=0;t<this.requireFail.length;){if(!(this.requireFail[t].state&(he|re)))return!1;t++}return!0},recognize:function(t){var e=a({},t);return l(this.options.enable,[this,e])?(this.state&(ce|ue|he)&&(this.state=re),this.state=this.process(e),void(this.state&(se|oe|ae|ue)&&this.tryEmit(e))):(this.reset(),void(this.state=he))},process:function(t){},getTouchAction:function(){},reset:function(){}},u(K,G,{defaults:{pointers:1},attrTest:function(t){var e=this.options.pointers;return 0===e||t.pointers.length===e},process:function(t){var e=this.state,n=t.eventType,i=e&(se|oe),r=this.attrTest(t);return i&&(n&At||!r)?e|ue:i||r?n&xt?e|ae:e&se?e|oe:se:he}}),u(V,K,{defaults:{event:"pan",threshold:10,pointers:1,direction:Nt},getTouchAction:function(){var t=this.options.direction,e=[];return t&Ft&&e.push(ie),t&zt&&e.push(ne),e},directionTest:function(t){var e=this.options,n=!0,i=t.distance,r=t.direction,s=t.deltaX,o=t.deltaY;return r&e.direction||(e.direction&Ft?(r=0===s?$t:0>s?Dt:St,n=s!=this.pX,i=Math.abs(t.deltaX)):(r=0===o?$t:0>o?Ot:Rt,n=o!=this.pY,i=Math.abs(t.deltaY))),t.direction=r,n&&i>e.threshold&&r&e.direction},attrTest:function(t){return K.prototype.attrTest.call(this,t)&&(this.state&se||!(this.state&se)&&this.directionTest(t))},emit:function(t){this.pX=t.deltaX,this.pY=t.deltaY;var e=Q(t.direction);e&&this.manager.emit(this.options.event+e,t),this._super.emit.call(this,t)}}),u(J,K,{defaults:{event:"pinch",threshold:0,pointers:2},getTouchAction:function(){return[ee]},attrTest:function(t){return this._super.attrTest.call(this,t)&&(Math.abs(t.scale-1)>this.options.threshold||this.state&se)},emit:function(t){if(this._super.emit.call(this,t),1!==t.scale){var e=t.scale<1?"in":"out";this.manager.emit(this.options.event+e,t)}}}),u(tt,G,{defaults:{event:"press",pointers:1,time:500,threshold:5},getTouchAction:function(){return[Jt]},process:function(t){var e=this.options,n=t.pointers.length===e.pointers,i=t.distance<e.threshold,s=t.deltaTime>e.time;if(this._input=t,!i||!n||t.eventType&(xt|At)&&!s)this.reset();else if(t.eventType&_t)this.reset(),this._timer=r(function(){this.state=ce,this.tryEmit()},e.time,this);else if(t.eventType&xt)return ce;return he},reset:function(){clearTimeout(this._timer)},emit:function(t){this.state===ce&&(t&&t.eventType&xt?this.manager.emit(this.options.event+"up",t):(this._input.timeStamp=ft(),this.manager.emit(this.options.event,this._input)))}}),u(et,K,{defaults:{event:"rotate",threshold:0,pointers:2},getTouchAction:function(){return[ee]},attrTest:function(t){return this._super.attrTest.call(this,t)&&(Math.abs(t.rotation)>this.options.threshold||this.state&se)}}),u(nt,K,{defaults:{event:"swipe",threshold:10,velocity:.65,direction:Ft|zt,pointers:1},getTouchAction:function(){return V.prototype.getTouchAction.call(this)},attrTest:function(t){var e,n=this.options.direction;return n&(Ft|zt)?e=t.velocity:n&Ft?e=t.velocityX:n&zt&&(e=t.velocityY),this._super.attrTest.call(this,t)&&n&t.direction&&t.distance>this.options.threshold&&pt(e)>this.options.velocity&&t.eventType&xt},emit:function(t){var e=Q(t.direction);e&&this.manager.emit(this.options.event+e,t),this.manager.emit(this.options.event,t)}}),u(it,G,{defaults:{event:"tap",pointers:1,taps:1,interval:300,time:250,threshold:2,posThreshold:10},getTouchAction:function(){return[te]},process:function(t){var e=this.options,n=t.pointers.length===e.pointers,i=t.distance<e.threshold,s=t.deltaTime<e.time;if(this.reset(),t.eventType&_t&&0===this.count)return this.failTimeout();if(i&&s&&n){if(t.eventType!=xt)return this.failTimeout();var o=this.pTime?t.timeStamp-this.pTime<e.interval:!0,a=!this.pCenter||z(this.pCenter,t.center)<e.posThreshold;this.pTime=t.timeStamp,this.pCenter=t.center,a&&o?this.count+=1:this.count=1,this._input=t;var c=this.count%e.taps;if(0===c)return this.hasRequireFailures()?(this._timer=r(function(){this.state=ce,this.tryEmit()},e.interval,this),se):ce}return he},failTimeout:function(){return this._timer=r(function(){this.state=he},this.options.interval,this),he},reset:function(){clearTimeout(this._timer)},emit:function(){this.state==ce&&(this._input.tapCount=this.count,this.manager.emit(this.options.event,this._input))}}),rt.VERSION="2.0.4",rt.defaults={domEvents:!1,touchAction:Vt,enable:!0,inputTarget:null,inputClass:null,preset:[[et,{enable:!1}],[J,{enable:!1},["rotate"]],[nt,{direction:Ft}],[V,{direction:Ft},["swipe"]],[it],[it,{event:"doubletap",taps:2},["tap"]],[tt]],cssProps:{userSelect:"none",touchSelect:"none",touchCallout:"none",contentZooming:"none",userDrag:"none",tapHighlightColor:"rgba(0,0,0,0)"}};var le=1,pe=2;st.prototype={set:function(t){return a(this.options,t),t.touchAction&&this.touchAction.update(),t.inputTarget&&(this.input.destroy(),this.input.target=t.inputTarget,this.input.init()),this},stop:function(t){this.session.stopped=t?pe:le},recognize:function(t){var e=this.session;if(!e.stopped){this.touchAction.preventDefaults(t);var n,i=this.recognizers,r=e.curRecognizer;(!r||r&&r.state&ce)&&(r=e.curRecognizer=null);for(var s=0;s<i.length;)n=i[s],e.stopped===pe||r&&n!=r&&!n.canRecognizeWith(r)?n.reset():n.recognize(t),!r&&n.state&(se|oe|ae)&&(r=e.curRecognizer=n),s++}},get:function(t){if(t instanceof G)return t;for(var e=this.recognizers,n=0;n<e.length;n++)if(e[n].options.event==t)return e[n];return null},add:function(t){if(s(t,"add",this))return this;var e=this.get(t.options.event);return e&&this.remove(e),this.recognizers.push(t),t.manager=this,this.touchAction.update(),t},remove:function(t){if(s(t,"remove",this))return this;var e=this.recognizers;return t=this.get(t),e.splice(y(e,t),1),this.touchAction.update(),this},on:function(t,e){var n=this.handlers;return o(m(t),function(t){n[t]=n[t]||[],n[t].push(e)}),this},off:function(t,e){var n=this.handlers;return o(m(t),function(t){e?n[t].splice(y(n[t],e),1):delete n[t]}),this},emit:function(t,e){this.options.domEvents&&at(t,e);var n=this.handlers[t]&&this.handlers[t].slice();if(n&&n.length){e.type=t,e.preventDefault=function(){e.srcEvent.preventDefault()};for(var i=0;i<n.length;)n[i](e),i++}},destroy:function(){this.element&&ot(this,!1),this.handlers={},this.session={},this.input.destroy(),this.element=null}},a(rt,{INPUT_START:_t,INPUT_MOVE:It,INPUT_END:xt,INPUT_CANCEL:At,STATE_POSSIBLE:re,STATE_BEGAN:se,STATE_CHANGED:oe,STATE_ENDED:ae,STATE_RECOGNIZED:ce,STATE_CANCELLED:ue,STATE_FAILED:he,DIRECTION_NONE:$t,DIRECTION_LEFT:Dt,DIRECTION_RIGHT:St,DIRECTION_UP:Ot,DIRECTION_DOWN:Rt,DIRECTION_HORIZONTAL:Ft,DIRECTION_VERTICAL:zt,DIRECTION_ALL:Nt,Manager:st,Input:_,TouchAction:L,TouchInput:Y,MouseInput:M,PointerEventInput:j,TouchMouseInput:H,SingleTouchInput:W,Recognizer:G,AttrRecognizer:K,Tap:it,Pan:V,Swipe:nt,Pinch:J,Rotate:et,Press:tt,on:f,off:d,each:o,merge:c,extend:a,inherit:u,bindFn:h,prefixed:E}),typeof define==ht&&define.amd?define(function(){return rt}):"undefined"!=typeof module&&module.exports?module.exports=rt:t[n]=rt}(window,document,"Hammer"),function(t){"use strict";function e(t,n){if(!(this instanceof e)){var i=new e(t,n);return i.open(),i}this.id=e.id++,this.setup(t,n),this.chainCallbacks(e._callbackChain)}if("undefined"==typeof t)return void("console"in window&&window.console.info("Too much lightness, Featherlight needs jQuery."));var n=[],i=function(e){return n=t.grep(n,function(t){return t!==e&&t.$instance.closest("body").length>0})},r=function(t,e){var n={},i=new RegExp("^"+e+"([A-Z])(.*)");for(var r in t){var s=r.match(i);if(s){var o=(s[1]+s[2].replace(/([A-Z])/g,"-$1")).toLowerCase();n[o]=t[r]}}return n},s={keyup:"onKeyUp",resize:"onResize"},o=function(n){t.each(e.opened().reverse(),function(){return n.isDefaultPrevented()||!1!==this[s[n.type]](n)?void 0:(n.preventDefault(),n.stopPropagation(),!1)})},a=function(n){if(n!==e._globalHandlerInstalled){e._globalHandlerInstalled=n;var i=t.map(s,function(t,n){return n+"."+e.prototype.namespace}).join(" ");t(window)[n?"on":"off"](i,o)}};e.prototype={constructor:e,namespace:"featherlight",targetAttr:"data-featherlight",variant:null,resetCss:!1,background:null,openTrigger:"click",closeTrigger:"click",filter:null,root:"body",openSpeed:250,closeSpeed:250,closeOnClick:"background",closeOnEsc:!0,closeIcon:"&#10005;",loading:"",otherClose:null,beforeOpen:t.noop,beforeContent:t.noop,beforeClose:t.noop,afterOpen:t.noop,afterContent:t.noop,afterClose:t.noop,onKeyUp:t.noop,onResize:t.noop,type:null,contentFilters:["jquery","image","html","ajax","iframe","text"],setup:function(e,n){"object"!=typeof e||e instanceof t!=!1||n||(n=e,e=void 0);var i=t.extend(this,n,{target:e}),r=i.resetCss?i.namespace+"-reset":i.namespace,s=t(i.background||['<div class="'+r+"-loading "+r+'">','<div class="'+r+'-content">','<span class="'+r+"-close-icon "+i.namespace+'-close">',i.closeIcon,"</span>",'<div class="'+i.namespace+'-inner">'+i.loading+"</div>","</div>","</div>"].join("")),o="."+i.namespace+"-close"+(i.otherClose?","+i.otherClose:"");return i.$instance=s.clone().addClass(i.variant),i.$instance.on(i.closeTrigger+"."+i.namespace,function(e){var n=t(e.target);("background"===i.closeOnClick&&n.is("."+i.namespace)||"anywhere"===i.closeOnClick||n.closest(o).length)&&(e.preventDefault(),i.close())}),this},getContent:function(){var e=this,n=this.constructor.contentFilters,i=function(t){return e.$currentTarget&&e.$currentTarget.attr(t)},r=i(e.targetAttr),s=e.target||r||"",o=n[e.type];if(!o&&s in n&&(o=n[s],s=e.target&&r),s=s||i("href")||"",!o)for(var a in n)e[a]&&(o=n[a],s=e[a]);if(!o){var c=s;if(s=null,t.each(e.contentFilters,function(){return o=n[this],o.test&&(s=o.test(c)),!s&&o.regex&&c.match&&c.match(o.regex)&&(s=c),!s}),!s)return"console"in window&&window.console.error("Featherlight: no content filter found "+(c?' for "'+c+'"':" (no target specified)")),!1}return o.process.call(e,s)},setContent:function(e){var n=this;return(e.is("iframe")||t("iframe",e).length>0)&&n.$instance.addClass(n.namespace+"-iframe"),n.$instance.removeClass(n.namespace+"-loading"),n.$instance.find("."+n.namespace+"-inner").slice(1).remove().end().replaceWith(t.contains(n.$instance[0],e[0])?"":e),n.$content=e.addClass(n.namespace+"-inner"),n},open:function(e){var i=this;if(i.$instance.hide().appendTo(i.root),!(e&&e.isDefaultPrevented()||i.beforeOpen(e)===!1)){e&&e.preventDefault();var r=i.getContent();if(r)return n.push(i),a(!0),i.$instance.fadeIn(i.openSpeed),i.beforeContent(e),t.when(r).always(function(t){i.setContent(t),i.afterContent(e)}).then(i.$instance.promise()).done(function(){i.afterOpen(e)})}return i.$instance.detach(),t.Deferred().reject().promise()},close:function(e){var n=this,r=t.Deferred();return n.beforeClose(e)===!1?r.reject():(0===i(n).length&&a(!1),n.$instance.fadeOut(n.closeSpeed,function(){n.$instance.detach(),n.afterClose(e),r.resolve()})),r.promise()},chainCallbacks:function(e){for(var n in e)this[n]=t.proxy(e[n],this,t.proxy(this[n],this))}},t.extend(e,{id:0,autoBind:"[data-featherlight]",defaults:e.prototype,contentFilters:{jquery:{regex:/^[#.]\w/,test:function(e){return e instanceof t&&e},process:function(e){return t(e).clone(!0)}},image:{regex:/\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,process:function(e){var n=this,i=t.Deferred(),r=new Image,s=t('<img src="'+e+'" alt="" class="'+n.namespace+'-image" />');return r.onload=function(){s.naturalWidth=r.width,s.naturalHeight=r.height,i.resolve(s)},r.onerror=function(){i.reject(s)},r.src=e,i.promise()}},html:{regex:/^\s*<[\w!][^<]*>/,process:function(e){return t(e)}},ajax:{regex:/./,process:function(e){var n=t.Deferred(),i=t("<div></div>").load(e,function(t,e){"error"!==e&&n.resolve(i.contents()),n.fail()});return n.promise()}},iframe:{process:function(e){var n=new t.Deferred,i=t("<iframe/>").hide().attr("src",e).css(r(this,"iframe")).on("load",function(){n.resolve(i.show())}).appendTo(this.$instance.find("."+this.namespace+"-content"));return n.promise()}},text:{process:function(e){return t("<div>",{text:e})}}},functionAttributes:["beforeOpen","afterOpen","beforeContent","afterContent","beforeClose","afterClose"],readElementConfig:function(e,n){var i=this,r=new RegExp("^data-"+n+"-(.*)"),s={};return e&&e.attributes&&t.each(e.attributes,function(){var e=this.name.match(r);if(e){var n=this.value,o=t.camelCase(e[1]);if(t.inArray(o,i.functionAttributes)>=0)n=new Function(n);else try{n=t.parseJSON(n)}catch(a){}s[o]=n}}),s},extend:function(e,n){var i=function(){this.constructor=e};return i.prototype=this.prototype,e.prototype=new i,e.__super__=this.prototype,t.extend(e,this,n),e.defaults=e.prototype,e},attach:function(e,n,i){var r=this;"object"!=typeof n||n instanceof t!=!1||i||(i=n,n=void 0),i=t.extend({},i);var s=i.namespace||r.defaults.namespace,o=t.extend({},r.defaults,r.readElementConfig(e[0],s),i);return e.on(o.openTrigger+"."+o.namespace,o.filter,function(s){var a=t.extend({$source:e,$currentTarget:t(this)},r.readElementConfig(e[0],o.namespace),r.readElementConfig(this,o.namespace),i);new r(n,a).open(s)}),e},current:function(){var t=this.opened();return t[t.length-1]||null},opened:function(){var e=this;return i(),t.grep(n,function(t){return t instanceof e})},close:function(){var t=this.current();return t?t.close():void 0},_onReady:function(){var e=this;e.autoBind&&(e.attach(t(document),{filter:e.autoBind}),t(e.autoBind).filter("[data-featherlight-filter]").each(function(){e.attach(t(this))}))},_callbackChain:{onKeyUp:function(t,e){return 27===e.keyCode?(this.closeOnEsc&&this.$instance.find("."+this.namespace+"-close:first").click(),!1):t(e)},onResize:function(t,e){if(this.$content.naturalWidth){var n=this.$content.naturalWidth,i=this.$content.naturalHeight;this.$content.css("width","").css("height","");var r=Math.max(n/parseInt(this.$content.parent().css("width"),10),i/parseInt(this.$content.parent().css("height"),10));r>1&&this.$content.css("width",""+n/r+"px").css("height",""+i/r+"px")}return t(e)},afterContent:function(t,e){var n=t(e);return this.onResize(e),n}}}),t.featherlight=e,t.fn.featherlight=function(t,n){return e.attach(this,t,n)},t(document).ready(function(){e._onReady()})}(jQuery),function(t){"use strict";function e(n,i){if(!(this instanceof e)){var r=new e(t.extend({$source:n,$currentTarget:n.first()},i));return r.open(),r}t.featherlight.apply(this,arguments),this.chainCallbacks(a)}var n=function(t){window.console&&window.console.warn&&window.console.warn("FeatherlightGallery: "+t)};if("undefined"==typeof t)return n("Too much lightness, Featherlight needs jQuery.");if(!t.featherlight)return n("Load the featherlight plugin before the gallery plugin");var i="ontouchstart"in document.documentElement,r=t.event&&t.event.special.swipeleft&&t,s=window.Hammer&&function(t){var e=new window.Hammer.Manager(t[0]);return e.add(new window.Hammer.Swipe),e},o=i&&(r||s);i&&!o&&n("No compatible swipe library detected; one must be included before featherlightGallery for swipe motions to navigate the galleries.");var a={afterClose:function(t,e){var n=this;return n.$instance.off("next."+n.namespace+" previous."+n.namespace),n._swiper&&(n._swiper.off("swipeleft",n._swipeleft).off("swiperight",n._swiperight),n._swiper=null),t(e)},beforeOpen:function(t,e){var n=this;return n.$instance.on("next."+n.namespace+" previous."+n.namespace,function(t){var e="next"===t.type?1:-1;n.navigateTo(n.currentNavigation()+e)}),o?n._swiper=o(n.$instance).on("swipeleft",n._swipeleft=function(){n.$instance.trigger("next")}).on("swiperight",n._swiperight=function(){n.$instance.trigger("previous")}):n.$instance.find("."+n.namespace+"-content").append(n.createNavigation("previous")).append(n.createNavigation("next")),t(e)},onKeyUp:function(t,e){var n={37:"previous",39:"next"}[e.keyCode];return n?(this.$instance.trigger(n),!1):t(e)}};t.featherlight.extend(e,{autoBind:"[data-featherlight-gallery]"}),t.extend(e.prototype,{previousIcon:"&#9664;",nextIcon:"&#9654;",galleryFadeIn:100,galleryFadeOut:300,images:function(){return this.filter?this.$source.find(this.filter):this.$source},currentNavigation:function(){return this.images().index(this.$currentTarget)},navigateTo:function(e){var n=this,i=n.images(),r=i.length,s=n.$instance.find("."+n.namespace+"-inner");return e=(e%r+r)%r,n.$currentTarget=i.eq(e),n.beforeContent(),t.when(n.getContent(),s.fadeTo(n.galleryFadeOut,.2)).always(function(t){n.setContent(t),n.afterContent(),t.fadeTo(n.galleryFadeIn,1)})},createNavigation:function(e){var n=this;return t('<span title="'+e+'" class="'+this.namespace+"-"+e+'"><span>'+this[e+"Icon"]+"</span></span>").click(function(){t(this).trigger(e+"."+n.namespace)})}}),t.featherlightGallery=e,t.fn.featherlightGallery=function(t){return e.attach(this,t)},t(document).ready(function(){e._onReady()})}(jQuery),function(t,e,n){"use strict";function i(t,n){return n.hostname&&n.hostname!==location.hostname?!1:/(png|jpg|jpeg|gif|tiff|bmp)$/.test(e(n).attr("href"))}function r(){e("a[href]").filter(i).attr("data-featherlight","image")}function s(){var t=e(".gallery-item a");0!==t.length&&t.featherlightGallery({openSpeed:300})}function o(){r(),s()}jQuery(function(){o()})}(this,jQuery);
+/*! Hammer.JS - v2.0.4 - 2014-09-28
+ * http://hammerjs.github.io/
+ *
+ * Copyright (c) 2014 Jorik Tangelder;
+ * Licensed under the MIT license */
+(function(window, document, exportName, undefined) {
+  'use strict';
+
+var VENDOR_PREFIXES = ['', 'webkit', 'moz', 'MS', 'ms', 'o'];
+var TEST_ELEMENT = document.createElement('div');
+
+var TYPE_FUNCTION = 'function';
+
+var round = Math.round;
+var abs = Math.abs;
+var now = Date.now;
+
+/**
+ * set a timeout with a given scope
+ * @param {Function} fn
+ * @param {Number} timeout
+ * @param {Object} context
+ * @returns {number}
+ */
+function setTimeoutContext(fn, timeout, context) {
+	return setTimeout(bindFn(fn, context), timeout);
+}
+
+/**
+ * if the argument is an array, we want to execute the fn on each entry
+ * if it aint an array we don't want to do a thing.
+ * this is used by all the methods that accept a single and array argument.
+ * @param {*|Array} arg
+ * @param {String} fn
+ * @param {Object} [context]
+ * @returns {Boolean}
+ */
+function invokeArrayArg(arg, fn, context) {
+	if (Array.isArray(arg)) {
+		each(arg, context[fn], context);
+		return true;
+	}
+	return false;
+}
+
+/**
+ * walk objects and arrays
+ * @param {Object} obj
+ * @param {Function} iterator
+ * @param {Object} context
+ */
+function each(obj, iterator, context) {
+	var i;
+
+	if (!obj) {
+		return;
+	}
+
+	if (obj.forEach) {
+		obj.forEach(iterator, context);
+	} else if (obj.length !== undefined) {
+		i = 0;
+		while (i < obj.length) {
+			iterator.call(context, obj[i], i, obj);
+			i++;
+		}
+	} else {
+		for (i in obj) {
+			obj.hasOwnProperty(i) && iterator.call(context, obj[i], i, obj);
+		}
+	}
+}
+
+/**
+ * extend object.
+ * means that properties in dest will be overwritten by the ones in src.
+ * @param {Object} dest
+ * @param {Object} src
+ * @param {Boolean} [merge]
+ * @returns {Object} dest
+ */
+function extend(dest, src, merge) {
+	var keys = Object.keys(src);
+	var i = 0;
+	while (i < keys.length) {
+		if (!merge || (merge && dest[keys[i]] === undefined)) {
+			dest[keys[i]] = src[keys[i]];
+		}
+		i++;
+	}
+	return dest;
+}
+
+/**
+ * merge the values from src in the dest.
+ * means that properties that exist in dest will not be overwritten by src
+ * @param {Object} dest
+ * @param {Object} src
+ * @returns {Object} dest
+ */
+function merge(dest, src) {
+	return extend(dest, src, true);
+}
+
+/**
+ * simple class inheritance
+ * @param {Function} child
+ * @param {Function} base
+ * @param {Object} [properties]
+ */
+function inherit(child, base, properties) {
+	var baseP = base.prototype,
+		childP;
+
+	childP = child.prototype = Object.create(baseP);
+	childP.constructor = child;
+	childP._super = baseP;
+
+	if (properties) {
+		extend(childP, properties);
+	}
+}
+
+/**
+ * simple function bind
+ * @param {Function} fn
+ * @param {Object} context
+ * @returns {Function}
+ */
+function bindFn(fn, context) {
+	return function boundFn() {
+		return fn.apply(context, arguments);
+	};
+}
+
+/**
+ * let a boolean value also be a function that must return a boolean
+ * this first item in args will be used as the context
+ * @param {Boolean|Function} val
+ * @param {Array} [args]
+ * @returns {Boolean}
+ */
+function boolOrFn(val, args) {
+	if (typeof val == TYPE_FUNCTION) {
+		return val.apply(args ? args[0] || undefined : undefined, args);
+	}
+	return val;
+}
+
+/**
+ * use the val2 when val1 is undefined
+ * @param {*} val1
+ * @param {*} val2
+ * @returns {*}
+ */
+function ifUndefined(val1, val2) {
+	return (val1 === undefined) ? val2 : val1;
+}
+
+/**
+ * addEventListener with multiple events at once
+ * @param {EventTarget} target
+ * @param {String} types
+ * @param {Function} handler
+ */
+function addEventListeners(target, types, handler) {
+	each(splitStr(types), function(type) {
+		target.addEventListener(type, handler, false);
+	});
+}
+
+/**
+ * removeEventListener with multiple events at once
+ * @param {EventTarget} target
+ * @param {String} types
+ * @param {Function} handler
+ */
+function removeEventListeners(target, types, handler) {
+	each(splitStr(types), function(type) {
+		target.removeEventListener(type, handler, false);
+	});
+}
+
+/**
+ * find if a node is in the given parent
+ * @method hasParent
+ * @param {HTMLElement} node
+ * @param {HTMLElement} parent
+ * @return {Boolean} found
+ */
+function hasParent(node, parent) {
+	while (node) {
+		if (node == parent) {
+			return true;
+		}
+		node = node.parentNode;
+	}
+	return false;
+}
+
+/**
+ * small indexOf wrapper
+ * @param {String} str
+ * @param {String} find
+ * @returns {Boolean} found
+ */
+function inStr(str, find) {
+	return str.indexOf(find) > -1;
+}
+
+/**
+ * split string on whitespace
+ * @param {String} str
+ * @returns {Array} words
+ */
+function splitStr(str) {
+	return str.trim().split(/\s+/g);
+}
+
+/**
+ * find if a array contains the object using indexOf or a simple polyFill
+ * @param {Array} src
+ * @param {String} find
+ * @param {String} [findByKey]
+ * @return {Boolean|Number} false when not found, or the index
+ */
+function inArray(src, find, findByKey) {
+	if (src.indexOf && !findByKey) {
+		return src.indexOf(find);
+	} else {
+		var i = 0;
+		while (i < src.length) {
+			if ((findByKey && src[i][findByKey] == find) || (!findByKey && src[i] === find)) {
+				return i;
+			}
+			i++;
+		}
+		return -1;
+	}
+}
+
+/**
+ * convert array-like objects to real arrays
+ * @param {Object} obj
+ * @returns {Array}
+ */
+function toArray(obj) {
+	return Array.prototype.slice.call(obj, 0);
+}
+
+/**
+ * unique array with objects based on a key (like 'id') or just by the array's value
+ * @param {Array} src [{id:1},{id:2},{id:1}]
+ * @param {String} [key]
+ * @param {Boolean} [sort=False]
+ * @returns {Array} [{id:1},{id:2}]
+ */
+function uniqueArray(src, key, sort) {
+	var results = [];
+	var values = [];
+	var i = 0;
+
+	while (i < src.length) {
+		var val = key ? src[i][key] : src[i];
+		if (inArray(values, val) < 0) {
+			results.push(src[i]);
+		}
+		values[i] = val;
+		i++;
+	}
+
+	if (sort) {
+		if (!key) {
+			results = results.sort();
+		} else {
+			results = results.sort(function sortUniqueArray(a, b) {
+				return a[key] > b[key];
+			});
+		}
+	}
+
+	return results;
+}
+
+/**
+ * get the prefixed property
+ * @param {Object} obj
+ * @param {String} property
+ * @returns {String|Undefined} prefixed
+ */
+function prefixed(obj, property) {
+	var prefix, prop;
+	var camelProp = property[0].toUpperCase() + property.slice(1);
+
+	var i = 0;
+	while (i < VENDOR_PREFIXES.length) {
+		prefix = VENDOR_PREFIXES[i];
+		prop = (prefix) ? prefix + camelProp : property;
+
+		if (prop in obj) {
+			return prop;
+		}
+		i++;
+	}
+	return undefined;
+}
+
+/**
+ * get a unique id
+ * @returns {number} uniqueId
+ */
+var _uniqueId = 1;
+function uniqueId() {
+	return _uniqueId++;
+}
+
+/**
+ * get the window object of an element
+ * @param {HTMLElement} element
+ * @returns {DocumentView|Window}
+ */
+function getWindowForElement(element) {
+	var doc = element.ownerDocument;
+	return (doc.defaultView || doc.parentWindow);
+}
+
+var MOBILE_REGEX = /mobile|tablet|ip(ad|hone|od)|android/i;
+
+var SUPPORT_TOUCH = ('ontouchstart' in window);
+var SUPPORT_POINTER_EVENTS = prefixed(window, 'PointerEvent') !== undefined;
+var SUPPORT_ONLY_TOUCH = SUPPORT_TOUCH && MOBILE_REGEX.test(navigator.userAgent);
+
+var INPUT_TYPE_TOUCH = 'touch';
+var INPUT_TYPE_PEN = 'pen';
+var INPUT_TYPE_MOUSE = 'mouse';
+var INPUT_TYPE_KINECT = 'kinect';
+
+var COMPUTE_INTERVAL = 25;
+
+var INPUT_START = 1;
+var INPUT_MOVE = 2;
+var INPUT_END = 4;
+var INPUT_CANCEL = 8;
+
+var DIRECTION_NONE = 1;
+var DIRECTION_LEFT = 2;
+var DIRECTION_RIGHT = 4;
+var DIRECTION_UP = 8;
+var DIRECTION_DOWN = 16;
+
+var DIRECTION_HORIZONTAL = DIRECTION_LEFT | DIRECTION_RIGHT;
+var DIRECTION_VERTICAL = DIRECTION_UP | DIRECTION_DOWN;
+var DIRECTION_ALL = DIRECTION_HORIZONTAL | DIRECTION_VERTICAL;
+
+var PROPS_XY = ['x', 'y'];
+var PROPS_CLIENT_XY = ['clientX', 'clientY'];
+
+/**
+ * create new input type manager
+ * @param {Manager} manager
+ * @param {Function} callback
+ * @returns {Input}
+ * @constructor
+ */
+function Input(manager, callback) {
+	var self = this;
+	this.manager = manager;
+	this.callback = callback;
+	this.element = manager.element;
+	this.target = manager.options.inputTarget;
+
+	// smaller wrapper around the handler, for the scope and the enabled state of the manager,
+	// so when disabled the input events are completely bypassed.
+	this.domHandler = function(ev) {
+		if (boolOrFn(manager.options.enable, [manager])) {
+			self.handler(ev);
+		}
+	};
+
+	this.init();
+
+}
+
+Input.prototype = {
+	/**
+	 * should handle the inputEvent data and trigger the callback
+	 * @virtual
+	 */
+	handler: function() { },
+
+	/**
+	 * bind the events
+	 */
+	init: function() {
+		this.evEl && addEventListeners(this.element, this.evEl, this.domHandler);
+		this.evTarget && addEventListeners(this.target, this.evTarget, this.domHandler);
+		this.evWin && addEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
+	},
+
+	/**
+	 * unbind the events
+	 */
+	destroy: function() {
+		this.evEl && removeEventListeners(this.element, this.evEl, this.domHandler);
+		this.evTarget && removeEventListeners(this.target, this.evTarget, this.domHandler);
+		this.evWin && removeEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
+	}
+};
+
+/**
+ * create new input type manager
+ * called by the Manager constructor
+ * @param {Hammer} manager
+ * @returns {Input}
+ */
+function createInputInstance(manager) {
+	var Type;
+	var inputClass = manager.options.inputClass;
+
+	if (inputClass) {
+		Type = inputClass;
+	} else if (SUPPORT_POINTER_EVENTS) {
+		Type = PointerEventInput;
+	} else if (SUPPORT_ONLY_TOUCH) {
+		Type = TouchInput;
+	} else if (!SUPPORT_TOUCH) {
+		Type = MouseInput;
+	} else {
+		Type = TouchMouseInput;
+	}
+	return new (Type)(manager, inputHandler);
+}
+
+/**
+ * handle input events
+ * @param {Manager} manager
+ * @param {String} eventType
+ * @param {Object} input
+ */
+function inputHandler(manager, eventType, input) {
+	var pointersLen = input.pointers.length;
+	var changedPointersLen = input.changedPointers.length;
+	var isFirst = (eventType & INPUT_START && (pointersLen - changedPointersLen === 0));
+	var isFinal = (eventType & (INPUT_END | INPUT_CANCEL) && (pointersLen - changedPointersLen === 0));
+
+	input.isFirst = !!isFirst;
+	input.isFinal = !!isFinal;
+
+	if (isFirst) {
+		manager.session = {};
+	}
+
+	// source event is the normalized value of the domEvents
+	// like 'touchstart, mouseup, pointerdown'
+	input.eventType = eventType;
+
+	// compute scale, rotation etc
+	computeInputData(manager, input);
+
+	// emit secret event
+	manager.emit('hammer.input', input);
+
+	manager.recognize(input);
+	manager.session.prevInput = input;
+}
+
+/**
+ * extend the data with some usable properties like scale, rotate, velocity etc
+ * @param {Object} manager
+ * @param {Object} input
+ */
+function computeInputData(manager, input) {
+	var session = manager.session;
+	var pointers = input.pointers;
+	var pointersLength = pointers.length;
+
+	// store the first input to calculate the distance and direction
+	if (!session.firstInput) {
+		session.firstInput = simpleCloneInputData(input);
+	}
+
+	// to compute scale and rotation we need to store the multiple touches
+	if (pointersLength > 1 && !session.firstMultiple) {
+		session.firstMultiple = simpleCloneInputData(input);
+	} else if (pointersLength === 1) {
+		session.firstMultiple = false;
+	}
+
+	var firstInput = session.firstInput;
+	var firstMultiple = session.firstMultiple;
+	var offsetCenter = firstMultiple ? firstMultiple.center : firstInput.center;
+
+	var center = input.center = getCenter(pointers);
+	input.timeStamp = now();
+	input.deltaTime = input.timeStamp - firstInput.timeStamp;
+
+	input.angle = getAngle(offsetCenter, center);
+	input.distance = getDistance(offsetCenter, center);
+
+	computeDeltaXY(session, input);
+	input.offsetDirection = getDirection(input.deltaX, input.deltaY);
+
+	input.scale = firstMultiple ? getScale(firstMultiple.pointers, pointers) : 1;
+	input.rotation = firstMultiple ? getRotation(firstMultiple.pointers, pointers) : 0;
+
+	computeIntervalInputData(session, input);
+
+	// find the correct target
+	var target = manager.element;
+	if (hasParent(input.srcEvent.target, target)) {
+		target = input.srcEvent.target;
+	}
+	input.target = target;
+}
+
+function computeDeltaXY(session, input) {
+	var center = input.center;
+	var offset = session.offsetDelta || {};
+	var prevDelta = session.prevDelta || {};
+	var prevInput = session.prevInput || {};
+
+	if (input.eventType === INPUT_START || prevInput.eventType === INPUT_END) {
+		prevDelta = session.prevDelta = {
+			x: prevInput.deltaX || 0,
+			y: prevInput.deltaY || 0
+		};
+
+		offset = session.offsetDelta = {
+			x: center.x,
+			y: center.y
+		};
+	}
+
+	input.deltaX = prevDelta.x + (center.x - offset.x);
+	input.deltaY = prevDelta.y + (center.y - offset.y);
+}
+
+/**
+ * velocity is calculated every x ms
+ * @param {Object} session
+ * @param {Object} input
+ */
+function computeIntervalInputData(session, input) {
+	var last = session.lastInterval || input,
+		deltaTime = input.timeStamp - last.timeStamp,
+		velocity, velocityX, velocityY, direction;
+
+	if (input.eventType != INPUT_CANCEL && (deltaTime > COMPUTE_INTERVAL || last.velocity === undefined)) {
+		var deltaX = last.deltaX - input.deltaX;
+		var deltaY = last.deltaY - input.deltaY;
+
+		var v = getVelocity(deltaTime, deltaX, deltaY);
+		velocityX = v.x;
+		velocityY = v.y;
+		velocity = (abs(v.x) > abs(v.y)) ? v.x : v.y;
+		direction = getDirection(deltaX, deltaY);
+
+		session.lastInterval = input;
+	} else {
+		// use latest velocity info if it doesn't overtake a minimum period
+		velocity = last.velocity;
+		velocityX = last.velocityX;
+		velocityY = last.velocityY;
+		direction = last.direction;
+	}
+
+	input.velocity = velocity;
+	input.velocityX = velocityX;
+	input.velocityY = velocityY;
+	input.direction = direction;
+}
+
+/**
+ * create a simple clone from the input used for storage of firstInput and firstMultiple
+ * @param {Object} input
+ * @returns {Object} clonedInputData
+ */
+function simpleCloneInputData(input) {
+	// make a simple copy of the pointers because we will get a reference if we don't
+	// we only need clientXY for the calculations
+	var pointers = [];
+	var i = 0;
+	while (i < input.pointers.length) {
+		pointers[i] = {
+			clientX: round(input.pointers[i].clientX),
+			clientY: round(input.pointers[i].clientY)
+		};
+		i++;
+	}
+
+	return {
+		timeStamp: now(),
+		pointers: pointers,
+		center: getCenter(pointers),
+		deltaX: input.deltaX,
+		deltaY: input.deltaY
+	};
+}
+
+/**
+ * get the center of all the pointers
+ * @param {Array} pointers
+ * @return {Object} center contains `x` and `y` properties
+ */
+function getCenter(pointers) {
+	var pointersLength = pointers.length;
+
+	// no need to loop when only one touch
+	if (pointersLength === 1) {
+		return {
+			x: round(pointers[0].clientX),
+			y: round(pointers[0].clientY)
+		};
+	}
+
+	var x = 0, y = 0, i = 0;
+	while (i < pointersLength) {
+		x += pointers[i].clientX;
+		y += pointers[i].clientY;
+		i++;
+	}
+
+	return {
+		x: round(x / pointersLength),
+		y: round(y / pointersLength)
+	};
+}
+
+/**
+ * calculate the velocity between two points. unit is in px per ms.
+ * @param {Number} deltaTime
+ * @param {Number} x
+ * @param {Number} y
+ * @return {Object} velocity `x` and `y`
+ */
+function getVelocity(deltaTime, x, y) {
+	return {
+		x: x / deltaTime || 0,
+		y: y / deltaTime || 0
+	};
+}
+
+/**
+ * get the direction between two points
+ * @param {Number} x
+ * @param {Number} y
+ * @return {Number} direction
+ */
+function getDirection(x, y) {
+	if (x === y) {
+		return DIRECTION_NONE;
+	}
+
+	if (abs(x) >= abs(y)) {
+		return x > 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
+	}
+	return y > 0 ? DIRECTION_UP : DIRECTION_DOWN;
+}
+
+/**
+ * calculate the absolute distance between two points
+ * @param {Object} p1 {x, y}
+ * @param {Object} p2 {x, y}
+ * @param {Array} [props] containing x and y keys
+ * @return {Number} distance
+ */
+function getDistance(p1, p2, props) {
+	if (!props) {
+		props = PROPS_XY;
+	}
+	var x = p2[props[0]] - p1[props[0]],
+		y = p2[props[1]] - p1[props[1]];
+
+	return Math.sqrt((x * x) + (y * y));
+}
+
+/**
+ * calculate the angle between two coordinates
+ * @param {Object} p1
+ * @param {Object} p2
+ * @param {Array} [props] containing x and y keys
+ * @return {Number} angle
+ */
+function getAngle(p1, p2, props) {
+	if (!props) {
+		props = PROPS_XY;
+	}
+	var x = p2[props[0]] - p1[props[0]],
+		y = p2[props[1]] - p1[props[1]];
+	return Math.atan2(y, x) * 180 / Math.PI;
+}
+
+/**
+ * calculate the rotation degrees between two pointersets
+ * @param {Array} start array of pointers
+ * @param {Array} end array of pointers
+ * @return {Number} rotation
+ */
+function getRotation(start, end) {
+	return getAngle(end[1], end[0], PROPS_CLIENT_XY) - getAngle(start[1], start[0], PROPS_CLIENT_XY);
+}
+
+/**
+ * calculate the scale factor between two pointersets
+ * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
+ * @param {Array} start array of pointers
+ * @param {Array} end array of pointers
+ * @return {Number} scale
+ */
+function getScale(start, end) {
+	return getDistance(end[0], end[1], PROPS_CLIENT_XY) / getDistance(start[0], start[1], PROPS_CLIENT_XY);
+}
+
+var MOUSE_INPUT_MAP = {
+	mousedown: INPUT_START,
+	mousemove: INPUT_MOVE,
+	mouseup: INPUT_END
+};
+
+var MOUSE_ELEMENT_EVENTS = 'mousedown';
+var MOUSE_WINDOW_EVENTS = 'mousemove mouseup';
+
+/**
+ * Mouse events input
+ * @constructor
+ * @extends Input
+ */
+function MouseInput() {
+	this.evEl = MOUSE_ELEMENT_EVENTS;
+	this.evWin = MOUSE_WINDOW_EVENTS;
+
+	this.allow = true; // used by Input.TouchMouse to disable mouse events
+	this.pressed = false; // mousedown state
+
+	Input.apply(this, arguments);
+}
+
+inherit(MouseInput, Input, {
+	/**
+	 * handle mouse events
+	 * @param {Object} ev
+	 */
+	handler: function MEhandler(ev) {
+		var eventType = MOUSE_INPUT_MAP[ev.type];
+
+		// on start we want to have the left mouse button down
+		if (eventType & INPUT_START && ev.button === 0) {
+			this.pressed = true;
+		}
+
+		if (eventType & INPUT_MOVE && ev.which !== 1) {
+			eventType = INPUT_END;
+		}
+
+		// mouse must be down, and mouse events are allowed (see the TouchMouse input)
+		if (!this.pressed || !this.allow) {
+			return;
+		}
+
+		if (eventType & INPUT_END) {
+			this.pressed = false;
+		}
+
+		this.callback(this.manager, eventType, {
+			pointers: [ev],
+			changedPointers: [ev],
+			pointerType: INPUT_TYPE_MOUSE,
+			srcEvent: ev
+		});
+	}
+});
+
+var POINTER_INPUT_MAP = {
+	pointerdown: INPUT_START,
+	pointermove: INPUT_MOVE,
+	pointerup: INPUT_END,
+	pointercancel: INPUT_CANCEL,
+	pointerout: INPUT_CANCEL
+};
+
+// in IE10 the pointer types is defined as an enum
+var IE10_POINTER_TYPE_ENUM = {
+	2: INPUT_TYPE_TOUCH,
+	3: INPUT_TYPE_PEN,
+	4: INPUT_TYPE_MOUSE,
+	5: INPUT_TYPE_KINECT // see https://twitter.com/jacobrossi/status/480596438489890816
+};
+
+var POINTER_ELEMENT_EVENTS = 'pointerdown';
+var POINTER_WINDOW_EVENTS = 'pointermove pointerup pointercancel';
+
+// IE10 has prefixed support, and case-sensitive
+if (window.MSPointerEvent) {
+	POINTER_ELEMENT_EVENTS = 'MSPointerDown';
+	POINTER_WINDOW_EVENTS = 'MSPointerMove MSPointerUp MSPointerCancel';
+}
+
+/**
+ * Pointer events input
+ * @constructor
+ * @extends Input
+ */
+function PointerEventInput() {
+	this.evEl = POINTER_ELEMENT_EVENTS;
+	this.evWin = POINTER_WINDOW_EVENTS;
+
+	Input.apply(this, arguments);
+
+	this.store = (this.manager.session.pointerEvents = []);
+}
+
+inherit(PointerEventInput, Input, {
+	/**
+	 * handle mouse events
+	 * @param {Object} ev
+	 */
+	handler: function PEhandler(ev) {
+		var store = this.store;
+		var removePointer = false;
+
+		var eventTypeNormalized = ev.type.toLowerCase().replace('ms', '');
+		var eventType = POINTER_INPUT_MAP[eventTypeNormalized];
+		var pointerType = IE10_POINTER_TYPE_ENUM[ev.pointerType] || ev.pointerType;
+
+		var isTouch = (pointerType == INPUT_TYPE_TOUCH);
+
+		// get index of the event in the store
+		var storeIndex = inArray(store, ev.pointerId, 'pointerId');
+
+		// start and mouse must be down
+		if (eventType & INPUT_START && (ev.button === 0 || isTouch)) {
+			if (storeIndex < 0) {
+				store.push(ev);
+				storeIndex = store.length - 1;
+			}
+		} else if (eventType & (INPUT_END | INPUT_CANCEL)) {
+			removePointer = true;
+		}
+
+		// it not found, so the pointer hasn't been down (so it's probably a hover)
+		if (storeIndex < 0) {
+			return;
+		}
+
+		// update the event in the store
+		store[storeIndex] = ev;
+
+		this.callback(this.manager, eventType, {
+			pointers: store,
+			changedPointers: [ev],
+			pointerType: pointerType,
+			srcEvent: ev
+		});
+
+		if (removePointer) {
+			// remove from the store
+			store.splice(storeIndex, 1);
+		}
+	}
+});
+
+var SINGLE_TOUCH_INPUT_MAP = {
+	touchstart: INPUT_START,
+	touchmove: INPUT_MOVE,
+	touchend: INPUT_END,
+	touchcancel: INPUT_CANCEL
+};
+
+var SINGLE_TOUCH_TARGET_EVENTS = 'touchstart';
+var SINGLE_TOUCH_WINDOW_EVENTS = 'touchstart touchmove touchend touchcancel';
+
+/**
+ * Touch events input
+ * @constructor
+ * @extends Input
+ */
+function SingleTouchInput() {
+	this.evTarget = SINGLE_TOUCH_TARGET_EVENTS;
+	this.evWin = SINGLE_TOUCH_WINDOW_EVENTS;
+	this.started = false;
+
+	Input.apply(this, arguments);
+}
+
+inherit(SingleTouchInput, Input, {
+	handler: function TEhandler(ev) {
+		var type = SINGLE_TOUCH_INPUT_MAP[ev.type];
+
+		// should we handle the touch events?
+		if (type === INPUT_START) {
+			this.started = true;
+		}
+
+		if (!this.started) {
+			return;
+		}
+
+		var touches = normalizeSingleTouches.call(this, ev, type);
+
+		// when done, reset the started state
+		if (type & (INPUT_END | INPUT_CANCEL) && touches[0].length - touches[1].length === 0) {
+			this.started = false;
+		}
+
+		this.callback(this.manager, type, {
+			pointers: touches[0],
+			changedPointers: touches[1],
+			pointerType: INPUT_TYPE_TOUCH,
+			srcEvent: ev
+		});
+	}
+});
+
+/**
+ * @this {TouchInput}
+ * @param {Object} ev
+ * @param {Number} type flag
+ * @returns {undefined|Array} [all, changed]
+ */
+function normalizeSingleTouches(ev, type) {
+	var all = toArray(ev.touches);
+	var changed = toArray(ev.changedTouches);
+
+	if (type & (INPUT_END | INPUT_CANCEL)) {
+		all = uniqueArray(all.concat(changed), 'identifier', true);
+	}
+
+	return [all, changed];
+}
+
+var TOUCH_INPUT_MAP = {
+	touchstart: INPUT_START,
+	touchmove: INPUT_MOVE,
+	touchend: INPUT_END,
+	touchcancel: INPUT_CANCEL
+};
+
+var TOUCH_TARGET_EVENTS = 'touchstart touchmove touchend touchcancel';
+
+/**
+ * Multi-user touch events input
+ * @constructor
+ * @extends Input
+ */
+function TouchInput() {
+	this.evTarget = TOUCH_TARGET_EVENTS;
+	this.targetIds = {};
+
+	Input.apply(this, arguments);
+}
+
+inherit(TouchInput, Input, {
+	handler: function MTEhandler(ev) {
+		var type = TOUCH_INPUT_MAP[ev.type];
+		var touches = getTouches.call(this, ev, type);
+		if (!touches) {
+			return;
+		}
+
+		this.callback(this.manager, type, {
+			pointers: touches[0],
+			changedPointers: touches[1],
+			pointerType: INPUT_TYPE_TOUCH,
+			srcEvent: ev
+		});
+	}
+});
+
+/**
+ * @this {TouchInput}
+ * @param {Object} ev
+ * @param {Number} type flag
+ * @returns {undefined|Array} [all, changed]
+ */
+function getTouches(ev, type) {
+	var allTouches = toArray(ev.touches);
+	var targetIds = this.targetIds;
+
+	// when there is only one touch, the process can be simplified
+	if (type & (INPUT_START | INPUT_MOVE) && allTouches.length === 1) {
+		targetIds[allTouches[0].identifier] = true;
+		return [allTouches, allTouches];
+	}
+
+	var i,
+		targetTouches,
+		changedTouches = toArray(ev.changedTouches),
+		changedTargetTouches = [],
+		target = this.target;
+
+	// get target touches from touches
+	targetTouches = allTouches.filter(function(touch) {
+		return hasParent(touch.target, target);
+	});
+
+	// collect touches
+	if (type === INPUT_START) {
+		i = 0;
+		while (i < targetTouches.length) {
+			targetIds[targetTouches[i].identifier] = true;
+			i++;
+		}
+	}
+
+	// filter changed touches to only contain touches that exist in the collected target ids
+	i = 0;
+	while (i < changedTouches.length) {
+		if (targetIds[changedTouches[i].identifier]) {
+			changedTargetTouches.push(changedTouches[i]);
+		}
+
+		// cleanup removed touches
+		if (type & (INPUT_END | INPUT_CANCEL)) {
+			delete targetIds[changedTouches[i].identifier];
+		}
+		i++;
+	}
+
+	if (!changedTargetTouches.length) {
+		return;
+	}
+
+	return [
+		// merge targetTouches with changedTargetTouches so it contains ALL touches, including 'end' and 'cancel'
+		uniqueArray(targetTouches.concat(changedTargetTouches), 'identifier', true),
+		changedTargetTouches
+	];
+}
+
+/**
+ * Combined touch and mouse input
+ *
+ * Touch has a higher priority then mouse, and while touching no mouse events are allowed.
+ * This because touch devices also emit mouse events while doing a touch.
+ *
+ * @constructor
+ * @extends Input
+ */
+function TouchMouseInput() {
+	Input.apply(this, arguments);
+
+	var handler = bindFn(this.handler, this);
+	this.touch = new TouchInput(this.manager, handler);
+	this.mouse = new MouseInput(this.manager, handler);
+}
+
+inherit(TouchMouseInput, Input, {
+	/**
+	 * handle mouse and touch events
+	 * @param {Hammer} manager
+	 * @param {String} inputEvent
+	 * @param {Object} inputData
+	 */
+	handler: function TMEhandler(manager, inputEvent, inputData) {
+		var isTouch = (inputData.pointerType == INPUT_TYPE_TOUCH),
+			isMouse = (inputData.pointerType == INPUT_TYPE_MOUSE);
+
+		// when we're in a touch event, so  block all upcoming mouse events
+		// most mobile browser also emit mouseevents, right after touchstart
+		if (isTouch) {
+			this.mouse.allow = false;
+		} else if (isMouse && !this.mouse.allow) {
+			return;
+		}
+
+		// reset the allowMouse when we're done
+		if (inputEvent & (INPUT_END | INPUT_CANCEL)) {
+			this.mouse.allow = true;
+		}
+
+		this.callback(manager, inputEvent, inputData);
+	},
+
+	/**
+	 * remove the event listeners
+	 */
+	destroy: function destroy() {
+		this.touch.destroy();
+		this.mouse.destroy();
+	}
+});
+
+var PREFIXED_TOUCH_ACTION = prefixed(TEST_ELEMENT.style, 'touchAction');
+var NATIVE_TOUCH_ACTION = PREFIXED_TOUCH_ACTION !== undefined;
+
+// magical touchAction value
+var TOUCH_ACTION_COMPUTE = 'compute';
+var TOUCH_ACTION_AUTO = 'auto';
+var TOUCH_ACTION_MANIPULATION = 'manipulation'; // not implemented
+var TOUCH_ACTION_NONE = 'none';
+var TOUCH_ACTION_PAN_X = 'pan-x';
+var TOUCH_ACTION_PAN_Y = 'pan-y';
+
+/**
+ * Touch Action
+ * sets the touchAction property or uses the js alternative
+ * @param {Manager} manager
+ * @param {String} value
+ * @constructor
+ */
+function TouchAction(manager, value) {
+	this.manager = manager;
+	this.set(value);
+}
+
+TouchAction.prototype = {
+	/**
+	 * set the touchAction value on the element or enable the polyfill
+	 * @param {String} value
+	 */
+	set: function(value) {
+		// find out the touch-action by the event handlers
+		if (value == TOUCH_ACTION_COMPUTE) {
+			value = this.compute();
+		}
+
+		if (NATIVE_TOUCH_ACTION) {
+			this.manager.element.style[PREFIXED_TOUCH_ACTION] = value;
+		}
+		this.actions = value.toLowerCase().trim();
+	},
+
+	/**
+	 * just re-set the touchAction value
+	 */
+	update: function() {
+		this.set(this.manager.options.touchAction);
+	},
+
+	/**
+	 * compute the value for the touchAction property based on the recognizer's settings
+	 * @returns {String} value
+	 */
+	compute: function() {
+		var actions = [];
+		each(this.manager.recognizers, function(recognizer) {
+			if (boolOrFn(recognizer.options.enable, [recognizer])) {
+				actions = actions.concat(recognizer.getTouchAction());
+			}
+		});
+		return cleanTouchActions(actions.join(' '));
+	},
+
+	/**
+	 * this method is called on each input cycle and provides the preventing of the browser behavior
+	 * @param {Object} input
+	 */
+	preventDefaults: function(input) {
+		// not needed with native support for the touchAction property
+		if (NATIVE_TOUCH_ACTION) {
+			return;
+		}
+
+		var srcEvent = input.srcEvent;
+		var direction = input.offsetDirection;
+
+		// if the touch action did prevented once this session
+		if (this.manager.session.prevented) {
+			srcEvent.preventDefault();
+			return;
+		}
+
+		var actions = this.actions;
+		var hasNone = inStr(actions, TOUCH_ACTION_NONE);
+		var hasPanY = inStr(actions, TOUCH_ACTION_PAN_Y);
+		var hasPanX = inStr(actions, TOUCH_ACTION_PAN_X);
+
+		if (hasNone ||
+			(hasPanY && direction & DIRECTION_HORIZONTAL) ||
+			(hasPanX && direction & DIRECTION_VERTICAL)) {
+			return this.preventSrc(srcEvent);
+		}
+	},
+
+	/**
+	 * call preventDefault to prevent the browser's default behavior (scrolling in most cases)
+	 * @param {Object} srcEvent
+	 */
+	preventSrc: function(srcEvent) {
+		this.manager.session.prevented = true;
+		srcEvent.preventDefault();
+	}
+};
+
+/**
+ * when the touchActions are collected they are not a valid value, so we need to clean things up. *
+ * @param {String} actions
+ * @returns {*}
+ */
+function cleanTouchActions(actions) {
+	// none
+	if (inStr(actions, TOUCH_ACTION_NONE)) {
+		return TOUCH_ACTION_NONE;
+	}
+
+	var hasPanX = inStr(actions, TOUCH_ACTION_PAN_X);
+	var hasPanY = inStr(actions, TOUCH_ACTION_PAN_Y);
+
+	// pan-x and pan-y can be combined
+	if (hasPanX && hasPanY) {
+		return TOUCH_ACTION_PAN_X + ' ' + TOUCH_ACTION_PAN_Y;
+	}
+
+	// pan-x OR pan-y
+	if (hasPanX || hasPanY) {
+		return hasPanX ? TOUCH_ACTION_PAN_X : TOUCH_ACTION_PAN_Y;
+	}
+
+	// manipulation
+	if (inStr(actions, TOUCH_ACTION_MANIPULATION)) {
+		return TOUCH_ACTION_MANIPULATION;
+	}
+
+	return TOUCH_ACTION_AUTO;
+}
+
+/**
+ * Recognizer flow explained; *
+ * All recognizers have the initial state of POSSIBLE when a input session starts.
+ * The definition of a input session is from the first input until the last input, with all it's movement in it. *
+ * Example session for mouse-input: mousedown -> mousemove -> mouseup
+ *
+ * On each recognizing cycle (see Manager.recognize) the .recognize() method is executed
+ * which determines with state it should be.
+ *
+ * If the recognizer has the state FAILED, CANCELLED or RECOGNIZED (equals ENDED), it is reset to
+ * POSSIBLE to give it another change on the next cycle.
+ *
+ *               Possible
+ *                  |
+ *            +-----+---------------+
+ *            |                     |
+ *      +-----+-----+               |
+ *      |           |               |
+ *   Failed      Cancelled          |
+ *                          +-------+------+
+ *                          |              |
+ *                      Recognized       Began
+ *                                         |
+ *                                      Changed
+ *                                         |
+ *                                  Ended/Recognized
+ */
+var STATE_POSSIBLE = 1;
+var STATE_BEGAN = 2;
+var STATE_CHANGED = 4;
+var STATE_ENDED = 8;
+var STATE_RECOGNIZED = STATE_ENDED;
+var STATE_CANCELLED = 16;
+var STATE_FAILED = 32;
+
+/**
+ * Recognizer
+ * Every recognizer needs to extend from this class.
+ * @constructor
+ * @param {Object} options
+ */
+function Recognizer(options) {
+	this.id = uniqueId();
+
+	this.manager = null;
+	this.options = merge(options || {}, this.defaults);
+
+	// default is enable true
+	this.options.enable = ifUndefined(this.options.enable, true);
+
+	this.state = STATE_POSSIBLE;
+
+	this.simultaneous = {};
+	this.requireFail = [];
+}
+
+Recognizer.prototype = {
+	/**
+	 * @virtual
+	 * @type {Object}
+	 */
+	defaults: {},
+
+	/**
+	 * set options
+	 * @param {Object} options
+	 * @return {Recognizer}
+	 */
+	set: function(options) {
+		extend(this.options, options);
+
+		// also update the touchAction, in case something changed about the directions/enabled state
+		this.manager && this.manager.touchAction.update();
+		return this;
+	},
+
+	/**
+	 * recognize simultaneous with an other recognizer.
+	 * @param {Recognizer} otherRecognizer
+	 * @returns {Recognizer} this
+	 */
+	recognizeWith: function(otherRecognizer) {
+		if (invokeArrayArg(otherRecognizer, 'recognizeWith', this)) {
+			return this;
+		}
+
+		var simultaneous = this.simultaneous;
+		otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+		if (!simultaneous[otherRecognizer.id]) {
+			simultaneous[otherRecognizer.id] = otherRecognizer;
+			otherRecognizer.recognizeWith(this);
+		}
+		return this;
+	},
+
+	/**
+	 * drop the simultaneous link. it doesnt remove the link on the other recognizer.
+	 * @param {Recognizer} otherRecognizer
+	 * @returns {Recognizer} this
+	 */
+	dropRecognizeWith: function(otherRecognizer) {
+		if (invokeArrayArg(otherRecognizer, 'dropRecognizeWith', this)) {
+			return this;
+		}
+
+		otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+		delete this.simultaneous[otherRecognizer.id];
+		return this;
+	},
+
+	/**
+	 * recognizer can only run when an other is failing
+	 * @param {Recognizer} otherRecognizer
+	 * @returns {Recognizer} this
+	 */
+	requireFailure: function(otherRecognizer) {
+		if (invokeArrayArg(otherRecognizer, 'requireFailure', this)) {
+			return this;
+		}
+
+		var requireFail = this.requireFail;
+		otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+		if (inArray(requireFail, otherRecognizer) === -1) {
+			requireFail.push(otherRecognizer);
+			otherRecognizer.requireFailure(this);
+		}
+		return this;
+	},
+
+	/**
+	 * drop the requireFailure link. it does not remove the link on the other recognizer.
+	 * @param {Recognizer} otherRecognizer
+	 * @returns {Recognizer} this
+	 */
+	dropRequireFailure: function(otherRecognizer) {
+		if (invokeArrayArg(otherRecognizer, 'dropRequireFailure', this)) {
+			return this;
+		}
+
+		otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+		var index = inArray(this.requireFail, otherRecognizer);
+		if (index > -1) {
+			this.requireFail.splice(index, 1);
+		}
+		return this;
+	},
+
+	/**
+	 * has require failures boolean
+	 * @returns {boolean}
+	 */
+	hasRequireFailures: function() {
+		return this.requireFail.length > 0;
+	},
+
+	/**
+	 * if the recognizer can recognize simultaneous with an other recognizer
+	 * @param {Recognizer} otherRecognizer
+	 * @returns {Boolean}
+	 */
+	canRecognizeWith: function(otherRecognizer) {
+		return !!this.simultaneous[otherRecognizer.id];
+	},
+
+	/**
+	 * You should use `tryEmit` instead of `emit` directly to check
+	 * that all the needed recognizers has failed before emitting.
+	 * @param {Object} input
+	 */
+	emit: function(input) {
+		var self = this;
+		var state = this.state;
+
+		function emit(withState) {
+			self.manager.emit(self.options.event + (withState ? stateStr(state) : ''), input);
+		}
+
+		// 'panstart' and 'panmove'
+		if (state < STATE_ENDED) {
+			emit(true);
+		}
+
+		emit(); // simple 'eventName' events
+
+		// panend and pancancel
+		if (state >= STATE_ENDED) {
+			emit(true);
+		}
+	},
+
+	/**
+	 * Check that all the require failure recognizers has failed,
+	 * if true, it emits a gesture event,
+	 * otherwise, setup the state to FAILED.
+	 * @param {Object} input
+	 */
+	tryEmit: function(input) {
+		if (this.canEmit()) {
+			return this.emit(input);
+		}
+		// it's failing anyway
+		this.state = STATE_FAILED;
+	},
+
+	/**
+	 * can we emit?
+	 * @returns {boolean}
+	 */
+	canEmit: function() {
+		var i = 0;
+		while (i < this.requireFail.length) {
+			if (!(this.requireFail[i].state & (STATE_FAILED | STATE_POSSIBLE))) {
+				return false;
+			}
+			i++;
+		}
+		return true;
+	},
+
+	/**
+	 * update the recognizer
+	 * @param {Object} inputData
+	 */
+	recognize: function(inputData) {
+		// make a new copy of the inputData
+		// so we can change the inputData without messing up the other recognizers
+		var inputDataClone = extend({}, inputData);
+
+		// is is enabled and allow recognizing?
+		if (!boolOrFn(this.options.enable, [this, inputDataClone])) {
+			this.reset();
+			this.state = STATE_FAILED;
+			return;
+		}
+
+		// reset when we've reached the end
+		if (this.state & (STATE_RECOGNIZED | STATE_CANCELLED | STATE_FAILED)) {
+			this.state = STATE_POSSIBLE;
+		}
+
+		this.state = this.process(inputDataClone);
+
+		// the recognizer has recognized a gesture
+		// so trigger an event
+		if (this.state & (STATE_BEGAN | STATE_CHANGED | STATE_ENDED | STATE_CANCELLED)) {
+			this.tryEmit(inputDataClone);
+		}
+	},
+
+	/**
+	 * return the state of the recognizer
+	 * the actual recognizing happens in this method
+	 * @virtual
+	 * @param {Object} inputData
+	 * @returns {Const} STATE
+	 */
+	process: function(inputData) { }, // jshint ignore:line
+
+	/**
+	 * return the preferred touch-action
+	 * @virtual
+	 * @returns {Array}
+	 */
+	getTouchAction: function() { },
+
+	/**
+	 * called when the gesture isn't allowed to recognize
+	 * like when another is being recognized or it is disabled
+	 * @virtual
+	 */
+	reset: function() { }
+};
+
+/**
+ * get a usable string, used as event postfix
+ * @param {Const} state
+ * @returns {String} state
+ */
+function stateStr(state) {
+	if (state & STATE_CANCELLED) {
+		return 'cancel';
+	} else if (state & STATE_ENDED) {
+		return 'end';
+	} else if (state & STATE_CHANGED) {
+		return 'move';
+	} else if (state & STATE_BEGAN) {
+		return 'start';
+	}
+	return '';
+}
+
+/**
+ * direction cons to string
+ * @param {Const} direction
+ * @returns {String}
+ */
+function directionStr(direction) {
+	if (direction == DIRECTION_DOWN) {
+		return 'down';
+	} else if (direction == DIRECTION_UP) {
+		return 'up';
+	} else if (direction == DIRECTION_LEFT) {
+		return 'left';
+	} else if (direction == DIRECTION_RIGHT) {
+		return 'right';
+	}
+	return '';
+}
+
+/**
+ * get a recognizer by name if it is bound to a manager
+ * @param {Recognizer|String} otherRecognizer
+ * @param {Recognizer} recognizer
+ * @returns {Recognizer}
+ */
+function getRecognizerByNameIfManager(otherRecognizer, recognizer) {
+	var manager = recognizer.manager;
+	if (manager) {
+		return manager.get(otherRecognizer);
+	}
+	return otherRecognizer;
+}
+
+/**
+ * This recognizer is just used as a base for the simple attribute recognizers.
+ * @constructor
+ * @extends Recognizer
+ */
+function AttrRecognizer() {
+	Recognizer.apply(this, arguments);
+}
+
+inherit(AttrRecognizer, Recognizer, {
+	/**
+	 * @namespace
+	 * @memberof AttrRecognizer
+	 */
+	defaults: {
+		/**
+		 * @type {Number}
+		 * @default 1
+		 */
+		pointers: 1
+	},
+
+	/**
+	 * Used to check if it the recognizer receives valid input, like input.distance > 10.
+	 * @memberof AttrRecognizer
+	 * @param {Object} input
+	 * @returns {Boolean} recognized
+	 */
+	attrTest: function(input) {
+		var optionPointers = this.options.pointers;
+		return optionPointers === 0 || input.pointers.length === optionPointers;
+	},
+
+	/**
+	 * Process the input and return the state for the recognizer
+	 * @memberof AttrRecognizer
+	 * @param {Object} input
+	 * @returns {*} State
+	 */
+	process: function(input) {
+		var state = this.state;
+		var eventType = input.eventType;
+
+		var isRecognized = state & (STATE_BEGAN | STATE_CHANGED);
+		var isValid = this.attrTest(input);
+
+		// on cancel input and we've recognized before, return STATE_CANCELLED
+		if (isRecognized && (eventType & INPUT_CANCEL || !isValid)) {
+			return state | STATE_CANCELLED;
+		} else if (isRecognized || isValid) {
+			if (eventType & INPUT_END) {
+				return state | STATE_ENDED;
+			} else if (!(state & STATE_BEGAN)) {
+				return STATE_BEGAN;
+			}
+			return state | STATE_CHANGED;
+		}
+		return STATE_FAILED;
+	}
+});
+
+/**
+ * Pan
+ * Recognized when the pointer is down and moved in the allowed direction.
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function PanRecognizer() {
+	AttrRecognizer.apply(this, arguments);
+
+	this.pX = null;
+	this.pY = null;
+}
+
+inherit(PanRecognizer, AttrRecognizer, {
+	/**
+	 * @namespace
+	 * @memberof PanRecognizer
+	 */
+	defaults: {
+		event: 'pan',
+		threshold: 10,
+		pointers: 1,
+		direction: DIRECTION_ALL
+	},
+
+	getTouchAction: function() {
+		var direction = this.options.direction;
+		var actions = [];
+		if (direction & DIRECTION_HORIZONTAL) {
+			actions.push(TOUCH_ACTION_PAN_Y);
+		}
+		if (direction & DIRECTION_VERTICAL) {
+			actions.push(TOUCH_ACTION_PAN_X);
+		}
+		return actions;
+	},
+
+	directionTest: function(input) {
+		var options = this.options;
+		var hasMoved = true;
+		var distance = input.distance;
+		var direction = input.direction;
+		var x = input.deltaX;
+		var y = input.deltaY;
+
+		// lock to axis?
+		if (!(direction & options.direction)) {
+			if (options.direction & DIRECTION_HORIZONTAL) {
+				direction = (x === 0) ? DIRECTION_NONE : (x < 0) ? DIRECTION_LEFT : DIRECTION_RIGHT;
+				hasMoved = x != this.pX;
+				distance = Math.abs(input.deltaX);
+			} else {
+				direction = (y === 0) ? DIRECTION_NONE : (y < 0) ? DIRECTION_UP : DIRECTION_DOWN;
+				hasMoved = y != this.pY;
+				distance = Math.abs(input.deltaY);
+			}
+		}
+		input.direction = direction;
+		return hasMoved && distance > options.threshold && direction & options.direction;
+	},
+
+	attrTest: function(input) {
+		return AttrRecognizer.prototype.attrTest.call(this, input) &&
+			(this.state & STATE_BEGAN || (!(this.state & STATE_BEGAN) && this.directionTest(input)));
+	},
+
+	emit: function(input) {
+		this.pX = input.deltaX;
+		this.pY = input.deltaY;
+
+		var direction = directionStr(input.direction);
+		if (direction) {
+			this.manager.emit(this.options.event + direction, input);
+		}
+
+		this._super.emit.call(this, input);
+	}
+});
+
+/**
+ * Pinch
+ * Recognized when two or more pointers are moving toward (zoom-in) or away from each other (zoom-out).
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function PinchRecognizer() {
+	AttrRecognizer.apply(this, arguments);
+}
+
+inherit(PinchRecognizer, AttrRecognizer, {
+	/**
+	 * @namespace
+	 * @memberof PinchRecognizer
+	 */
+	defaults: {
+		event: 'pinch',
+		threshold: 0,
+		pointers: 2
+	},
+
+	getTouchAction: function() {
+		return [TOUCH_ACTION_NONE];
+	},
+
+	attrTest: function(input) {
+		return this._super.attrTest.call(this, input) &&
+			(Math.abs(input.scale - 1) > this.options.threshold || this.state & STATE_BEGAN);
+	},
+
+	emit: function(input) {
+		this._super.emit.call(this, input);
+		if (input.scale !== 1) {
+			var inOut = input.scale < 1 ? 'in' : 'out';
+			this.manager.emit(this.options.event + inOut, input);
+		}
+	}
+});
+
+/**
+ * Press
+ * Recognized when the pointer is down for x ms without any movement.
+ * @constructor
+ * @extends Recognizer
+ */
+function PressRecognizer() {
+	Recognizer.apply(this, arguments);
+
+	this._timer = null;
+	this._input = null;
+}
+
+inherit(PressRecognizer, Recognizer, {
+	/**
+	 * @namespace
+	 * @memberof PressRecognizer
+	 */
+	defaults: {
+		event: 'press',
+		pointers: 1,
+		time: 500, // minimal time of the pointer to be pressed
+		threshold: 5 // a minimal movement is ok, but keep it low
+	},
+
+	getTouchAction: function() {
+		return [TOUCH_ACTION_AUTO];
+	},
+
+	process: function(input) {
+		var options = this.options;
+		var validPointers = input.pointers.length === options.pointers;
+		var validMovement = input.distance < options.threshold;
+		var validTime = input.deltaTime > options.time;
+
+		this._input = input;
+
+		// we only allow little movement
+		// and we've reached an end event, so a tap is possible
+		if (!validMovement || !validPointers || (input.eventType & (INPUT_END | INPUT_CANCEL) && !validTime)) {
+			this.reset();
+		} else if (input.eventType & INPUT_START) {
+			this.reset();
+			this._timer = setTimeoutContext(function() {
+				this.state = STATE_RECOGNIZED;
+				this.tryEmit();
+			}, options.time, this);
+		} else if (input.eventType & INPUT_END) {
+			return STATE_RECOGNIZED;
+		}
+		return STATE_FAILED;
+	},
+
+	reset: function() {
+		clearTimeout(this._timer);
+	},
+
+	emit: function(input) {
+		if (this.state !== STATE_RECOGNIZED) {
+			return;
+		}
+
+		if (input && (input.eventType & INPUT_END)) {
+			this.manager.emit(this.options.event + 'up', input);
+		} else {
+			this._input.timeStamp = now();
+			this.manager.emit(this.options.event, this._input);
+		}
+	}
+});
+
+/**
+ * Rotate
+ * Recognized when two or more pointer are moving in a circular motion.
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function RotateRecognizer() {
+	AttrRecognizer.apply(this, arguments);
+}
+
+inherit(RotateRecognizer, AttrRecognizer, {
+	/**
+	 * @namespace
+	 * @memberof RotateRecognizer
+	 */
+	defaults: {
+		event: 'rotate',
+		threshold: 0,
+		pointers: 2
+	},
+
+	getTouchAction: function() {
+		return [TOUCH_ACTION_NONE];
+	},
+
+	attrTest: function(input) {
+		return this._super.attrTest.call(this, input) &&
+			(Math.abs(input.rotation) > this.options.threshold || this.state & STATE_BEGAN);
+	}
+});
+
+/**
+ * Swipe
+ * Recognized when the pointer is moving fast (velocity), with enough distance in the allowed direction.
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function SwipeRecognizer() {
+	AttrRecognizer.apply(this, arguments);
+}
+
+inherit(SwipeRecognizer, AttrRecognizer, {
+	/**
+	 * @namespace
+	 * @memberof SwipeRecognizer
+	 */
+	defaults: {
+		event: 'swipe',
+		threshold: 10,
+		velocity: 0.65,
+		direction: DIRECTION_HORIZONTAL | DIRECTION_VERTICAL,
+		pointers: 1
+	},
+
+	getTouchAction: function() {
+		return PanRecognizer.prototype.getTouchAction.call(this);
+	},
+
+	attrTest: function(input) {
+		var direction = this.options.direction;
+		var velocity;
+
+		if (direction & (DIRECTION_HORIZONTAL | DIRECTION_VERTICAL)) {
+			velocity = input.velocity;
+		} else if (direction & DIRECTION_HORIZONTAL) {
+			velocity = input.velocityX;
+		} else if (direction & DIRECTION_VERTICAL) {
+			velocity = input.velocityY;
+		}
+
+		return this._super.attrTest.call(this, input) &&
+			direction & input.direction &&
+			input.distance > this.options.threshold &&
+			abs(velocity) > this.options.velocity && input.eventType & INPUT_END;
+	},
+
+	emit: function(input) {
+		var direction = directionStr(input.direction);
+		if (direction) {
+			this.manager.emit(this.options.event + direction, input);
+		}
+
+		this.manager.emit(this.options.event, input);
+	}
+});
+
+/**
+ * A tap is ecognized when the pointer is doing a small tap/click. Multiple taps are recognized if they occur
+ * between the given interval and position. The delay option can be used to recognize multi-taps without firing
+ * a single tap.
+ *
+ * The eventData from the emitted event contains the property `tapCount`, which contains the amount of
+ * multi-taps being recognized.
+ * @constructor
+ * @extends Recognizer
+ */
+function TapRecognizer() {
+	Recognizer.apply(this, arguments);
+
+	// previous time and center,
+	// used for tap counting
+	this.pTime = false;
+	this.pCenter = false;
+
+	this._timer = null;
+	this._input = null;
+	this.count = 0;
+}
+
+inherit(TapRecognizer, Recognizer, {
+	/**
+	 * @namespace
+	 * @memberof PinchRecognizer
+	 */
+	defaults: {
+		event: 'tap',
+		pointers: 1,
+		taps: 1,
+		interval: 300, // max time between the multi-tap taps
+		time: 250, // max time of the pointer to be down (like finger on the screen)
+		threshold: 2, // a minimal movement is ok, but keep it low
+		posThreshold: 10 // a multi-tap can be a bit off the initial position
+	},
+
+	getTouchAction: function() {
+		return [TOUCH_ACTION_MANIPULATION];
+	},
+
+	process: function(input) {
+		var options = this.options;
+
+		var validPointers = input.pointers.length === options.pointers;
+		var validMovement = input.distance < options.threshold;
+		var validTouchTime = input.deltaTime < options.time;
+
+		this.reset();
+
+		if ((input.eventType & INPUT_START) && (this.count === 0)) {
+			return this.failTimeout();
+		}
+
+		// we only allow little movement
+		// and we've reached an end event, so a tap is possible
+		if (validMovement && validTouchTime && validPointers) {
+			if (input.eventType != INPUT_END) {
+				return this.failTimeout();
+			}
+
+			var validInterval = this.pTime ? (input.timeStamp - this.pTime < options.interval) : true;
+			var validMultiTap = !this.pCenter || getDistance(this.pCenter, input.center) < options.posThreshold;
+
+			this.pTime = input.timeStamp;
+			this.pCenter = input.center;
+
+			if (!validMultiTap || !validInterval) {
+				this.count = 1;
+			} else {
+				this.count += 1;
+			}
+
+			this._input = input;
+
+			// if tap count matches we have recognized it,
+			// else it has began recognizing...
+			var tapCount = this.count % options.taps;
+			if (tapCount === 0) {
+				// no failing requirements, immediately trigger the tap event
+				// or wait as long as the multitap interval to trigger
+				if (!this.hasRequireFailures()) {
+					return STATE_RECOGNIZED;
+				} else {
+					this._timer = setTimeoutContext(function() {
+						this.state = STATE_RECOGNIZED;
+						this.tryEmit();
+					}, options.interval, this);
+					return STATE_BEGAN;
+				}
+			}
+		}
+		return STATE_FAILED;
+	},
+
+	failTimeout: function() {
+		this._timer = setTimeoutContext(function() {
+			this.state = STATE_FAILED;
+		}, this.options.interval, this);
+		return STATE_FAILED;
+	},
+
+	reset: function() {
+		clearTimeout(this._timer);
+	},
+
+	emit: function() {
+		if (this.state == STATE_RECOGNIZED ) {
+			this._input.tapCount = this.count;
+			this.manager.emit(this.options.event, this._input);
+		}
+	}
+});
+
+/**
+ * Simple way to create an manager with a default set of recognizers.
+ * @param {HTMLElement} element
+ * @param {Object} [options]
+ * @constructor
+ */
+function Hammer(element, options) {
+	options = options || {};
+	options.recognizers = ifUndefined(options.recognizers, Hammer.defaults.preset);
+	return new Manager(element, options);
+}
+
+/**
+ * @const {string}
+ */
+Hammer.VERSION = '2.0.4';
+
+/**
+ * default settings
+ * @namespace
+ */
+Hammer.defaults = {
+	/**
+	 * set if DOM events are being triggered.
+	 * But this is slower and unused by simple implementations, so disabled by default.
+	 * @type {Boolean}
+	 * @default false
+	 */
+	domEvents: false,
+
+	/**
+	 * The value for the touchAction property/fallback.
+	 * When set to `compute` it will magically set the correct value based on the added recognizers.
+	 * @type {String}
+	 * @default compute
+	 */
+	touchAction: TOUCH_ACTION_COMPUTE,
+
+	/**
+	 * @type {Boolean}
+	 * @default true
+	 */
+	enable: true,
+
+	/**
+	 * EXPERIMENTAL FEATURE -- can be removed/changed
+	 * Change the parent input target element.
+	 * If Null, then it is being set the to main element.
+	 * @type {Null|EventTarget}
+	 * @default null
+	 */
+	inputTarget: null,
+
+	/**
+	 * force an input class
+	 * @type {Null|Function}
+	 * @default null
+	 */
+	inputClass: null,
+
+	/**
+	 * Default recognizer setup when calling `Hammer()`
+	 * When creating a new Manager these will be skipped.
+	 * @type {Array}
+	 */
+	preset: [
+		// RecognizerClass, options, [recognizeWith, ...], [requireFailure, ...]
+		[RotateRecognizer, { enable: false }],
+		[PinchRecognizer, { enable: false }, ['rotate']],
+		[SwipeRecognizer,{ direction: DIRECTION_HORIZONTAL }],
+		[PanRecognizer, { direction: DIRECTION_HORIZONTAL }, ['swipe']],
+		[TapRecognizer],
+		[TapRecognizer, { event: 'doubletap', taps: 2 }, ['tap']],
+		[PressRecognizer]
+	],
+
+	/**
+	 * Some CSS properties can be used to improve the working of Hammer.
+	 * Add them to this method and they will be set when creating a new Manager.
+	 * @namespace
+	 */
+	cssProps: {
+		/**
+		 * Disables text selection to improve the dragging gesture. Mainly for desktop browsers.
+		 * @type {String}
+		 * @default 'none'
+		 */
+		userSelect: 'none',
+
+		/**
+		 * Disable the Windows Phone grippers when pressing an element.
+		 * @type {String}
+		 * @default 'none'
+		 */
+		touchSelect: 'none',
+
+		/**
+		 * Disables the default callout shown when you touch and hold a touch target.
+		 * On iOS, when you touch and hold a touch target such as a link, Safari displays
+		 * a callout containing information about the link. This property allows you to disable that callout.
+		 * @type {String}
+		 * @default 'none'
+		 */
+		touchCallout: 'none',
+
+		/**
+		 * Specifies whether zooming is enabled. Used by IE10>
+		 * @type {String}
+		 * @default 'none'
+		 */
+		contentZooming: 'none',
+
+		/**
+		 * Specifies that an entire element should be draggable instead of its contents. Mainly for desktop browsers.
+		 * @type {String}
+		 * @default 'none'
+		 */
+		userDrag: 'none',
+
+		/**
+		 * Overrides the highlight color shown when the user taps a link or a JavaScript
+		 * clickable element in iOS. This property obeys the alpha value, if specified.
+		 * @type {String}
+		 * @default 'rgba(0,0,0,0)'
+		 */
+		tapHighlightColor: 'rgba(0,0,0,0)'
+	}
+};
+
+var STOP = 1;
+var FORCED_STOP = 2;
+
+/**
+ * Manager
+ * @param {HTMLElement} element
+ * @param {Object} [options]
+ * @constructor
+ */
+function Manager(element, options) {
+	options = options || {};
+
+	this.options = merge(options, Hammer.defaults);
+	this.options.inputTarget = this.options.inputTarget || element;
+
+	this.handlers = {};
+	this.session = {};
+	this.recognizers = [];
+
+	this.element = element;
+	this.input = createInputInstance(this);
+	this.touchAction = new TouchAction(this, this.options.touchAction);
+
+	toggleCssProps(this, true);
+
+	each(options.recognizers, function(item) {
+		var recognizer = this.add(new (item[0])(item[1]));
+		item[2] && recognizer.recognizeWith(item[2]);
+		item[3] && recognizer.requireFailure(item[3]);
+	}, this);
+}
+
+Manager.prototype = {
+	/**
+	 * set options
+	 * @param {Object} options
+	 * @returns {Manager}
+	 */
+	set: function(options) {
+		extend(this.options, options);
+
+		// Options that need a little more setup
+		if (options.touchAction) {
+			this.touchAction.update();
+		}
+		if (options.inputTarget) {
+			// Clean up existing event listeners and reinitialize
+			this.input.destroy();
+			this.input.target = options.inputTarget;
+			this.input.init();
+		}
+		return this;
+	},
+
+	/**
+	 * stop recognizing for this session.
+	 * This session will be discarded, when a new [input]start event is fired.
+	 * When forced, the recognizer cycle is stopped immediately.
+	 * @param {Boolean} [force]
+	 */
+	stop: function(force) {
+		this.session.stopped = force ? FORCED_STOP : STOP;
+	},
+
+	/**
+	 * run the recognizers!
+	 * called by the inputHandler function on every movement of the pointers (touches)
+	 * it walks through all the recognizers and tries to detect the gesture that is being made
+	 * @param {Object} inputData
+	 */
+	recognize: function(inputData) {
+		var session = this.session;
+		if (session.stopped) {
+			return;
+		}
+
+		// run the touch-action polyfill
+		this.touchAction.preventDefaults(inputData);
+
+		var recognizer;
+		var recognizers = this.recognizers;
+
+		// this holds the recognizer that is being recognized.
+		// so the recognizer's state needs to be BEGAN, CHANGED, ENDED or RECOGNIZED
+		// if no recognizer is detecting a thing, it is set to `null`
+		var curRecognizer = session.curRecognizer;
+
+		// reset when the last recognizer is recognized
+		// or when we're in a new session
+		if (!curRecognizer || (curRecognizer && curRecognizer.state & STATE_RECOGNIZED)) {
+			curRecognizer = session.curRecognizer = null;
+		}
+
+		var i = 0;
+		while (i < recognizers.length) {
+			recognizer = recognizers[i];
+
+			// find out if we are allowed try to recognize the input for this one.
+			// 1.   allow if the session is NOT forced stopped (see the .stop() method)
+			// 2.   allow if we still haven't recognized a gesture in this session, or the this recognizer is the one
+			//      that is being recognized.
+			// 3.   allow if the recognizer is allowed to run simultaneous with the current recognized recognizer.
+			//      this can be setup with the `recognizeWith()` method on the recognizer.
+			if (session.stopped !== FORCED_STOP && ( // 1
+					!curRecognizer || recognizer == curRecognizer || // 2
+					recognizer.canRecognizeWith(curRecognizer))) { // 3
+				recognizer.recognize(inputData);
+			} else {
+				recognizer.reset();
+			}
+
+			// if the recognizer has been recognizing the input as a valid gesture, we want to store this one as the
+			// current active recognizer. but only if we don't already have an active recognizer
+			if (!curRecognizer && recognizer.state & (STATE_BEGAN | STATE_CHANGED | STATE_ENDED)) {
+				curRecognizer = session.curRecognizer = recognizer;
+			}
+			i++;
+		}
+	},
+
+	/**
+	 * get a recognizer by its event name.
+	 * @param {Recognizer|String} recognizer
+	 * @returns {Recognizer|Null}
+	 */
+	get: function(recognizer) {
+		if (recognizer instanceof Recognizer) {
+			return recognizer;
+		}
+
+		var recognizers = this.recognizers;
+		for (var i = 0; i < recognizers.length; i++) {
+			if (recognizers[i].options.event == recognizer) {
+				return recognizers[i];
+			}
+		}
+		return null;
+	},
+
+	/**
+	 * add a recognizer to the manager
+	 * existing recognizers with the same event name will be removed
+	 * @param {Recognizer} recognizer
+	 * @returns {Recognizer|Manager}
+	 */
+	add: function(recognizer) {
+		if (invokeArrayArg(recognizer, 'add', this)) {
+			return this;
+		}
+
+		// remove existing
+		var existing = this.get(recognizer.options.event);
+		if (existing) {
+			this.remove(existing);
+		}
+
+		this.recognizers.push(recognizer);
+		recognizer.manager = this;
+
+		this.touchAction.update();
+		return recognizer;
+	},
+
+	/**
+	 * remove a recognizer by name or instance
+	 * @param {Recognizer|String} recognizer
+	 * @returns {Manager}
+	 */
+	remove: function(recognizer) {
+		if (invokeArrayArg(recognizer, 'remove', this)) {
+			return this;
+		}
+
+		var recognizers = this.recognizers;
+		recognizer = this.get(recognizer);
+		recognizers.splice(inArray(recognizers, recognizer), 1);
+
+		this.touchAction.update();
+		return this;
+	},
+
+	/**
+	 * bind event
+	 * @param {String} events
+	 * @param {Function} handler
+	 * @returns {EventEmitter} this
+	 */
+	on: function(events, handler) {
+		var handlers = this.handlers;
+		each(splitStr(events), function(event) {
+			handlers[event] = handlers[event] || [];
+			handlers[event].push(handler);
+		});
+		return this;
+	},
+
+	/**
+	 * unbind event, leave emit blank to remove all handlers
+	 * @param {String} events
+	 * @param {Function} [handler]
+	 * @returns {EventEmitter} this
+	 */
+	off: function(events, handler) {
+		var handlers = this.handlers;
+		each(splitStr(events), function(event) {
+			if (!handler) {
+				delete handlers[event];
+			} else {
+				handlers[event].splice(inArray(handlers[event], handler), 1);
+			}
+		});
+		return this;
+	},
+
+	/**
+	 * emit event to the listeners
+	 * @param {String} event
+	 * @param {Object} data
+	 */
+	emit: function(event, data) {
+		// we also want to trigger dom events
+		if (this.options.domEvents) {
+			triggerDomEvent(event, data);
+		}
+
+		// no handlers, so skip it all
+		var handlers = this.handlers[event] && this.handlers[event].slice();
+		if (!handlers || !handlers.length) {
+			return;
+		}
+
+		data.type = event;
+		data.preventDefault = function() {
+			data.srcEvent.preventDefault();
+		};
+
+		var i = 0;
+		while (i < handlers.length) {
+			handlers[i](data);
+			i++;
+		}
+	},
+
+	/**
+	 * destroy the manager and unbinds all events
+	 * it doesn't unbind dom events, that is the user own responsibility
+	 */
+	destroy: function() {
+		this.element && toggleCssProps(this, false);
+
+		this.handlers = {};
+		this.session = {};
+		this.input.destroy();
+		this.element = null;
+	}
+};
+
+/**
+ * add/remove the css properties as defined in manager.options.cssProps
+ * @param {Manager} manager
+ * @param {Boolean} add
+ */
+function toggleCssProps(manager, add) {
+	var element = manager.element;
+	each(manager.options.cssProps, function(value, name) {
+		element.style[prefixed(element.style, name)] = add ? value : '';
+	});
+}
+
+/**
+ * trigger dom event
+ * @param {String} event
+ * @param {Object} data
+ */
+function triggerDomEvent(event, data) {
+	var gestureEvent = document.createEvent('Event');
+	gestureEvent.initEvent(event, true, true);
+	gestureEvent.gesture = data;
+	data.target.dispatchEvent(gestureEvent);
+}
+
+extend(Hammer, {
+	INPUT_START: INPUT_START,
+	INPUT_MOVE: INPUT_MOVE,
+	INPUT_END: INPUT_END,
+	INPUT_CANCEL: INPUT_CANCEL,
+
+	STATE_POSSIBLE: STATE_POSSIBLE,
+	STATE_BEGAN: STATE_BEGAN,
+	STATE_CHANGED: STATE_CHANGED,
+	STATE_ENDED: STATE_ENDED,
+	STATE_RECOGNIZED: STATE_RECOGNIZED,
+	STATE_CANCELLED: STATE_CANCELLED,
+	STATE_FAILED: STATE_FAILED,
+
+	DIRECTION_NONE: DIRECTION_NONE,
+	DIRECTION_LEFT: DIRECTION_LEFT,
+	DIRECTION_RIGHT: DIRECTION_RIGHT,
+	DIRECTION_UP: DIRECTION_UP,
+	DIRECTION_DOWN: DIRECTION_DOWN,
+	DIRECTION_HORIZONTAL: DIRECTION_HORIZONTAL,
+	DIRECTION_VERTICAL: DIRECTION_VERTICAL,
+	DIRECTION_ALL: DIRECTION_ALL,
+
+	Manager: Manager,
+	Input: Input,
+	TouchAction: TouchAction,
+
+	TouchInput: TouchInput,
+	MouseInput: MouseInput,
+	PointerEventInput: PointerEventInput,
+	TouchMouseInput: TouchMouseInput,
+	SingleTouchInput: SingleTouchInput,
+
+	Recognizer: Recognizer,
+	AttrRecognizer: AttrRecognizer,
+	Tap: TapRecognizer,
+	Pan: PanRecognizer,
+	Swipe: SwipeRecognizer,
+	Pinch: PinchRecognizer,
+	Rotate: RotateRecognizer,
+	Press: PressRecognizer,
+
+	on: addEventListeners,
+	off: removeEventListeners,
+	each: each,
+	merge: merge,
+	extend: extend,
+	inherit: inherit,
+	bindFn: bindFn,
+	prefixed: prefixed
+});
+
+if (typeof define == TYPE_FUNCTION && define.amd) {
+	define(function() {
+		return Hammer;
+	});
+} else if (typeof module != 'undefined' && module.exports) {
+	module.exports = Hammer;
+} else {
+	window[exportName] = Hammer;
+}
+
+})(window, document, 'Hammer');
+
+/**
+ * Featherlight - ultra slim jQuery lightbox
+ * Version 1.2.3 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+(function($) {
+	"use strict";
+
+	if('undefined' === typeof $) {
+		if('console' in window){ window.console.info('Too much lightness, Featherlight needs jQuery.'); }
+		return;
+	}
+
+	/* Featherlight is exported as $.featherlight.
+	   It is a function used to open a featherlight lightbox.
+
+	   [tech]
+	   Featherlight uses prototype inheritance.
+	   Each opened lightbox will have a corresponding object.
+	   That object may have some attributes that override the
+	   prototype's.
+	   Extensions created with Featherlight.extend will have their
+	   own prototype that inherits from Featherlight's prototype,
+	   thus attributes can be overriden either at the object level,
+	   or at the extension level.
+	   To create callbacks that chain themselves instead of overriding,
+	   use chainCallbacks.
+	   For those familiar with CoffeeScript, this correspond to
+	   Featherlight being a class and the Gallery being a class
+	   extending Featherlight.
+	   The chainCallbacks is used since we don't have access to
+	   CoffeeScript's `super`.
+	*/
+
+	function Featherlight($content, config) {
+		if(this instanceof Featherlight) {  /* called with new */
+			this.id = Featherlight.id++;
+			this.setup($content, config);
+			this.chainCallbacks(Featherlight._callbackChain);
+		} else {
+			var fl = new Featherlight($content, config);
+			fl.open();
+			return fl;
+		}
+	}
+
+	var opened = [],
+		pruneOpened = function(remove) {
+			opened = $.grep(opened, function(fl) {
+				return fl !== remove && fl.$instance.closest('body').length > 0;
+			} );
+			return opened;
+		};
+
+	// structure({iframeMinHeight: 44, foo: 0}, 'iframe')
+	//   #=> {min-height: 44}
+	var structure = function(obj, prefix) {
+		var result = {},
+			regex = new RegExp('^' + prefix + '([A-Z])(.*)');
+		for (var key in obj) {
+			var match = key.match(regex);
+			if (match) {
+				var dasherized = (match[1] + match[2].replace(/([A-Z])/g, '-$1')).toLowerCase();
+				result[dasherized] = obj[key];
+			}
+		}
+		return result;
+	};
+
+	/* document wide key handler */
+	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
+
+	var globalEventHandler = function(event) {
+		$.each(Featherlight.opened().reverse(), function() {
+			if (!event.isDefaultPrevented()) {
+				if (false === this[eventMap[event.type]](event)) {
+					event.preventDefault(); event.stopPropagation(); return false;
+			  }
+			}
+		});
+	};
+
+	var toggleGlobalEvents = function(set) {
+			if(set !== Featherlight._globalHandlerInstalled) {
+				Featherlight._globalHandlerInstalled = set;
+				var events = $.map(eventMap, function(_, name) { return name+'.'+Featherlight.prototype.namespace; } ).join(' ');
+				$(window)[set ? 'on' : 'off'](events, globalEventHandler);
+			}
+		};
+
+	Featherlight.prototype = {
+		constructor: Featherlight,
+		/*** defaults ***/
+		/* extend featherlight with defaults and methods */
+		namespace:    'featherlight',         /* Name of the events and css class prefix */
+		targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
+		variant:      null,                   /* Class that will be added to change look of the lightbox */
+		resetCss:     false,                  /* Reset all css */
+		background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
+		openTrigger:  'click',                /* Event that triggers the lightbox */
+		closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
+		filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
+		root:         'body',                 /* Where to append featherlights */
+		openSpeed:    250,                    /* Duration of opening animation */
+		closeSpeed:   250,                    /* Duration of closing animation */
+		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
+		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
+		closeIcon:    '&#10005;',             /* Close icon */
+		loading:      '',                     /* Content to show while initial content is loading */
+		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
+		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
+		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
+		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
+		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
+		onKeyUp:      $.noop,                 /* Called on key down for the frontmost featherlight */
+		onResize:     $.noop,                 /* Called after new content and when a window is resized */
+		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
+		contentFilters: ['jquery', 'image', 'html', 'ajax', 'iframe', 'text'], /* List of content filters to use to determine the content */
+
+		/*** methods ***/
+		/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
+		setup: function(target, config){
+			/* all arguments are optional */
+			if (typeof target === 'object' && target instanceof $ === false && !config) {
+				config = target;
+				target = undefined;
+			}
+
+			var self = $.extend(this, config, {target: target}),
+				css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
+				$background = $(self.background || [
+					'<div class="'+css+'-loading '+css+'">',
+						'<div class="'+css+'-content">',
+							'<span class="'+css+'-close-icon '+ self.namespace + '-close">',
+								self.closeIcon,
+							'</span>',
+							'<div class="'+self.namespace+'-inner">' + self.loading + '</div>',
+						'</div>',
+					'</div>'].join('')),
+				closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
+
+			self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
+
+			/* close when click on background/anywhere/null or closebox */
+			self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
+				var $target = $(event.target);
+				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
+					|| 'anywhere' === self.closeOnClick
+					|| $target.closest(closeButtonSelector).length ){
+					event.preventDefault();
+					self.close();
+				}
+			});
+
+			return this;
+		},
+
+		/* this method prepares the content and converts it into a jQuery object or a promise */
+		getContent: function(){
+			var self = this,
+				filters = this.constructor.contentFilters,
+				readTargetAttr = function(name){ return self.$currentTarget && self.$currentTarget.attr(name); },
+				targetValue = readTargetAttr(self.targetAttr),
+				data = self.target || targetValue || '';
+
+			/* Find which filter applies */
+			var filter = filters[self.type]; /* check explicit type like {type: 'image'} */
+
+			/* check explicit type like data-featherlight="image" */
+			if(!filter && data in filters) {
+				filter = filters[data];
+				data = self.target && targetValue;
+			}
+			data = data || readTargetAttr('href') || '';
+
+			/* check explicity type & content like {image: 'photo.jpg'} */
+			if(!filter) {
+				for(var filterName in filters) {
+					if(self[filterName]) {
+						filter = filters[filterName];
+						data = self[filterName];
+					}
+				}
+			}
+
+			/* otherwise it's implicit, run checks */
+			if(!filter) {
+				var target = data;
+				data = null;
+				$.each(self.contentFilters, function() {
+					filter = filters[this];
+					if(filter.test)  {
+						data = filter.test(target);
+					}
+					if(!data && filter.regex && target.match && target.match(filter.regex)) {
+						data = target;
+					}
+					return !data;
+				});
+				if(!data) {
+					if('console' in window){ window.console.error('Featherlight: no content filter found ' + (target ? ' for "' + target + '"' : ' (no target specified)')); }
+					return false;
+				}
+			}
+			/* Process it */
+			return filter.process.call(self, data);
+		},
+
+		/* sets the content of $instance to $content */
+		setContent: function($content){
+			var self = this;
+			/* we need a special class for the iframe */
+			if($content.is('iframe') || $('iframe', $content).length > 0){
+				self.$instance.addClass(self.namespace+'-iframe');
+			}
+
+			self.$instance.removeClass(self.namespace+'-loading');
+
+			/* replace content by appending to existing one before it is removed
+			   this insures that featherlight-inner remain at the same relative
+				 position to any other items added to featherlight-content */
+			self.$instance.find('.'+self.namespace+'-inner')
+				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
+				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
+
+			self.$content = $content.addClass(self.namespace+'-inner');
+
+			return self;
+		},
+
+		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config.
+			Returns a promise that is resolved after is successfully opened. */
+		open: function(event){
+			var self = this;
+			self.$instance.hide().appendTo(self.root);
+			if((!event || !event.isDefaultPrevented())
+				&& self.beforeOpen(event) !== false) {
+
+				if(event){
+					event.preventDefault();
+				}
+				var $content = self.getContent();
+
+				if($content) {
+					opened.push(self);
+
+					toggleGlobalEvents(true);
+
+					self.$instance.fadeIn(self.openSpeed);
+					self.beforeContent(event);
+
+					/* Set content and show */
+					return $.when($content)
+						.always(function($content){
+							self.setContent($content);
+							self.afterContent(event);
+						})
+						.then(self.$instance.promise())
+						/* Call afterOpen after fadeIn is done */
+						.done(function(){ self.afterOpen(event); });
+				}
+			}
+			self.$instance.detach();
+			return $.Deferred().reject().promise();
+		},
+
+		/* closes the lightbox. "this" contains $instance with the lightbox, and with the config
+			returns a promise, resolved after the lightbox is successfully closed. */
+		close: function(event){
+			var self = this,
+				deferred = $.Deferred();
+
+			if(self.beforeClose(event) === false) {
+				deferred.reject();
+			} else {
+
+				if (0 === pruneOpened(self).length) {
+					toggleGlobalEvents(false);
+				}
+
+				self.$instance.fadeOut(self.closeSpeed,function(){
+					self.$instance.detach();
+					self.afterClose(event);
+					deferred.resolve();
+				});
+			}
+			return deferred.promise();
+		},
+
+		/* Utility function to chain callbacks
+		   [Warning: guru-level]
+		   Used be extensions that want to let users specify callbacks but
+		   also need themselves to use the callbacks.
+		   The argument 'chain' has callback names as keys and function(super, event)
+		   as values. That function is meant to call `super` at some point.
+		*/
+		chainCallbacks: function(chain) {
+			for (var name in chain) {
+				this[name] = $.proxy(chain[name], this, $.proxy(this[name], this));
+			}
+		}
+	};
+
+	$.extend(Featherlight, {
+		id: 0,                                    /* Used to id single featherlight instances */
+		autoBind:       '[data-featherlight]',    /* Will automatically bind elements matching this selector. Clear or set before onReady */
+		defaults:       Featherlight.prototype,   /* You can access and override all defaults using $.featherlight.defaults, which is just a synonym for $.featherlight.prototype */
+		/* Contains the logic to determine content */
+		contentFilters: {
+			jquery: {
+				regex: /^[#.]\w/,         /* Anything that starts with a class name or identifiers */
+				test: function(elem)    { return elem instanceof $ && elem; },
+				process: function(elem) { return $(elem).clone(true); }
+			},
+			image: {
+				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
+				process: function(url)  {
+					var self = this,
+						deferred = $.Deferred(),
+						img = new Image(),
+						$img = $('<img src="'+url+'" alt="" class="'+self.namespace+'-image" />');
+					img.onload  = function() {
+						/* Store naturalWidth & height for IE8 */
+						$img.naturalWidth = img.width; $img.naturalHeight = img.height;
+						deferred.resolve( $img );
+					};
+					img.onerror = function() { deferred.reject($img); };
+					img.src = url;
+					return deferred.promise();
+				}
+			},
+			html: {
+				regex: /^\s*<[\w!][^<]*>/, /* Anything that starts with some kind of valid tag */
+				process: function(html) { return $(html); }
+			},
+			ajax: {
+				regex: /./,            /* At this point, any content is assumed to be an URL */
+				process: function(url)  {
+					var self = this,
+						deferred = $.Deferred();
+					/* we are using load so one can specify a target with: url.html #targetelement */
+					var $container = $('<div></div>').load(url, function(response, status){
+						if ( status !== "error" ) {
+							deferred.resolve($container.contents());
+						}
+						deferred.fail();
+					});
+					return deferred.promise();
+				}
+			},
+			iframe: {
+				process: function(url) {
+					var deferred = new $.Deferred();
+					var $content = $('<iframe/>')
+						.hide()
+						.attr('src', url)
+						.css(structure(this, 'iframe'))
+						.on('load', function() { deferred.resolve($content.show()); })
+						// We can't move an <iframe> and avoid reloading it,
+						// so let's put it in place ourselves right now:
+						.appendTo(this.$instance.find('.' + this.namespace + '-content'));
+					return deferred.promise();
+				}
+			},
+			text: {
+				process: function(text) { return $('<div>', {text: text}); }
+			}
+		},
+
+		functionAttributes: ['beforeOpen', 'afterOpen', 'beforeContent', 'afterContent', 'beforeClose', 'afterClose'],
+
+		/*** class methods ***/
+		/* read element's attributes starting with data-featherlight- */
+		readElementConfig: function(element, namespace) {
+			var Klass = this,
+				regexp = new RegExp('^data-' + namespace + '-(.*)'),
+				config = {};
+			if (element && element.attributes) {
+				$.each(element.attributes, function(){
+					var match = this.name.match(regexp);
+					if (match) {
+						var val = this.value,
+							name = $.camelCase(match[1]);
+						if ($.inArray(name, Klass.functionAttributes) >= 0) {  /* jshint -W054 */
+							val = new Function(val);                           /* jshint +W054 */
+						} else {
+							try { val = $.parseJSON(val); }
+							catch(e) {}
+						}
+						config[name] = val;
+					}
+				});
+			}
+			return config;
+		},
+
+		/* Used to create a Featherlight extension
+		   [Warning: guru-level]
+		   Creates the extension's prototype that in turn
+		   inherits Featherlight's prototype.
+		   Could be used to extend an extension too...
+		   This is pretty high level wizardy, it comes pretty much straight
+		   from CoffeeScript and won't teach you anything about Featherlight
+		   as it's not really specific to this library.
+		   My suggestion: move along and keep your sanity.
+		*/
+		extend: function(child, defaults) {
+			/* Setup class hierarchy, adapted from CoffeeScript */
+			var Ctor = function(){ this.constructor = child; };
+			Ctor.prototype = this.prototype;
+			child.prototype = new Ctor();
+			child.__super__ = this.prototype;
+			/* Copy class methods & attributes */
+			$.extend(child, this, defaults);
+			child.defaults = child.prototype;
+			return child;
+		},
+
+		attach: function($source, $content, config) {
+			var Klass = this;
+			if (typeof $content === 'object' && $content instanceof $ === false && !config) {
+				config = $content;
+				$content = undefined;
+			}
+			/* make a copy */
+			config = $.extend({}, config);
+
+			/* Only for openTrigger and namespace... */
+			var namespace = config.namespace || Klass.defaults.namespace,
+				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config);
+
+			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
+				/* ... since we might as well compute the config on the actual target */
+				var elemConfig = $.extend(
+					{$source: $source, $currentTarget: $(this)},
+					Klass.readElementConfig($source[0], tempConfig.namespace),
+					Klass.readElementConfig(this, tempConfig.namespace),
+					config);
+				new Klass($content, elemConfig).open(event);
+			});
+			return $source;
+		},
+
+		current: function() {
+			var all = this.opened();
+			return all[all.length - 1] || null;
+		},
+
+		opened: function() {
+			var klass = this;
+			pruneOpened();
+			return $.grep(opened, function(fl) { return fl instanceof klass; } );
+		},
+
+		close: function() {
+			var cur = this.current();
+			if(cur) { return cur.close(); }
+		},
+
+		/* Does the auto binding on startup.
+		   Meant only to be used by Featherlight and its extensions
+		*/
+		_onReady: function() {
+			var Klass = this;
+			if(Klass.autoBind){
+				/* First, bind click on document, so it will work for items added dynamically */
+				Klass.attach($(document), {filter: Klass.autoBind});
+				/* Auto bound elements with attr-featherlight-filter won't work
+				   (since we already used it to bind on document), so bind these
+				   directly. We can't easily support dynamically added element with filters */
+				$(Klass.autoBind).filter('[data-featherlight-filter]').each(function(){
+					Klass.attach($(this));
+				});
+			}
+		},
+
+		/* Featherlight uses the onKeyUp callback to intercept the escape key.
+		   Private to Featherlight.
+		*/
+		_callbackChain: {
+			onKeyUp: function(_super, event){
+				if(27 === event.keyCode) {
+					if (this.closeOnEsc) {
+						this.$instance.find('.'+this.namespace+'-close:first').click();
+					}
+					return false;
+				} else {
+					return _super(event);
+				}
+			},
+
+			onResize: function(_super, event){
+				if (this.$content.naturalWidth) {
+					var w = this.$content.naturalWidth, h = this.$content.naturalHeight;
+					/* Reset apparent image size first so container grows */
+					this.$content.css('width', '').css('height', '');
+					/* Calculate the worst ratio so that dimensions fit */
+					var ratio = Math.max(
+						w  / parseInt(this.$content.parent().css('width'),10),
+						h / parseInt(this.$content.parent().css('height'),10));
+					/* Resize content */
+					if (ratio > 1) {
+						this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+					}
+				}
+				return _super(event);
+			},
+
+			afterContent: function(_super, event){
+				var r = _super(event);
+				this.onResize(event);
+				return r;
+			}
+		}
+	});
+
+	$.featherlight = Featherlight;
+
+	/* bind jQuery elements to trigger featherlight */
+	$.fn.featherlight = function($content, config) {
+		return Featherlight.attach(this, $content, config);
+	};
+
+	/* bind featherlight on ready if config autoBind is set */
+	$(document).ready(function(){ Featherlight._onReady(); });
+}(jQuery));
+
+/**
+ * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
+ * Version 1.2.3 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+(function($) {
+	"use strict";
+
+	var warn = function(m) {
+		if(window.console && window.console.warn) {
+			window.console.warn('FeatherlightGallery: ' + m);
+		}
+	};
+
+	if('undefined' === typeof $) {
+		return warn('Too much lightness, Featherlight needs jQuery.');
+	} else if(!$.featherlight) {
+		return warn('Load the featherlight plugin before the gallery plugin');
+	}
+
+	var isTouchAware = 'ontouchstart' in document.documentElement,
+		jQueryConstructor = $.event && $.event.special.swipeleft && $,
+		hammerConstructor = window.Hammer && function($el){
+			var mc = new window.Hammer.Manager($el[0]);
+			mc.add(new window.Hammer.Swipe());
+			return mc;
+		},
+		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
+	if(isTouchAware && !swipeAwareConstructor) {
+		warn('No compatible swipe library detected; one must be included before featherlightGallery for swipe motions to navigate the galleries.');
+	}
+
+	var callbackChain = {
+			afterClose: function(_super, event) {
+					var self = this;
+					self.$instance.off('next.'+self.namespace+' previous.'+self.namespace);
+					if (self._swiper) {
+						self._swiper
+							.off('swipeleft', self._swipeleft) /* See http://stackoverflow.com/questions/17367198/hammer-js-cant-remove-event-listener */
+							.off('swiperight', self._swiperight);
+						self._swiper = null;
+					}
+					return _super(event);
+			},
+			beforeOpen: function(_super, event){
+					var self = this;
+
+					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
+						var offset = event.type === 'next' ? +1 : -1;
+						self.navigateTo(self.currentNavigation() + offset);
+					});
+
+					if (swipeAwareConstructor) {
+						self._swiper = swipeAwareConstructor(self.$instance)
+							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
+							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
+					} else {
+						self.$instance.find('.'+self.namespace+'-content')
+							.append(self.createNavigation('previous'))
+							.append(self.createNavigation('next'));
+					}
+					return _super(event);
+			},
+			onKeyUp: function(_super, event){
+				var dir = {
+					37: 'previous', /* Left arrow */
+					39: 'next'			/* Rigth arrow */
+				}[event.keyCode];
+				if(dir) {
+					this.$instance.trigger(dir);
+					return false;
+				} else {
+					return _super(event);
+				}
+			}
+		};
+
+	function FeatherlightGallery($source, config) {
+		if(this instanceof FeatherlightGallery) {  /* called with new */
+			$.featherlight.apply(this, arguments);
+			this.chainCallbacks(callbackChain);
+		} else {
+			var flg = new FeatherlightGallery($.extend({$source: $source, $currentTarget: $source.first()}, config));
+			flg.open();
+			return flg;
+		}
+	}
+
+	$.featherlight.extend(FeatherlightGallery, {
+		autoBind: '[data-featherlight-gallery]'
+	});
+
+	$.extend(FeatherlightGallery.prototype, {
+		/** Additional settings for Gallery **/
+		previousIcon: '&#9664;',     /* Code that is used as previous icon */
+		nextIcon: '&#9654;',         /* Code that is used as next icon */
+		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
+		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
+
+		images: function() {
+			if (this.filter) {
+				return this.$source.find(this.filter);
+			}
+			return this.$source;
+		},
+
+		currentNavigation: function() {
+			return this.images().index(this.$currentTarget);
+		},
+
+		navigateTo: function(index) {
+			var self = this,
+				source = self.images(),
+				len = source.length,
+				$inner = self.$instance.find('.' + self.namespace + '-inner');
+			index = ((index % len) + len) % len; /* pin index to [0, len[ */
+
+			self.$currentTarget = source.eq(index);
+			self.beforeContent();
+			return $.when(
+				self.getContent(),
+				$inner.fadeTo(self.galleryFadeOut,0.2)
+			).always(function($newContent) {
+					self.setContent($newContent);
+					self.afterContent();
+					$newContent.fadeTo(self.galleryFadeIn,1);
+			});
+		},
+
+		createNavigation: function(target) {
+			var self = this;
+			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(){
+				$(this).trigger(target+'.'+self.namespace);
+			});
+		}
+	});
+
+	$.featherlightGallery = FeatherlightGallery;
+
+	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
+	$.fn.featherlightGallery = function(config) {
+		return FeatherlightGallery.attach(this, config);
+	};
+
+	/* bind featherlight on ready if config autoBind is set */
+	$(document).ready(function(){ FeatherlightGallery._onReady(); });
+
+}(jQuery));
+
+/**
+ * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
+ *
+ * @version   Version 0.1.0
+ * @copyright Copyright 2015, Robert Neu (http://robneu.com)
+ * @license   MIT
+ */
+(function( window, $, undefined ) {
+	'use strict';
+
+	/**
+	 * Checks href targets to see if a given anchor is linking to an image.
+	 *
+	 * Returns false if the anchor is pointing to an external URL.
+	 *
+	 * @since  0.1.0
+	 * @return mixed
+	 */
+	function testImages( index, element ) {
+		if ( element.hostname && element.hostname !== location.hostname ) {
+			return false;
+		}
+		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ) );
+	}
+
+	/**
+	 * Filters all href elements on a page to add Featherlight's data attribute.
+	 * When a match is found, the data attribute is added so Featherlight will
+	 * open it normally.
+	 *
+	 * @since  0.1.0
+	 * @return void
+	 */
+	function findImages() {
+		$( 'a[href]' ).filter( testImages ).attr( 'data-featherlight', 'image' );
+	}
+
+	/**
+	 * Sets up the Featherlight gallery option for WordPress image galleries.
+	 *
+	 * @since  0.1.0
+	 * @return void
+	 */
+	function setupGallery() {
+		var $galleryItem = $( '.gallery-item a' );
+		if ( $galleryItem.length === 0 ) {
+			return;
+		}
+		$galleryItem.featherlightGallery({
+			openSpeed: 300
+		});
+	}
+
+	/**
+	 * Fires all of our helper methods to load featherlight.
+	 *
+	 * @since  0.1.0
+	 * @return void
+	 */
+	function wpFeatherlightInit() {
+		findImages();
+		setupGallery();
+	}
+
+	$(document).ready(function() {
+		wpFeatherlightInit();
+	});
+})( this, jQuery );
