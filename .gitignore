@@ -1,0 +1,18 @@
+.DS_Store
+
+# Sass cache
+/.sass-cache
+
+# Development files
+/node_modules
+/bower_components
+
+# Development directories
+/dist/
+/docs/
+/logs/
+/reports/
+/tmp/
+
+# Third-party dependencies
+includes/vendor/

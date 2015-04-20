@@ -1,0 +1,49 @@
+# Default application configuration that all configurations inherit from:
+# https://github.com/causes/scss-lint/blob/master/config/default.yml
+
+linters:
+  Comment:
+    enabled: false # False since style.dev.css should also contain heading comments
+
+  IdSelector:
+    exclude: # These files have ID selectors because of WordPress or plugins.
+      - 'scss/partials/_common-classes.scss'
+      - 'scss/partials/_jetpack.scss'
+
+  Indentation:
+    character: tab
+    width: 1 # Set to one, as tabs are used, not spaces.
+
+  LeadingZero:
+    style: include_zero
+
+  PropertySortOrder:
+    enabled: false # To be handled with CSSComb
+
+  QualifyingElement:
+    allow_element_with_attribute: true
+    exclude: # These files currently have qualifying elements
+      - 'scss/partials/_common-classes.scss'
+      - 'scss/partials/_plugins.scss'
+      - 'scss/partials/_jetpack.scss'
+      - 'scss/partials/_reset.scss'
+
+  SelectorDepth:
+    enabled: false
+
+  SelectorFormat:
+    exclude: # These files have underscore selectors because of WordPress or plugins.
+      - 'scss/partials/_plugins.scss'
+      - 'scss/partials/_jetpack.scss'
+      - 'scss/partials/_sidebars.scss'
+      - 'scss/partials/_theme-icons.scss'
+      - 'scss/partials/_widgets.scss'
+
+  SingleLinePerProperty:
+    allow_single_line_rule_sets: false
+
+  StringQuotes:
+    style: double_quotes
+
+  UrlQuotes:
+    enabled: false
