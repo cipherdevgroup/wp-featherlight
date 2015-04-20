@@ -39,6 +39,7 @@
 }
 
 .featherlight .featherlight-content {
+	background: #fff;
 	border: 0;
 	cursor: auto;
 	display: inline-block;
