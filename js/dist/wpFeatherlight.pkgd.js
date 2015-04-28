@@ -5,6 +5,7 @@
  * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)
  */
 (function($) {
+	'use strict';
 
 	$.detectSwipe = {
 		version: '2.1.1',
@@ -24,20 +25,21 @@
 	}
 
 	function onTouchMove(e) {
-		if ($.detectSwipe.preventDefault) { e.preventDefault(); }
+		if ($.detectSwipe.preventDefault) {
+			e.preventDefault();
+		}
 		if(isMoving) {
-			var x = e.touches[0].pageX;
-			var y = e.touches[0].pageY;
-			var dx = startX - x;
-			var dy = startY - y;
-			var dir;
-			if(Math.abs(dx) >= $.detectSwipe.threshold) {
-				dir = dx > 0 ? 'left' : 'right'
+			var x = e.touches[0].pageX,
+				y = e.touches[0].pageY,
+				dx = startX - x,
+				dy = startY - y,
+				dir;
+			if (Math.abs(dx) >= $.detectSwipe.threshold) {
+				dir = dx > 0 ? 'left' : 'right';
+			} else if (Math.abs(dy) >= $.detectSwipe.threshold) {
+				dir = dy > 0 ? 'down' : 'up';
 			}
-			else if(Math.abs(dy) >= $.detectSwipe.threshold) {
-				dir = dy > 0 ? 'down' : 'up'
-			}
-			if(dir) {
+			if (dir) {
 				onTouchEnd.call(this);
 				$(this).trigger('swipe', dir).trigger('swipe' + dir);
 			}
@@ -64,8 +66,8 @@
 
 	$.event.special.swipe = { setup: setup };
 
-	$.each(['left', 'up', 'down', 'right'], function () {
-		$.event.special['swipe' + this] = { setup: function(){
+	$.each(['left', 'up', 'down', 'right'], function() {
+		$.event.special['swipe' + this] = { setup: function() {
 			$(this).on('swipe', $.noop);
 		} };
 	});
@@ -792,19 +794,39 @@
 	}
 
 	/**
-	 * Sets up the Featherlight gallery option for WordPress image galleries.
+	 * Callback function to initialize Featherlight galleries when they contain
+	 * items that are able to be opened in a light box.
 	 *
 	 * @since  0.1.0
 	 * @return void
 	 */
-	function setupGallery() {
-		var $galleryItem = $( '.gallery-item a' );
-		if ( $galleryItem.length === 0 ) {
+	function buildGalleries( index, value ) {
+		var galleryID    = $( value ).attr( 'id' ),
+			$galleryItem = $( '#' + galleryID + ' .gallery-item a' );
+
+		if ( ! $galleryItem.attr( 'data-featherlight' ) ) {
 			return;
 		}
+
 		$galleryItem.featherlightGallery({
 			openSpeed: 300
 		});
+	}
+
+	/**
+	 * Finds and creates Featherlight galleries for WordPress image galleries.
+	 *
+	 * @since  0.1.0
+	 * @return void
+	 */
+	function findGalleries() {
+		var $gallery = $( '.gallery' );
+
+		if ( $gallery.length === 0 ) {
+			return;
+		}
+
+		$.each( $gallery, buildGalleries );
 	}
 
 	/**
@@ -815,7 +837,7 @@
 	 */
 	function wpFeatherlightInit() {
 		findImages();
-		setupGallery();
+		findGalleries();
 	}
 
 	$(document).ready(function() {
