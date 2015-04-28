@@ -36,19 +36,39 @@
 	}
 
 	/**
-	 * Sets up the Featherlight gallery option for WordPress image galleries.
+	 * Callback function to initialize Featherlight galleries when they contain
+	 * items that are able to be opened in a light box.
 	 *
 	 * @since  0.1.0
 	 * @return void
 	 */
-	function setupGallery() {
-		var $galleryItem = $( '.gallery-item a' );
-		if ( $galleryItem.length === 0 ) {
+	function buildGalleries( index, value ) {
+		var galleryID    = $( value ).attr( 'id' ),
+			$galleryItem = $( '#' + galleryID + ' .gallery-item a' );
+
+		if ( ! $galleryItem.attr( 'data-featherlight' ) ) {
 			return;
 		}
+
 		$galleryItem.featherlightGallery({
 			openSpeed: 300
 		});
+	}
+
+	/**
+	 * Finds and creates Featherlight galleries for WordPress image galleries.
+	 *
+	 * @since  0.1.0
+	 * @return void
+	 */
+	function findGalleries() {
+		var $gallery = $( '.gallery' );
+
+		if ( $gallery.length === 0 ) {
+			return;
+		}
+
+		$.each( $gallery, buildGalleries );
 	}
 
 	/**
@@ -59,7 +79,7 @@
 	 */
 	function wpFeatherlightInit() {
 		findImages();
-		setupGallery();
+		findGalleries();
 	}
 
 	$(document).ready(function() {
