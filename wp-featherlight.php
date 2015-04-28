@@ -3,7 +3,7 @@
  * Plugin Name:  WP Featherlight
  * Plugin URI:   http://www.wpsitecare.com/wp-featherlight/
  * Description:  An ultra lightweight jQuery lightbox for WordPress images and galleries.
- * Version:      0.1.0
+ * Version:      0.1.1
  * Author:       Robert Neu
  * Author URI:   http://robneu.com
  * License:      GPL-2.0+
@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'WP_FEATHERLIGHT_FILE', __FILE__ );
-define( 'WP_FEATHERLIGHT_VERSION', '0.1.0' );
+define( 'WP_FEATHERLIGHT_VERSION', '0.1.1' );
 
 if ( ! defined( 'WP_FEATHERLIGHT_DIR' ) ) {
 	define( 'WP_FEATHERLIGHT_DIR', plugin_dir_path( WP_FEATHERLIGHT_FILE ) );
