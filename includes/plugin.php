@@ -56,7 +56,7 @@ class WP_Featherlight {
 		load_plugin_textdomain(
 			'wp-featherlight',
 			false,
-			apply_filters( 'wp_featherlight_lang_directory', WP_FEATHERLIGHT_DIR . 'languages/' )
+			dirname( plugin_basename( WP_FEATHERLIGHT_FILE ) ) . '/languages'
 		);
 	}
 
