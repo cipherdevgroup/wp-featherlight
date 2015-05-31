@@ -56,7 +56,7 @@ class WP_Featherlight_Scripts {
 			return;
 		}
 		wp_enqueue_style(
-			'wp-feahterlight',
+			'wp-featherlight',
 			WP_FEATHERLIGHT_URL . "css/wp-featherlight{$this->suffix}.css",
 			array(),
 			WP_FEATHERLIGHT_VERSION
