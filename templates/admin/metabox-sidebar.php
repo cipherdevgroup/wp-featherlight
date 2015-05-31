@@ -11,8 +11,8 @@
 ?>
 <?php wp_nonce_field( plugin_basename( WP_FEATHERLIGHT_FILE ), 'wp_featherlight_nonce' ); ?>
 <p>
-	<label for="meta-checkbox">
-		<input type="checkbox" name="wp_featherlight_disable" id="wp_featherlight_disable" value="yes" <?php esc_attr( checked( $checked, 'yes' ) ); ?> />
-		<?php _e( 'Disable Lightbox on This', 'wp-featherlight' ); ?> <?php echo $name; ?>
+	<label for="wp_featherlight_disable">
+		<input type="checkbox" name="wp_featherlight_disable" id="wp_featherlight_disable" value="yes"<?php checked( $checked, 'yes' ); ?> />
+		<?php esc_html_e( 'Disable Lightbox on This', 'wp-featherlight' ); ?> <?php echo $name; ?>
 	</label>
 </p>
