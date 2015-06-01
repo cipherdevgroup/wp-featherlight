@@ -46,12 +46,9 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	protected function stop_save() {
-		$stops = array(
-			defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE,
-			defined( 'DOING_AJAX' ) && DOING_AJAX,
-			defined( 'DOING_CRON' ) && DOING_CRON,
-		);
-		return in_array( true, $stops );
+		return defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ||
+			defined( 'DOING_AJAX' ) && DOING_AJAX ||
+			defined( 'DOING_CRON' ) && DOING_CRON;
 	}
 
 	/**
@@ -79,8 +76,8 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function options_callback( $post ) {
-		$type = get_post_type_object( $post->post_type );
-		$name = $type->labels->singular_name;
+		$type    = get_post_type_object( $post->post_type );
+		$name    = $type->labels->singular_name;
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
 		$checked = '';
 		if ( ! empty( $disable ) ) {
