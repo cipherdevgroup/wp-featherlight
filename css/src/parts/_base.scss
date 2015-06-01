@@ -79,3 +79,31 @@
 	border-bottom: 0;
 	padding: 0;
 }
+
+/* Animated Loader
+--------------------------------------------- */
+.featherlight.featherlight-loading {
+	.featherlight-content {
+		background: transparent;
+		overflow: hidden;
+		margin: 0 auto;
+		font-size: 10px;
+		position: relative;
+		border: 1.1em solid #909090;
+		border-left-color: #fff;
+		transform: translateZ(0);
+		animation: featherlightLoader 1.1s infinite linear;
+	}
+
+	.featherlight-content,
+	.featherlight-content:after {
+		border-radius: 50%;
+		width: 10em;
+		height: 10em;
+	}
+
+	.featherlight-close,
+	.featherlight-inner {
+		display: none;
+	}
+}
