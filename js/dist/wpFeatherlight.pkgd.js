@@ -775,7 +775,7 @@
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ) );
+		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ).toLowerCase() );
 	}
 
 	/**
