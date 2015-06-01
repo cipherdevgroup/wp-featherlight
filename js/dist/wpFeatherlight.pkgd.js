@@ -775,9 +775,6 @@
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		if ( element.hostname && element.hostname !== location.hostname ) {
-			return false;
-		}
 		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ) );
 	}
 
@@ -840,7 +837,7 @@
 		findGalleries();
 	}
 
-	$(document).ready(function() {
+	$( document ).ready(function() {
 		wpFeatherlightInit();
 	});
 })( this, jQuery );
