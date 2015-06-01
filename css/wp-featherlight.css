@@ -126,7 +126,7 @@
 /* Animated Loader
 --------------------------------------------- */
 
-.featherlight.featherlight-loading .featherlight-content {
+.featherlight-loading .featherlight-content {
 	-webkit-animation: featherlightLoader 1.1s infinite linear;
 	animation: featherlightLoader 1.1s infinite linear;
 	background: transparent;
@@ -140,16 +140,16 @@
 	transform: translateZ(0);
 }
 
-.featherlight.featherlight-loading .featherlight-content,
-.featherlight.featherlight-loading .featherlight-content:after {
+.featherlight-loading .featherlight-content,
+.featherlight-loading .featherlight-content:after {
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 	height: 10em;
 	width: 10em;
 }
 
-.featherlight.featherlight-loading .featherlight-close,
-.featherlight.featherlight-loading .featherlight-inner {
+.featherlight-loading .featherlight-close,
+.featherlight-loading .featherlight-inner {
 	display: none;
 }
 
