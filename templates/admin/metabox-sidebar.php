@@ -13,6 +13,6 @@
 <p>
 	<label for="wp_featherlight_disable">
 		<input type="checkbox" name="wp_featherlight_disable" id="wp_featherlight_disable" value="yes"<?php checked( $checked, 'yes' ); ?> />
-		<?php esc_html_e( 'Disable Lightbox on This', 'wp-featherlight' ); ?> <?php echo $name; ?>
+		<?php printf( esc_html__( 'Disable Lightbox on This %1$s', 'wp-featherlight' ), $name ); ?>
 	</label>
 </p>
