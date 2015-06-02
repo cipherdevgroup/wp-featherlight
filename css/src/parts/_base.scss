@@ -84,15 +84,11 @@
 --------------------------------------------- */
 .featherlight-loading {
 	.featherlight-content {
+		animation: featherlightLoader 1s infinite linear;
 		background: transparent;
-		overflow: hidden;
-		margin: 0 auto;
-		font-size: 10px;
-		position: relative;
-		border: 1.1em solid #909090;
+		border: 8px solid #909090;
 		border-left-color: #fff;
-		transform: translateZ(0);
-		animation: featherlightLoader 1.1s infinite linear;
+		font-size: 10px;
 	}
 
 	.featherlight-content,

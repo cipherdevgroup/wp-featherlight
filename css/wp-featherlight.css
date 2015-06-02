@@ -127,17 +127,12 @@
 --------------------------------------------- */
 
 .featherlight-loading .featherlight-content {
-	-webkit-animation: featherlightLoader 1.1s infinite linear;
-	animation: featherlightLoader 1.1s infinite linear;
+	-webkit-animation: featherlightLoader 1s infinite linear;
+	animation: featherlightLoader 1s infinite linear;
 	background: transparent;
-	border: 1.1em solid #909090;
+	border: 8px solid #909090;
 	border-left-color: #fff;
 	font-size: 10px;
-	margin: 0 auto;
-	overflow: hidden;
-	position: relative;
-	-webkit-transform: translateZ(0);
-	transform: translateZ(0);
 }
 
 .featherlight-loading .featherlight-content,
