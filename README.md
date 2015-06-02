@@ -4,7 +4,7 @@ An ultra lightweight jQuery lightbox for WordPress images and galleries.
 
 __Contributors:__ [Robert Neu](https://github.com/robneu)  
 __Requires:__ WordPress 4.1  
-__Tested up to:__ WordPress 4.1  
+__Tested up to:__ WordPress 4.2.2  
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 ## Description ##
