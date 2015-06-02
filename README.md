@@ -7,9 +7,9 @@ __Requires:__ WordPress 4.1
 __Tested up to:__ WordPress 4.2.2  
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)  
 
-## Description ##
-
 ![Lightbox Popup](https://cloud.githubusercontent.com/assets/2184093/7943642/6885759a-092b-11e5-943c-c9211653a1e4.png)
+
+## Description ##
 
 WP Featherlight is a WordPress plugin wrapper for the Featherlight jQuery lightbox plugin. When installed, the plugin will automatically display all standard WordPress images and galleries in a simple, minimalistic lightbox popup. It's also possible to load Videos, iframes, and ajax content using WP Featherlight by adding data attributes to your content. For more details on custom content loading, check out the [featherlight documentation](https://github.com/noelboss/featherlight/#usage).
 
