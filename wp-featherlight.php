@@ -10,9 +10,6 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:  wp-featherlight
  * Domain Path:  /languages
- * Git URI:      https://github.com/wpsitecare/wp-featherlight
- * GitHub Plugin URI: https://github.com/wpsitecare/wp-featherlight
- * GitHub Branch: master
  */
 
 // Prevent direct access.
