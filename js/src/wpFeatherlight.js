@@ -39,17 +39,19 @@
 	 * @since  0.1.0
 	 * @return void
 	 */
-	function buildGalleries( index, value ) {
-		var galleryID    = $( value ).attr( 'id' ),
-			$galleryItem = $( '#' + galleryID + ' .gallery-item a' );
+	function buildGalleries( index, element ) {
+		var $galleryObj   = $( element ),
+			$galleryItems = $galleryObj.find( '.gallery-item a' );
 
-		if ( ! $galleryItem.attr( 'data-featherlight' ) ) {
+		if ( $galleryItems.length === 0 ) {
+			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
+		}
+
+		if ( ! $galleryItems.attr( 'data-featherlight' ) ) {
 			return;
 		}
 
-		$galleryItem.featherlightGallery({
-			openSpeed: 300
-		});
+		$galleryItems.featherlightGallery();
 	}
 
 	/**
@@ -59,7 +61,7 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $( '.gallery' );
+		var $gallery = $( '.gallery, .tiled-gallery' );
 
 		if ( $gallery.length === 0 ) {
 			return;
