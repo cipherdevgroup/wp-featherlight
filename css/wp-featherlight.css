@@ -1,11 +1,41 @@
 /**
+ * Featherlight Animations
+ * Version 0.2.0
+ *
+ * Copyright 2015, WP Site Care
+ * MIT Licensed.
+ */
+@-webkit-keyframes featherlightLoader {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes featherlightLoader {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+/**
  * Featherlight - ultra slim jQuery lightbox
  * Version 1.2.3 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noel Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
  */
-
 .featherlight {
 	background: transparent;
 	cursor: pointer;
@@ -93,6 +123,31 @@
 }
 
 
+/* Animated Loader
+--------------------------------------------- */
+
+.featherlight-loading .featherlight-content {
+	-webkit-animation: featherlightLoader 1s infinite linear;
+	animation: featherlightLoader 1s infinite linear;
+	background: transparent;
+	border: 8px solid #909090;
+	border-left-color: #fff;
+	font-size: 10px;
+}
+
+.featherlight-loading .featherlight-content,
+.featherlight-loading .featherlight-content:after {
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	height: 10em;
+	width: 10em;
+}
+
+.featherlight-loading .featherlight-close,
+.featherlight-loading .featherlight-inner {
+	display: none;
+}
+
 /**
  * Featherlight Gallery - an extension for the ultra slim jQuery lightbox
  * Version 1.2.3 - http://noelboss.github.io/featherlight/
@@ -100,7 +155,6 @@
  * Copyright 2015, Noel Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
  */
-
 .featherlight-next,
 .featherlight-previous {
 	background: transparent;

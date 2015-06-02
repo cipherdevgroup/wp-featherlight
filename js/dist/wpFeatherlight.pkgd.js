@@ -759,7 +759,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @version   Version 0.1.1
+ * @version   Version 0.2.0
  * @copyright Copyright 2015, Robert Neu (http://robneu.com)
  * @license   MIT
  */
@@ -775,10 +775,7 @@
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		if ( element.hostname && element.hostname !== location.hostname ) {
-			return false;
-		}
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ) );
+		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ).toLowerCase() );
 	}
 
 	/**
@@ -800,17 +797,19 @@
 	 * @since  0.1.0
 	 * @return void
 	 */
-	function buildGalleries( index, value ) {
-		var galleryID    = $( value ).attr( 'id' ),
-			$galleryItem = $( '#' + galleryID + ' .gallery-item a' );
+	function buildGalleries( index, element ) {
+		var $galleryObj   = $( element ),
+			$galleryItems = $galleryObj.find( '.gallery-item a' );
 
-		if ( ! $galleryItem.attr( 'data-featherlight' ) ) {
+		if ( $galleryItems.length === 0 ) {
+			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
+		}
+
+		if ( ! $galleryItems.attr( 'data-featherlight' ) ) {
 			return;
 		}
 
-		$galleryItem.featherlightGallery({
-			openSpeed: 300
-		});
+		$galleryItems.featherlightGallery();
 	}
 
 	/**
@@ -820,7 +819,7 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $( '.gallery' );
+		var $gallery = $( '.gallery, .tiled-gallery' );
 
 		if ( $gallery.length === 0 ) {
 			return;
@@ -840,7 +839,7 @@
 		findGalleries();
 	}
 
-	$(document).ready(function() {
+	$( document ).ready(function() {
 		wpFeatherlightInit();
 	});
 })( this, jQuery );
