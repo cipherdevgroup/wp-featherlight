@@ -759,7 +759,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @version   Version 0.1.1
+ * @version   Version 0.2.0
  * @copyright Copyright 2015, Robert Neu (http://robneu.com)
  * @license   MIT
  */
