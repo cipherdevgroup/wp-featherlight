@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'WP_FEATHERLIGHT_FILE', __FILE__ );
-define( 'WP_FEATHERLIGHT_VERSION', '0.1.1' );
+define( 'WP_FEATHERLIGHT_VERSION', '0.2.0' );
 
 if ( ! defined( 'WP_FEATHERLIGHT_DIR' ) ) {
 	define( 'WP_FEATHERLIGHT_DIR', plugin_dir_path( WP_FEATHERLIGHT_FILE ) );
