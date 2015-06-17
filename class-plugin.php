@@ -40,9 +40,11 @@ class WP_Featherlight {
 	 * @return void
 	 */
 	public function run() {
-		self::load_textdomain();
 		self::includes();
 		self::instantiate();
+		if ( is_admin() ) {
+			self::load_textdomain();
+		}
 	}
 
 	/**
