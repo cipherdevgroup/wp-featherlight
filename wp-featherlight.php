@@ -27,7 +27,7 @@ if ( ! defined( 'WP_FEATHERLIGHT_URL' ) ) {
 }
 
 // Load the main plugin class.
-require_once WP_FEATHERLIGHT_DIR . 'includes/plugin.php';
+require_once WP_FEATHERLIGHT_DIR . 'class-plugin.php';
 
 /**
  * Allow themes and plugins to access WP_Featherlight methods and properties.
@@ -38,7 +38,7 @@ require_once WP_FEATHERLIGHT_DIR . 'includes/plugin.php';
  *
  * Example:
  *
- * <?php wp_featherlight()->meta; ?>
+ * <?php wp_featherlight()->scripts; ?>
  *
  * @since  0.1.0
  * @access public

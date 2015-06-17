@@ -1,6 +1,6 @@
 <?php
 /**
- * Enhanced User Profiles main plugin class.
+ * WP Featherlight main plugin class.
  *
  * @package   WPFeatherlight
  * @author    Robert Neu
@@ -68,9 +68,11 @@ class WP_Featherlight {
 	 * @return void
 	 */
 	private function includes() {
-		$includes_dir = WP_FEATHERLIGHT_DIR . 'includes/';
-		require_once $includes_dir . 'classes/scripts.php';
-		require_once $includes_dir . 'classes/admin/meta.php';
+		$dir = WP_FEATHERLIGHT_DIR;
+		require_once $dir . 'includes/class-scripts.php';
+		if ( is_admin() ) {
+			require_once $dir . 'admin/class-meta.php';
+		}
 	}
 
 	/**
@@ -83,11 +85,10 @@ class WP_Featherlight {
 	private function instantiate() {
 		$this->scripts = new WP_Featherlight_Scripts;
 		$this->scripts->run();
-		if ( ! is_admin() ) {
-			return;
+		if ( is_admin() ) {
+			$this->meta = new WP_Featherlight_Admin_Meta;
+			$this->meta->run();
 		}
-		$this->meta = new WP_Featherlight_Admin_Meta;
-		$this->meta->run();
 	}
 
 	/**

@@ -83,7 +83,7 @@ class WP_Featherlight_Admin_Meta {
 		if ( ! empty( $disable ) ) {
 			$checked = $disable;
 		}
-		require_once WP_FEATHERLIGHT_DIR . 'templates/admin/metabox-sidebar.php';
+		require_once WP_FEATHERLIGHT_DIR . 'admin/templates/metabox-sidebar.php';
 	}
 
 	/**
@@ -100,13 +100,10 @@ class WP_Featherlight_Admin_Meta {
 			return;
 		}
 
-		$nonce = '';
-		if ( isset( $_POST['wp_featherlight_nonce'] ) ) {
-			$nonce = $_POST['wp_featherlight_nonce'];
-		}
+		$no = 'wp_featherlight_disable_nonce';
 
 		//	Bail if we can't verify the nonce.
-		if ( ! wp_verify_nonce( $nonce, plugin_basename( WP_FEATHERLIGHT_FILE ) ) ) {
+		if ( ! isset( $_POST[ $no ] ) || ! wp_verify_nonce( $_POST[ $no ], 'toggle_wp_featherlight' ) ) {
 			return;
 		}
 
