@@ -16,6 +16,10 @@ class WP_Featherlight_Scripts {
 
 	protected $suffix;
 
+	public function __construct() {
+		$this->suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	}
+
 	/**
 	 * Get the class running!
 	 *
@@ -24,7 +28,6 @@ class WP_Featherlight_Scripts {
 	 * @return void
 	 */
 	public function run() {
-		$this->suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		self::wp_hooks();
 	}
 
@@ -129,8 +132,6 @@ class WP_Featherlight_Scripts {
 	/**
 	 * Load all of our JS files individually to for maximum compatibility.
 	 *
-	 * @todo Add logic to use minified versions of scripts when not debugging.
-	 *
 	 * @since  0.1.0
 	 * @access public
 	 * @return void
@@ -139,31 +140,32 @@ class WP_Featherlight_Scripts {
 		if ( $this->enable_packed_js() ) {
 			return;
 		}
-		$url = WP_FEATHERLIGHT_URL . 'js/src/';
+		$url    = WP_FEATHERLIGHT_URL . 'js/src/';
+		$suffix = $this->suffix;
 		wp_enqueue_script(
 			'jquery-detect-swipe',
-			$url . 'vendor/jquery.detect_swipe.js',
+			$url . "vendor/jquery.detect_swipe{$suffix}.js",
 			array( 'jquery' ),
 			'2.1.1',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight',
-			$url . 'vendor/featherlight.js',
+			$url . "vendor/featherlight{$suffix}.js",
 			array( 'jquery-detect-swipe' ),
 			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight-gallery',
-			$url . 'vendor/featherlight.gallery.js',
+			$url . "vendor/featherlight.gallery{$suffix}.js",
 			array( 'featherlight' ),
 			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'wp-featherlight',
-			$url . 'wpFeatherlight.js',
+			$url . "wpFeatherlight{$suffix}.js",
 			array( 'featherlight-gallery' ),
 			WP_FEATHERLIGHT_VERSION,
 			true
