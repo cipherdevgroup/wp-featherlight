@@ -144,21 +144,21 @@ class WP_Featherlight_Scripts {
 			'jquery-detect-swipe',
 			$url . 'vendor/jquery.detect_swipe.js',
 			array( 'jquery' ),
-			'2.0.4',
+			'2.1.1',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight',
 			$url . 'vendor/featherlight.js',
 			array( 'jquery-detect-swipe' ),
-			'1.2.3',
+			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight-gallery',
 			$url . 'vendor/featherlight.gallery.js',
 			array( 'featherlight' ),
-			'1.2.3',
+			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
