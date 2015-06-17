@@ -11,13 +11,13 @@
 	/**
 	 * Checks href targets to see if a given anchor is linking to an image.
 	 *
-	 * Returns false if the anchor is pointing to an external URL.
-	 *
 	 * @since  0.1.0
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ).toLowerCase() );
+		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test(
+			$( element ).attr( 'href' ).toLowerCase().split( '?' )[0].split( '#' )[0]
+		);
 	}
 
 	/**
