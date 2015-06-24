@@ -18,6 +18,38 @@ defined( 'ABSPATH' ) || exit;
 class WP_Featherlight {
 
 	/**
+	 * Property for storing the plugin version.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	private $version = '0.1.0';
+
+	/**
+	 * Property for storing a reference to the main plugin file.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	private $file = __FILE__;
+
+	/**
+	 * Property for storing the plugin's directory path.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	private $dir;
+
+	/**
+	 * Property for storing the plugin directory URL.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	private $url;
+
+	/**
 	 * An empty placeholder for referencing the scripts class.
 	 *
 	 * @since 0.1.0
@@ -32,6 +64,11 @@ class WP_Featherlight {
 	 * @var   object
 	 */
 	public $meta;
+
+	public function __construct() {
+		$this->dir = plugin_dir_path( __FILE__ );
+		$this->url = plugin_dir_url( __FILE__ );
+	}
 
 	/**
 	 * Method to initialize the plugin.
@@ -48,6 +85,50 @@ class WP_Featherlight {
 	}
 
 	/**
+	 * Retrieve the plugin version number.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function get_version() {
+		return $this->version;
+	}
+
+	/**
+	 * Retrieve a trailing slashed path to the plugin directory.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function get_file() {
+		return $this->file;
+	}
+
+	/**
+	 * Retrieve a trailing slashed path to the plugin directory.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function get_dir() {
+		return $this->dir;
+	}
+
+	/**
+	 * Retrieve a trailing slashed URL to the plugin directory.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function get_url() {
+		return $this->url;
+	}
+
+	/**
 	 * Loads the plugin language files
 	 *
 	 * @since  0.1.0
@@ -58,7 +139,7 @@ class WP_Featherlight {
 		load_plugin_textdomain(
 			'wp-featherlight',
 			false,
-			dirname( plugin_basename( WP_FEATHERLIGHT_FILE ) ) . '/languages'
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
 		);
 	}
 
@@ -70,10 +151,9 @@ class WP_Featherlight {
 	 * @return void
 	 */
 	private function includes() {
-		$dir = WP_FEATHERLIGHT_DIR;
-		require_once $dir . 'includes/class-scripts.php';
+		require_once $this->dir . 'includes/class-scripts.php';
 		if ( is_admin() ) {
-			require_once $dir . 'admin/class-meta.php';
+			require_once $this->dir . 'admin/class-meta.php';
 		}
 	}
 

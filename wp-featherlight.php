@@ -15,20 +15,10 @@
 // Prevent direct access.
 defined( 'ABSPATH' ) || exit;
 
-define( 'WP_FEATHERLIGHT_FILE', __FILE__ );
-define( 'WP_FEATHERLIGHT_VERSION', '0.2.0' );
-
-if ( ! defined( 'WP_FEATHERLIGHT_DIR' ) ) {
-	define( 'WP_FEATHERLIGHT_DIR', plugin_dir_path( WP_FEATHERLIGHT_FILE ) );
-}
-
-if ( ! defined( 'WP_FEATHERLIGHT_URL' ) ) {
-	define( 'WP_FEATHERLIGHT_URL', plugin_dir_url( WP_FEATHERLIGHT_FILE ) );
-}
-
 // Load the main plugin class.
-require_once WP_FEATHERLIGHT_DIR . 'class-plugin.php';
+require_once plugin_dir_path( __FILE__ ) . 'class-plugin.php';
 
+add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
 /**
  * Allow themes and plugins to access WP_Featherlight methods and properties.
  *
@@ -60,10 +50,4 @@ function wp_featherlight() {
  * @access public
  * @return void
  */
-register_activation_hook(
-	WP_FEATHERLIGHT_FILE,
-	array( wp_featherlight(), 'activate' )
-);
-
-// Hook the main plugin class into WordPress to get things running.
-add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
+register_activation_hook( __FILE__, array( wp_featherlight(), 'activate' ) );

@@ -16,8 +16,14 @@ class WP_Featherlight_Scripts {
 
 	protected $suffix;
 
+	protected $url;
+
+	protected $version;
+
 	public function __construct() {
-		$this->suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$this->suffix  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$this->url     = wp_featherlight()->get_url();
+		$this->version = wp_featherlight()->get_version();
 	}
 
 	/**
@@ -60,9 +66,9 @@ class WP_Featherlight_Scripts {
 		}
 		wp_enqueue_style(
 			'wp-featherlight',
-			WP_FEATHERLIGHT_URL . "css/wp-featherlight{$this->suffix}.css",
+			"{$this->url}css/wp-featherlight{$this->suffix}.css",
 			array(),
-			WP_FEATHERLIGHT_VERSION
+			$this->version
 		);
 	}
 
@@ -122,9 +128,9 @@ class WP_Featherlight_Scripts {
 		}
 		wp_enqueue_script(
 			'wp-featherlight',
-			WP_FEATHERLIGHT_URL . "js/dist/wpFeatherlight.pkgd{$this->suffix}.js",
+			"{$this->url}js/dist/wpFeatherlight.pkgd{$this->suffix}.js",
 			array( 'jquery' ),
-			WP_FEATHERLIGHT_VERSION,
+			$this->version,
 			true
 		);
 	}
@@ -140,34 +146,34 @@ class WP_Featherlight_Scripts {
 		if ( $this->enable_packed_js() ) {
 			return;
 		}
-		$url    = WP_FEATHERLIGHT_URL . 'js/src/';
 		$suffix = $this->suffix;
+		$url    = "{$this->url}js/src/";
 		wp_enqueue_script(
 			'jquery-detect-swipe',
-			$url . "vendor/jquery.detect_swipe{$suffix}.js",
+			"{$url}vendor/jquery.detect_swipe{$suffix}.js",
 			array( 'jquery' ),
 			'2.1.1',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight',
-			$url . "vendor/featherlight{$suffix}.js",
+			"{$url}vendor/featherlight{$suffix}.js",
 			array( 'jquery-detect-swipe' ),
 			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight-gallery',
-			$url . "vendor/featherlight.gallery{$suffix}.js",
+			"{$url}vendor/featherlight.gallery{$suffix}.js",
 			array( 'featherlight' ),
 			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'wp-featherlight',
-			$url . "wpFeatherlight{$suffix}.js",
+			"{$url}wpFeatherlight{$suffix}.js",
 			array( 'featherlight-gallery' ),
-			WP_FEATHERLIGHT_VERSION,
+			$this->version,
 			true
 		);
 	}

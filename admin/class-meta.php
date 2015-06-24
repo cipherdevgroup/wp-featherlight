@@ -83,7 +83,7 @@ class WP_Featherlight_Admin_Meta {
 		$name    = $type->labels->singular_name;
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
 		$checked = empty( $disable ) ? '' : $disable;
-		require_once WP_FEATHERLIGHT_DIR . 'admin/templates/metabox-sidebar.php';
+		require_once wp_featherlight()->get_dir() . 'admin/templates/metabox-sidebar.php';
 	}
 
 	/**
