@@ -59,13 +59,16 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function add_meta_boxes( $post_type ) {
-		add_meta_box(
-			'wp_featherlight_options',
-			__( 'WP Featherlight Options', 'wp-featherlight' ),
-			array( $this, 'options_callback' ),
-			null,
-			'side'
-		);
+		$type = get_post_type_object( $post_type );
+		if ( is_object( $type ) && $type->public ) {
+			add_meta_box(
+				'wp_featherlight_options',
+				__( 'WP Featherlight Options', 'wp-featherlight' ),
+				array( $this, 'options_callback' ),
+				null,
+				'side'
+			);
+		}
 	}
 
 	/**
@@ -79,10 +82,7 @@ class WP_Featherlight_Admin_Meta {
 		$type    = get_post_type_object( $post->post_type );
 		$name    = $type->labels->singular_name;
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
-		$checked = '';
-		if ( ! empty( $disable ) ) {
-			$checked = $disable;
-		}
+		$checked = empty( $disable ) ? '' : $disable;
 		require_once WP_FEATHERLIGHT_DIR . 'admin/templates/metabox-sidebar.php';
 	}
 
