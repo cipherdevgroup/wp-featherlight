@@ -1,9 +1,14 @@
 {
-	"requireSpacesInConditionalExpression": true,
+	"requireSpacesInConditionalExpression": {
+		"afterTest": true,
+		"beforeConsequent": true,
+		"afterConsequent": true,
+		"beforeAlternate": true
+	},
 	"requireSpacesInFunction": {
 		"beforeOpeningCurlyBrace": true
 	},
-	"disallowSpacesInFunction": {
+	"disallowSpacesInAnonymousFunctionExpression": {
 		"beforeOpeningRoundBrace": true
 	},
 	"requireMultipleVarDecl": "onevar",
@@ -30,8 +35,15 @@
 	"validateLineBreaks": "LF",
 	"disallowMixedSpacesAndTabs": "smart",
 	"disallowTrailingWhitespace": true,
-
-	"requireCurlyBraces": [ "if", "else", "for", "while", "do", "try", "catch" ],
+	"requireCurlyBraces": [
+		"if",
+		"else",
+		"for",
+		"while",
+		"do",
+		"try",
+		"catch"
+	],
 	"requireSpaceBeforeBlockStatements": true,
 	"requireParenthesesAroundIIFE": true,
 	"requireBlocksOnNewline": true,
@@ -51,6 +63,7 @@
 		"<",
 		"<="
 	],
+	"requireCapitalizedComments": true,
 	"requireSpaceBeforeBinaryOperators": [
 		"?",
 		"=",
@@ -95,6 +108,46 @@
 	"requireLineFeedAtFileEnd": true,
 	"requireDotNotation": true,
 	"disallowNewlineBeforeBlockStatements": true,
+	"requireSpaceAfterKeywords": [
+		"do",
+		"for",
+		"if",
+		"else",
+		"switch",
+		"case",
+		"try",
+		"catch",
+		"void",
+		"while",
+		"with",
+		"return",
+		"typeof"
+	],
+	"requireSpaceAfterLineComment": true,
+	"requireSpaceBeforeKeywords": [
+		"else",
+		"while",
+		"catch"
+	],
+	"requireSpaceBeforeObjectValues": true,
+	"requireSpaceBetweenArguments": true,
+	"requireSpacesInAnonymousFunctionExpression": {
+		"beforeOpeningCurlyBrace": true
+	},
+	"requireSpacesInForStatement": true,
+	"requireSpacesInsideArrayBrackets": "all",
+	"requireSpacesInsideParentheses": {
+		"all": true,
+		"except": [
+			"{",
+			"}",
+			"[",
+			"]",
+			"function"
+		]
+	},
+	"requireYodaConditions": true,
+	"validateParameterSeparator": ", ",
 
 	"disallowTrailingComma": true,
 	"disallowPaddingNewlinesInBlocks": true,
