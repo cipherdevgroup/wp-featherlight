@@ -43,7 +43,7 @@
 		var $galleryObj   = $( element ),
 			$galleryItems = $galleryObj.find( '.gallery-item a' );
 
-		if ( $galleryItems.length === 0 ) {
+		if ( 0 === $galleryItems.length ) {
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
@@ -63,7 +63,7 @@
 	function findGalleries() {
 		var $gallery = $( '.gallery, .tiled-gallery' );
 
-		if ( $gallery.length === 0 ) {
+		if ( 0 === $gallery.length ) {
 			return;
 		}
 
