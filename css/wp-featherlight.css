@@ -38,8 +38,9 @@
  */
 .featherlight {
 	background: transparent;
-	cursor: pointer;
+	cursor: zoom-out;
 	display: none;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -50,6 +51,10 @@
 	z-index: 2147483647;
 }
 
+a img {
+	cursor: zoom-in;
+}
+
 .featherlight * {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -57,7 +62,7 @@
 }
 
 .featherlight:last-of-type {
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.90);
 }
 
 .featherlight:before {
@@ -73,10 +78,10 @@
 	border: 0;
 	cursor: auto;
 	display: inline-block;
-	max-height: 95%;
+	max-height: 90%;
 	max-width: 90%;
 	min-width: inherit;
-	overflow: auto;
+	overflow: visible;
 	padding: 0;
 	position: relative;
 	text-align: left;
@@ -89,28 +94,22 @@
 }
 
 .featherlight .featherlight-close-icon {
-	background: rgba(255, 255, 255, 0.3);
-	color: #000;
-	cursor: pointer;
-	font: Arial, sans-serif;
-	line-height: 25px;
-	position: absolute;
+	color: #fff;
+	cursor: zoom-out;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 30px;
+	font-weight: lighter;
+	font-size: 30px;
+	position: fixed;
 	top: 0;
 	right: 0;
 	text-align: center;
-	width: 20px;
+	width: 30px;
 	z-index: 9999;
 }
 
 .featherlight .featherlight-image {
-	border: 20px solid #fff;
 	max-width: 100%;
-}
-
-@media only screen and (max-width: 1024px) {
-	.featherlight .featherlight-image {
-		border: 10px solid #fff;
-	}
 }
 
 .featherlight iframe {
@@ -122,6 +121,12 @@
 	padding: 0;
 }
 
+.featherlight-content .caption {
+	color: #fff;
+	font-weight: lighter;
+	font-size: 14px;
+	position: absolute;
+}
 
 /* Animated Loader
 --------------------------------------------- */
@@ -157,93 +162,58 @@
  */
 .featherlight-next,
 .featherlight-previous {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
 	background: transparent;
 	cursor: pointer;
 	display: block;
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	bottom: 0;
-	left: 80%;
+	position: fixed;
+	top: 50%;
+	height: 60px;
+	margin-top: -30px;
+	width: 60px;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
 
-@media only screen and (max-width: 1024px) {
-	.featherlight-next,
-	.featherlight-previous {
-		top: 10px;
-		right: 10px;
-		left: 85%;
-	}
-}
-
-.featherlight-next:hover,
-.featherlight-next:focus,
-.featherlight-previous:hover,
-.featherlight-previous:focus {
-	background: rgba(255, 255, 255, 0.25);
-}
-
-@media only screen and (max-width: 1024px) {
-	.featherlight-next:hover,
-	.featherlight-next:focus,
-	.featherlight-previous:hover,
-	.featherlight-previous:focus {
-		background: none;
-	}
-}
-
-.featherlight-next:hover span,
-.featherlight-next:focus span,
-.featherlight-previous:hover span,
-.featherlight-previous:focus span {
-	display: inline-block;
-}
-
-.featherlight-next span,
-.featherlight-previous span {
-	color: #fff;
-	display: none;
-	font-size: 80px;
-	font-style: normal;
-	font-weight: normal;
-	line-height: 80px;
-	margin-top: -40px;
-	position: absolute;
-	top: 50%;
-	left: 5%;
-	text-align: center;
-	text-shadow: 0 0 5px #fff;
-	width: 82%;
-}
-
-@media only screen and (max-width: 1024px) {
-	.featherlight-next span,
-	.featherlight-previous span {
-		display: block;
-		font-size: 40px;
-		margin-top: -30px;
-	}
+.featherlight-next {
+	right: 0;
 }
 
 .featherlight-previous {
-	right: 80%;
-	left: 20px;
+	left: 0;
 }
 
-@media only screen and (max-width: 1024px) {
-	.featherlight-previous {
-		right: 85%;
-		left: 10px;
-	}
+.featherlight-next span:before,
+.featherlight-previous span:before {
+	color: #fff;
+	display: block;
+	font-size: 100px;
+	font-style: normal;
+	font-weight: lighter;
+	line-height: 60px;
+	text-align: center;
+	text-indent: 0;
+	opacity: 0.2;
 }
 
-.featherlight-next span {
-	right: 5%;
-	left: auto;
+.featherlight-previous span:before {
+	content:"\2039";
+}
+
+.featherlight-next span:before {
+	content:"\203A";
+}
+
+.featherlight-next:hover span:before,
+.featherlight-next:focus span:before,
+.featherlight-previous:hover span:before,
+.featherlight-previous:focus span:before {
+	opacity: 1;
 }
 
 .featherlight-loading .featherlight-previous,
