@@ -16,7 +16,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Load the main plugin class.
-require_once plugin_dir_path( __FILE__ ) . 'class-plugin.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
 
 add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
 /**
@@ -38,7 +38,7 @@ add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
 function wp_featherlight() {
 	static $plugin;
 	if ( null === $plugin ) {
-		$plugin = new WP_Featherlight;
+		$plugin = new WP_Featherlight( array( 'file' => __FILE__ ) );
 	}
 	return $plugin;
 }

@@ -31,7 +31,7 @@ class WP_Featherlight {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	private $file = __FILE__;
+	private $file;
 
 	/**
 	 * Property for storing the plugin's directory path.
@@ -65,9 +65,10 @@ class WP_Featherlight {
 	 */
 	public $meta;
 
-	public function __construct() {
-		$this->dir = plugin_dir_path( __FILE__ );
-		$this->url = plugin_dir_url( __FILE__ );
+	public function __construct( $args ) {
+		$this->file = $args['file'];
+		$this->dir  = plugin_dir_path( $this->file );
+		$this->url  = plugin_dir_url( $this->file );
 	}
 
 	/**
