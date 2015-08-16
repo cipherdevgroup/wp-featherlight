@@ -51,7 +51,7 @@
 	z-index: 2147483647;
 }
 
-a img {
+[data-featherlight] {
 	cursor: zoom-in;
 }
 
