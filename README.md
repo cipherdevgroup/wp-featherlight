@@ -27,4 +27,4 @@ The best way to install this plugin is to either [download a copy](https://wordp
 
 ## Contributing ##
 
-If you're a developer, the most current version can be found on the [develop branch](https://github.com/wpsitecare/wp-featherlight/tree/develop). Pull requests, issues, and any feedback is more than welcome. If you would like to contribute code, please make your pull requests against the develop branch rather than the master.
+If you're a developer, the most current version can be found on the [develop branch](https://github.com/wpsitecare/wp-featherlight/tree/develop). Pull requests, issues, and any feedback are all more than welcome. If you would like to contribute code, please make your pull requests against the develop branch rather than the master.
