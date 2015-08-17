@@ -1,7 +1,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @copyright Copyright 2015, Robert Neu (http://robneu.com)
+ * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
  * @license   MIT
  */
 (function( window, $, undefined ) {

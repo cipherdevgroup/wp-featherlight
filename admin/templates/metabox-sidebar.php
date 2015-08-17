@@ -4,7 +4,7 @@
  *
  * @package   WPFeatherlight
  * @author    Robert Neu
- * @copyright Copyright (c) 2015, Robert Neu
+ * @copyright Copyright (c) 2015, WP Site Care
  * @license   GPL-2.0+
  * @since     0.1.0
  */

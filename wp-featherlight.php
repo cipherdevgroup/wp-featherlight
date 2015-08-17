@@ -4,8 +4,8 @@
  * Plugin URI:   http://www.wpsitecare.com/wp-featherlight/
  * Description:  An ultra lightweight jQuery lightbox for WordPress images and galleries.
  * Version:      0.2.0
- * Author:       Robert Neu
- * Author URI:   http://robneu.com
+ * Author:       WP Site Care
+ * Author URI:   http://www.wpsitecare.com
  * License:      GPL-2.0+
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:  wp-featherlight
