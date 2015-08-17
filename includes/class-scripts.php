@@ -45,9 +45,10 @@ class WP_Featherlight_Scripts {
 	 * @return void
 	 */
 	protected function wp_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_css' ), 20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_js' ),  20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_disable' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_css' ),       20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_js' ),        20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_disable' ),  10 );
+		add_action( 'body_class',         array( $this, 'script_helpers' ), 10 );
 	}
 
 	/**
@@ -191,6 +192,22 @@ class WP_Featherlight_Scripts {
 			add_filter( 'wp_featherlight_load_css', '__return_false' );
 			add_filter( 'wp_featherlight_load_js',  '__return_false' );
 		}
+	}
+
+	/**
+	 * Add custom body classes to help our script enable and disable features
+	 * without creating true plugin database options.
+	 *
+	 * @since  0.2.0
+	 * @access public
+	 * @param  array $classes the existing body classes.
+	 * @return array $classes the amended body classes.
+	 */
+	public function script_helpers( $classes ) {
+		if ( apply_filters( 'wp_featherlight_captions', true ) ) {
+			$classes[] = 'wp-featherlight-captions';
+		}
+		return $classes;
 	}
 
 }

@@ -8,6 +8,8 @@
 (function( window, $, undefined ) {
 	'use strict';
 
+	var $body = $( 'body' );
+
 	/**
 	 * Checks href targets to see if a given anchor is linking to an image.
 	 *
@@ -71,6 +73,30 @@
 	}
 
 	/**
+	 * Append image captions to the Featherlight content <div>.
+	 *
+	 * @since  0.1.0
+	 * @return void
+	 */
+	function addCaptions() {
+		$.featherlight.prototype.afterContent = function() {
+			var object  = this.$instance,
+				target  = this.$currentTarget,
+				parent  = target.parent(),
+				caption = parent.find( '.wp-caption-text' );
+
+			if ( parent.hasClass( 'gallery-icon' ) ) {
+				caption = target.parents( '.gallery-item' ).find( '.wp-caption-text' );
+			}
+
+			object.find( '.caption' ).remove();
+			if ( 0 !== caption.length ) {
+				$( '<div class="caption">' ).text( caption.text() ).appendTo( object.find( '.featherlight-content' ) );
+			}
+		};
+	}
+
+	/**
 	 * Fires all of our helper methods to load featherlight.
 	 *
 	 * @since  0.1.0
@@ -79,6 +105,9 @@
 	function wpFeatherlightInit() {
 		findImages();
 		findGalleries();
+		if ( $body.hasClass( 'wp-featherlight-captions' ) ) {
+			addCaptions();
+		}
 	}
 
 	$( document ).ready(function() {
