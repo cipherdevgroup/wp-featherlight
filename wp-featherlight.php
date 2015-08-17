@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Load the main plugin class.
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/constants.php';
 
 add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
 /**
