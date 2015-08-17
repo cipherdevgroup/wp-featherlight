@@ -65,10 +65,12 @@
 .featherlight .featherlight-close-icon {
 	cursor: zoom-out;
 	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M21%204.41L19.59%203%2012%2010.59%204.41%203%203%204.41%2010.59%2012%203%2019.59%204.41%2021%2012%2013.41%2019.59%2021%2021%2019.59%2013.41%2012%2021%204.41z%22/%3E%0A%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
 	background-size: 100% auto;
 	display: block;
-	top: 20px;
-	right: 20px;
+	top: 25px;
+	right: 25px;
 	text-align: center;
 	width: 30px;
 	height: 30px;
@@ -99,80 +101,6 @@
 	position: absolute;
 }
 
-/* Animated Loader
---------------------------------------------- */
-
-.featherlight-loading .featherlight-content {
-	-webkit-animation: featherlightLoader 1s infinite linear;
-	animation: featherlightLoader 1s infinite linear;
-	background: transparent;
-	border: 8px solid #909090;
-	border-left-color: #fff;
-	font-size: 10px;
-}
-
-.featherlight-loading .featherlight-content,
-.featherlight-loading .featherlight-content:after {
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-	height: 10em;
-	width: 10em;
-}
-
-.featherlight-loading .featherlight-close,
-.featherlight-loading .featherlight-inner {
-	display: none;
-}
-
-/**
- * Featherlight Gallery - an extension for the ultra slim jQuery lightbox
- * Version 1.2.3 - http://noelboss.github.io/featherlight/
- *
- * Copyright 2015, Noel Raoul Bossart (http://www.noelboss.com)
- * MIT Licensed.
- */
-.featherlight-next,
-.featherlight-previous {
-	background-size: 100% auto;
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	cursor: pointer;
-	display: block;
-	position: fixed;
-	opacity: 0.4;
-	top: 50%;
-	height: 60px;
-	margin-top: -30px;
-	width: 60px;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
-}
-
-.featherlight-next {
-	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M8.59%2016.59L13.17%2012%208.59%207.41%2010%206l6%206-6%206-1.41-1.41z%22/%3E%0A%3C/svg%3E");
-	right: 0;
-}
-
-.featherlight-previous {
-	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M15.41%207.41L10.83%2012l4.58%204.59L14%2018l-6-6%206-6%201.41%201.41z%22/%3E%0A%3C/svg%3E");
-	left: 0;
-}
-
-.featherlight-next:hover,
-.featherlight-next:focus,
-.featherlight-previous:hover,
-.featherlight-previous:focus {
-	opacity: 1;
-}
-
-.featherlight-loading .featherlight-previous,
-.featherlight-loading .featherlight-next {
-	display: none;
-}
-
 /**
  * Featherlight Animations
  *
@@ -201,3 +129,83 @@
 		transform: rotate(360deg);
 	}
  }
+
+ /* Animated Loader
+ --------------------------------------------- */
+
+ .featherlight-loading .featherlight-content {
+ 	-webkit-animation: featherlightLoader 1s infinite linear;
+ 	animation: featherlightLoader 1s infinite linear;
+ 	background: transparent;
+ 	border: 8px solid #909090;
+ 	border-left-color: #fff;
+ 	font-size: 10px;
+ }
+
+ .featherlight-loading .featherlight-content,
+ .featherlight-loading .featherlight-content:after {
+ 	-webkit-border-radius: 50%;
+ 	border-radius: 50%;
+ 	height: 10em;
+ 	width: 10em;
+ }
+
+ .featherlight-loading .featherlight-close,
+ .featherlight-loading .featherlight-inner {
+ 	display: none;
+ }
+
+/**
+ * Featherlight Gallery - an extension for the ultra slim jQuery lightbox
+ * Version 1.2.3 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2015, Noel Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+ */
+.featherlight-next,
+.featherlight-previous {
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	cursor: pointer;
+	display: block;
+	position: fixed;
+	opacity: 0.4;
+	top: 50%;
+	height: 60px;
+	margin-top: -30px;
+	width: 60px;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.featherlight-next {
+	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M8.59%2016.59L13.17%2012%208.59%207.41%2010%206l6%206-6%206-1.41-1.41z%22/%3E%0A%3C/svg%3E");
+	right: 10px;
+}
+
+.featherlight-previous {
+	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M15.41%207.41L10.83%2012l4.58%204.59L14%2018l-6-6%206-6%201.41%201.41z%22/%3E%0A%3C/svg%3E");
+	left: 10px;
+}
+
+.featherlight-next span,
+.featherlight-previous span {
+	display: none;
+}
+
+.featherlight-next:hover,
+.featherlight-next:focus,
+.featherlight-previous:hover,
+.featherlight-previous:focus {
+	opacity: 1;
+}
+
+.featherlight-loading .featherlight-previous,
+.featherlight-loading .featherlight-next {
+	display: none;
+}
