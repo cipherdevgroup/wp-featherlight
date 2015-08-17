@@ -198,7 +198,7 @@ class WP_Featherlight_Scripts {
 	 * Add custom body classes to help our script enable and disable features
 	 * without creating true plugin database options.
 	 *
-	 * @since  0.2.0
+	 * @since  0.3.0
 	 * @access public
 	 * @param  array $classes the existing body classes.
 	 * @return array $classes the amended body classes.
