@@ -17,8 +17,8 @@
 	.featherlight-content {
 		animation: featherlightLoader 1s infinite linear;
 		background: transparent;
-		border: 8px solid #909090;
-		border-left-color: #fff;
+		border: 8px solid $loader-primary-color;
+		border-left-color: $loader-secondary-color;
 		font-size: 10px;
 	 }
 

@@ -26,12 +26,12 @@
 }
 
 .featherlight-next {
-	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M8.59%2016.59L13.17%2012%208.59%207.41%2010%206l6%206-6%206-1.41-1.41z%22/%3E%0A%3C/svg%3E");
+	background: $next-icon;
 	right: 10px;
 }
 
 .featherlight-previous {
-	background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M15.41%207.41L10.83%2012l4.58%204.59L14%2018l-6-6%206-6%201.41%201.41z%22/%3E%0A%3C/svg%3E");
+	background: $prev-icon;
 	left: 10px;
 }
 
