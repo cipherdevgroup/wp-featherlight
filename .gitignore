@@ -6,7 +6,7 @@ node_modules
 bower_components
 
 # Development directories
-dist/
+release/
 docs/
 tmp/
 
