@@ -20,15 +20,15 @@ class WP_Featherlight {
 	/**
 	 * Property for storing the plugin version.
 	 *
-	 * @since 1.0.0
+	 * @since 0.3.0
 	 * @var   string
 	 */
-	private $version = '0.1.0';
+	const VERSION = '0.2.0';
 
 	/**
 	 * Property for storing a reference to the main plugin file.
 	 *
-	 * @since 1.0.0
+	 * @since 0.3.0
 	 * @var   string
 	 */
 	private $file;
@@ -36,7 +36,7 @@ class WP_Featherlight {
 	/**
 	 * Property for storing the plugin's directory path.
 	 *
-	 * @since 1.0.0
+	 * @since 0.3.0
 	 * @var   string
 	 */
 	private $dir;
@@ -44,7 +44,7 @@ class WP_Featherlight {
 	/**
 	 * Property for storing the plugin directory URL.
 	 *
-	 * @since 1.0.0
+	 * @since 0.3.0
 	 * @var   string
 	 */
 	private $url;
@@ -88,18 +88,18 @@ class WP_Featherlight {
 	/**
 	 * Retrieve the plugin version number.
 	 *
-	 * @since  1.0.0
+	 * @since  0.3.0
 	 * @access public
 	 * @return string
 	 */
 	public function get_version() {
-		return $this->version;
+		return self::VERSION;
 	}
 
 	/**
 	 * Retrieve a trailing slashed path to the plugin directory.
 	 *
-	 * @since  1.0.0
+	 * @since  0.3.0
 	 * @access public
 	 * @return string
 	 */
@@ -110,7 +110,7 @@ class WP_Featherlight {
 	/**
 	 * Retrieve a trailing slashed path to the plugin directory.
 	 *
-	 * @since  1.0.0
+	 * @since  0.3.0
 	 * @access public
 	 * @return string
 	 */
@@ -121,7 +121,7 @@ class WP_Featherlight {
 	/**
 	 * Retrieve a trailing slashed URL to the plugin directory.
 	 *
-	 * @since  1.0.0
+	 * @since  0.3.0
 	 * @access public
 	 * @return string
 	 */
