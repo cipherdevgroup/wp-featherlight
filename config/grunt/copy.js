@@ -117,5 +117,35 @@ module.exports = {
 				}
 			}
 		]
+	},
+	release: {
+		files: [
+			{
+				expand: true,
+				src: [
+					'**',
+					'.*',
+					'!.git/**',
+					'!.sass-cache/**',
+					'!.jscsrc',
+					'!.jshintrc',
+					'!config/**',
+					'!release/**',
+					'!css/src/**',
+					'!bower_components/**',
+					'!node_modules/**',
+					'!tmp/**',
+					'!*.json',
+					'!*.sublime*',
+					'!.DS_Store',
+					'!.gitattributes',
+					'!.gitignore',
+					'!composer.lock',
+					'!gruntfile.js',
+					'!package.json'
+				],
+				dest: '<%= paths.release %><%= pkg.nameDashed %>-<%= pkg.version %>'
+			}
+		]
 	}
 };
