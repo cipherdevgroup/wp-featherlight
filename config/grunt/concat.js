@@ -2,8 +2,10 @@
 module.exports = {
 	js: {
 		src: [
-			'<%= paths.jsSrc %>**/*.js',
-			'!<%= paths.jsSrc %>**/*.min.js'
+			'<%= paths.jsSrc %>vendor/jquery.detect_swipe.js',
+			'<%= paths.jsSrc %>vendor/featherlight.js',
+			'<%= paths.jsSrc %>vendor/featherlight.gallery.js',
+			'<%= paths.jsSrc %>wpFeatherlight.js'
 		],
 		dest: 'js/<%= pkg.nameCamelLow %>.pkgd.js'
 	}
