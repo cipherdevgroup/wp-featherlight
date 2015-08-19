@@ -142,9 +142,11 @@ module.exports = {
 					'!.gitignore',
 					'!composer.lock',
 					'!gruntfile.js',
-					'!package.json'
+					'!package.json',
+					'!CHANGELOG.md',
+					'!README.md'
 				],
-				dest: '<%= paths.release %><%= pkg.nameDashed %>-<%= pkg.version %>'
+				dest: '<%= paths.release %><%= pkg.version %>'
 			}
 		]
 	}
