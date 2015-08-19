@@ -96,19 +96,6 @@
 	}
 
 	/**
-	 * Fix a bug in Featherlight which allows multiple lightboxes to be triggered
-	 * when using keyboard input.
-	 *
-	 * @since  0.3.0
-	 * @return void
-	 */
-	function removeFocus() {
-		$.featherlight.prototype.afterOpen = function() {
-			this.$currentTarget.blur();
-		};
-	}
-
-	/**
 	 * Fires all of our helper methods to load featherlight.
 	 *
 	 * @since  0.1.0
@@ -117,7 +104,6 @@
 	function wpFeatherlightInit() {
 		findImages();
 		findGalleries();
-		removeFocus();
 		if ( $body.hasClass( 'wp-featherlight-captions' ) ) {
 			addCaptions();
 		}
