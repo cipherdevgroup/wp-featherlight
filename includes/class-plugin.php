@@ -140,7 +140,7 @@ class WP_Featherlight {
 		load_plugin_textdomain(
 			'wp-featherlight',
 			false,
-			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+			dirname( plugin_basename( $this->file ) ) . '/languages'
 		);
 	}
 
