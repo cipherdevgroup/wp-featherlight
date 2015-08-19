@@ -3,8 +3,8 @@
 An ultra lightweight jQuery lightbox for WordPress images and galleries.
 
 __Contributors:__ [Robert Neu](https://github.com/robneu)  
-__Requires:__ WordPress 4.1  
-__Tested up to:__ WordPress 4.2.2  
+__Requires:__ WordPress 4.3  
+__Tested up to:__ WordPress 4.3  
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 ![Lightbox Popup](https://cloud.githubusercontent.com/assets/2184093/7943642/6885759a-092b-11e5-943c-c9211653a1e4.png)
