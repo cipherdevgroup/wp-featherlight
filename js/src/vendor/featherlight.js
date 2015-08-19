@@ -1,6 +1,6 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.3.2 - http://noelboss.github.io/featherlight/
+ * Version 1.3.3 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -322,7 +322,7 @@
 				process: function(elem) { return this.persist !== false ? $(elem) : $(elem).clone(true); }
 			},
 			image: {
-				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
+				regex: /\.(png|jpg|jpeg|gif|tiff|bmp|svg)(\?\S*)?$/i,
 				process: function(url)  {
 					var self = this,
 						deferred = $.Deferred(),
@@ -452,6 +452,7 @@
 				} else if(fl.persist !== false) {
 					$(this).data('featherlight-persisted', fl);
 				}
+				elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
 				fl.open(event);
 			});
 			return $source;

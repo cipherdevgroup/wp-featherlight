@@ -1,6 +1,6 @@
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.3.2 - http://noelboss.github.io/featherlight/
+ * Version 1.3.3 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -20,7 +20,7 @@
 		return warn('Load the featherlight plugin before the gallery plugin');
 	}
 
-	var isTouchAware = 'ontouchstart' in document.documentElement,
+	var isTouchAware = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
 		hammerConstructor = window.Hammer && function($el){
 			var mc = new window.Hammer.Manager($el[0]);
