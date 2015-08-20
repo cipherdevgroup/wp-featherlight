@@ -1,3 +1,12 @@
+## 0.3.0
+
+Added Language Support
+- German
+- Spanish
+- French
+- Portuguese (Brazil)
+- Spanish (Peru)
+
 ## 0.2.0
 
 The primary feature in this release is the addition of a visual loader and the automatic lightboxing of external images. In prior versions, only images from the WordPress host domain were lightboxed automatically. This caused some problems with people using a CDN as the URLs were treated as external.
