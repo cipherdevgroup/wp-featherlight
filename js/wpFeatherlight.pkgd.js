@@ -852,13 +852,17 @@
 	 */
 	function addCaptions() {
 		$.featherlight.prototype.afterContent = function() {
-			var object  = this.$instance,
-				target  = this.$currentTarget,
-				parent  = target.parent(),
-				caption = parent.find( '.wp-caption-text' );
+			var object    = this.$instance,
+				target    = this.$currentTarget,
+				parent    = target.parent(),
+				caption   = parent.find( '.wp-caption-text' ),
+				galParent = target.parents( '.gallery-item' ),
+				jetParent = target.parents( '.tiled-gallery-item' );
 
-			if ( parent.hasClass( 'gallery-icon' ) ) {
-				caption = target.parents( '.gallery-item' ).find( '.wp-caption-text' );
+			if ( 0 !== galParent.length ) {
+				caption = galParent.find( '.wp-caption-text' );
+			} else if ( 0 !== jetParent.length ) {
+				caption = jetParent.find( '.tiled-gallery-caption' );
 			}
 
 			object.find( '.caption' ).remove();
