@@ -26,12 +26,14 @@
 }
 
 .featherlight-next {
-	background: $next-icon;
+	background-image: $next-icon;
+	background-position: 0 0;
 	right: 10px;
 }
 
 .featherlight-previous {
-	background: $prev-icon;
+	background-image: $prev-icon;
+	background-position: -5px 0;
 	left: 10px;
 }
 
