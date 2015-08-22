@@ -33,7 +33,7 @@
 		border: 0;
 		cursor: auto;
 		display: inline-block;
-		max-height: 90%;
+		max-height: 80%;
 		max-width: 90%;
 		min-width: inherit;
 		overflow: visible;
@@ -42,6 +42,10 @@
 		text-align: left;
 		vertical-align: middle;
 		white-space: normal;
+
+		@media screen and (min-width: 980px) {
+			max-height: 90%;
+		}
 	}
 
 	.featherlight-inner {
@@ -87,7 +91,17 @@
 
 .featherlight-content .caption {
 	color: $caption-text-color;
-	font-weight: lighter;
 	font-size: 16px;
+	font-weight: lighter;
+	max-width: 100%;
+	overflow: hidden;
 	position: absolute;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&:hover,
+	&:focus {
+		white-space: normal;
+		overflow: visible;
+	}
 }
