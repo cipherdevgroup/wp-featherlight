@@ -1,6 +1,16 @@
 @import "variables/colors";
 @import "variables/icons";
 
+/* Base Styles
+--------------------------------------------- */
 @import "partials/base";
+
+
+/* Animated Loader
+--------------------------------------------- */
 @import "partials/animation";
+
+
+/* Gallery
+--------------------------------------------- */
 @import "partials/gallery";
