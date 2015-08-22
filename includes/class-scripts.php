@@ -71,6 +71,8 @@ class WP_Featherlight_Scripts {
 			array(),
 			$this->version
 		);
+		wp_style_add_data( 'wp-featherlight', 'rtl', 'replace' );
+		wp_style_add_data( 'wp-featherlight', 'suffix', $this->suffix );
 	}
 
 	/**
