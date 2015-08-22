@@ -79,8 +79,6 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function options_callback( $post ) {
-		$type    = get_post_type_object( $post->post_type );
-		$name    = $type->labels->singular_name;
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
 		$checked = empty( $disable ) ? '' : $disable;
 		require_once wp_featherlight()->get_dir() . 'admin/templates/metabox-sidebar.php';
