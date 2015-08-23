@@ -15,6 +15,20 @@ defined( 'ABSPATH' ) || exit;
 class WP_Featherlight_Admin_Meta {
 
 	/**
+	 * Name for the nonce field
+	 *
+	 * @var string
+	 */
+	private $nonce_name = 'wp_featherlight_disable_nonce';
+
+	/**
+	 * User submitted data.
+	 *
+	 * @var array
+	 */
+	private $user_data = array();
+
+	/**
 	 * Get the class running!
 	 *
 	 * @since  0.1.0
@@ -33,9 +47,13 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	protected function wp_hooks() {
+
 		add_action( 'add_meta_boxes',      array( $this, 'add_meta_boxes' ) );
-		add_action( 'save_post',           array( $this, 'save_meta_boxes' ) );
-		add_filter( 'wp_insert_post_data', array( $this, 'stop_multisite_save' ) );
+
+		if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+			$this->user_data = $_POST;
+			add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
+		}
 	}
 
 	/**
@@ -44,21 +62,39 @@ class WP_Featherlight_Admin_Meta {
 	 * @since  0.3.0
 	 * @access protected
 	 * @param  int $post_id Post ID.
-	 * @param  array $data the $_POST data to be saved.
-	 * @param  string $nonce Nonce that was used in the form to verify
-	 * @param  string|int $action Should give context to what is taking place and be the same when nonce was created.
-	 * @return array|bool data to be saved if all checks pass, false on failure.
+	 * @return bool Whether or not this is a valid request to save our data.
 	 */
-	protected function validate_request( $post_id, $data, $nonce, $action = -1 ) {
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ||
-			defined( 'DOING_AJAX' ) && DOING_AJAX ||
-			defined( 'DOING_CRON' ) && DOING_CRON ||
-			! current_user_can( 'edit_post', $post_id ) ||
-			! isset( $data[ $nonce ] ) ||
-			! wp_verify_nonce( $data[ $nonce ], $action ) ) {
+	protected function validate_request( $post_id ) {
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return false;
 		}
-		return $data;
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return false;
+		}
+
+		if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
+			return false;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return false;
+		}
+
+		if ( ! isset( $this->user_data[ $this->nonce_name ] ) ) {
+			return false;
+		}
+
+		if ( ! wp_verify_nonce( $this->user_data[ $this->nonce_name ] ) ) {
+			return false;
+		}
+		// @link http://make.marketpress.com/multilingualpress/2014/10/how-to-disable-broken-save_post-callbacks/
+		if ( is_multisite() && ms_is_switched() ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -87,9 +123,11 @@ class WP_Featherlight_Admin_Meta {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
+	 * @param \WP_Post $post Post object.
 	 * @return void
 	 */
-	public function options_callback( $post ) {
+	public function options_callback( WP_Post $post ) {
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
 		$checked = empty( $disable ) ? '' : $disable;
 		require_once wp_featherlight()->get_dir() . 'admin/templates/metabox-sidebar.php';
@@ -102,29 +140,15 @@ class WP_Featherlight_Admin_Meta {
 	 * @since  0.1.0
 	 * @access public
 	 * @param  int $post_id Post ID.
-	 * @return int|bool Meta ID if the key didn't exist, true on successful update, false on failure.
+	 * @return bool Whether or not data has been saved.
 	 */
 	public function save_meta_boxes( $post_id ) {
-		if ( ! $safe_data = $this->validate_request( $post_id, $_POST, 'wp_featherlight_disable_nonce', 'toggle_wp_featherlight' ) ) {
+		if ( ! $this->validate_request( $post_id ) ) {
 			return false;
 		}
-		return update_post_meta( $post_id, 'wp_featherlight_disable', isset( $safe_data['wp_featherlight_disable'] ) ? 'yes' : '' );
-	}
 
-	/**
-	 * Prevent unwanted extra calls to `save_post` on WordPress multisite.
-	 *
-	 * @since  0.3.0
-	 * @access public
-	 * @link   http://make.marketpress.com/multilingualpress/2014/10/how-to-disable-broken-save_post-callbacks/
-	 * @param  array $data the current sanitized post data
-	 * @return array $data the unmodified post data
-	 */
-	public function stop_multisite_save( $data ) {
-		if ( is_multisite() && ms_is_switched() ) {
-			remove_action( 'save_post', array( $this, 'save_meta_boxes' ) );
-		}
-		return $data;
-	}
+		$value = isset( $this->user_data['wp_featherlight_disable'] ) ? 'yes' : '';
 
+		return (bool) update_post_meta( $post_id, 'wp_featherlight_disable', $value );
+	}
 }
