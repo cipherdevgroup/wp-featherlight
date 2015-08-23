@@ -2,7 +2,7 @@
 /**
  * Methods used for adding and saving meta data for WP Featherlight.
  *
- * @package   WPFeatherlight
+ * @package   WPFeatherlight\Admin
  * @author    Robert Neu
  * @copyright Copyright (c) 2015, WP Site Care
  * @license   GPL-2.0+
@@ -133,6 +133,7 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function options_callback( WP_Post $post ) {
+		wp_featherlight()->i18n->load();
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
 		$checked = empty( $disable ) ? '' : $disable;
 		require_once wp_featherlight()->get_dir() . 'admin/templates/metabox-sidebar.php';

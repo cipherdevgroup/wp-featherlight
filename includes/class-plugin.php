@@ -58,6 +58,14 @@ class WP_Featherlight {
 	public $scripts;
 
 	/**
+	 * An empty placeholder for referencing the i18n class.
+	 *
+	 * @since 0.1.0
+	 * @var   object
+	 */
+	public $i18n;
+
+	/**
 	 * An empty placeholder for referencing the meta class.
 	 *
 	 * @since 0.1.0
@@ -80,9 +88,6 @@ class WP_Featherlight {
 	public function run() {
 		self::includes();
 		self::instantiate();
-		if ( is_admin() ) {
-			self::load_textdomain();
-		}
 	}
 
 	/**
@@ -130,21 +135,6 @@ class WP_Featherlight {
 	}
 
 	/**
-	 * Loads the plugin language files
-	 *
-	 * @since  0.1.0
-	 * @access public
-	 * @return void
-	 */
-	public function load_textdomain() {
-		load_plugin_textdomain(
-			'wp-featherlight',
-			false,
-			dirname( plugin_basename( $this->file ) ) . '/languages'
-		);
-	}
-
-	/**
 	 * Require all plugin files.
 	 *
 	 * @since  0.1.0
@@ -153,6 +143,7 @@ class WP_Featherlight {
 	 */
 	private function includes() {
 		require_once $this->dir . 'includes/class-scripts.php';
+		require_once $this->dir . 'includes/class-i18n.php';
 		if ( is_admin() ) {
 			require_once $this->dir . 'admin/class-meta.php';
 		}
@@ -169,7 +160,9 @@ class WP_Featherlight {
 		$this->scripts = new WP_Featherlight_Scripts;
 		$this->scripts->run();
 		if ( is_admin() ) {
+			$this->i18n = new WP_Featherlight_Language_Loader( 'wp-featherlight', $this->file );
 			$this->meta = new WP_Featherlight_Admin_Meta;
+			$this->i18n->run();
 			$this->meta->run();
 		}
 	}
