@@ -7,7 +7,7 @@ __Requires:__ WordPress 4.3
 __Tested up to:__ WordPress 4.3  
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)  
 
-![Lightbox Popup](https://cloud.githubusercontent.com/assets/2184093/7943642/6885759a-092b-11e5-943c-c9211653a1e4.png)
+![nacin-at-loopconf](https://cloud.githubusercontent.com/assets/2184093/9426378/56c32f16-4902-11e5-9e57-75a4620cc51b.png)
 
 ## Description ##
 
