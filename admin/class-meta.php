@@ -105,10 +105,10 @@ class WP_Featherlight_Admin_Meta {
 	 * @return int|bool Meta ID if the key didn't exist, true on successful update, false on failure.
 	 */
 	public function save_meta_boxes( $post_id ) {
-		if ( ! $safe_data = $this->validate_request( $post_id, $_POST, 'wp_featherlight_disable_nonce', 'toggle_wp_featherlight' ) ) {
+		if ( ! $data = $this->validate_request( $post_id, $_POST, 'wp_featherlight_disable_nonce', 'toggle_wp_featherlight' ) ) {
 			return false;
 		}
-		return update_post_meta( $post_id, 'wp_featherlight_disable', isset( $safe_data['wp_featherlight_disable'] ) ? 'yes' : '' );
+		return update_post_meta( $post_id, 'wp_featherlight_disable', isset( $data['wp_featherlight_disable'] ) ? 'yes' : '' );
 	}
 
 	/**
