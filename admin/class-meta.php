@@ -33,29 +33,39 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	protected function wp_hooks() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
-		add_action( 'save_post',      array( $this, 'save_meta_boxes' ) );
+		add_action( 'add_meta_boxes',      array( $this, 'add_meta_boxes' ) );
+		add_action( 'save_post',           array( $this, 'save_meta_boxes' ) );
 	}
 
 	/**
-	 * Helper function to determine if an automated task which should prevent
-	 * saving meta box data is running.
+	 * Determine if the request to save data should be allowed to proceed.
 	 *
-	 * @since  0.1.0
+	 * @since  0.3.0
 	 * @access protected
-	 * @return void
+	 * @param  int $post_id Post ID.
+	 * @param  array $data the $_POST data to be saved.
+	 * @param  string $nonce Nonce that was used in the form to verify
+	 * @param  string|int $action Should give context to what is taking place and be the same when nonce was created.
+	 * @return array|bool data to be saved if all checks pass, false on failure.
 	 */
-	protected function stop_save() {
-		return defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ||
+	protected function validate_request( $post_id, $data, $nonce, $action = -1 ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ||
 			defined( 'DOING_AJAX' ) && DOING_AJAX ||
-			defined( 'DOING_CRON' ) && DOING_CRON;
+			defined( 'DOING_CRON' ) && DOING_CRON ||
+			! current_user_can( 'edit_post', $post_id ) ||
+			! isset( $data[ $nonce ] ) ||
+			! wp_verify_nonce( $data[ $nonce ], $action ) ) {
+			return false;
+		}
+		return $data;
 	}
 
 	/**
 	 * Adds a simple metabox to disable the after entry widget areas.
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @access public
+	 * @param  string $post_type the current post type.
 	 * @return void
 	 */
 	public function add_meta_boxes( $post_type ) {
@@ -90,24 +100,14 @@ class WP_Featherlight_Admin_Meta {
 	 *
 	 * @since  0.1.0
 	 * @access public
-	 * @return void
+	 * @param  int $post_id Post ID.
+	 * @return int|bool Meta ID if the key didn't exist, true on successful update, false on failure.
 	 */
 	public function save_meta_boxes( $post_id ) {
-		// Bail if something is in progress.
-		if ( $this->stop_save() ) {
-			return;
+		if ( ! $safe_data = $this->validate_request( $post_id, $_POST, 'wp_featherlight_disable_nonce', 'toggle_wp_featherlight' ) ) {
+			return false;
 		}
-
-		$no = 'wp_featherlight_disable_nonce';
-
-		//	Bail if we can't verify the nonce.
-		if ( ! isset( $_POST[ $no ] ) || ! wp_verify_nonce( $_POST[ $no ], 'toggle_wp_featherlight' ) ) {
-			return;
-		}
-
-		$disable = isset( $_POST['wp_featherlight_disable'] ) ? 'yes' : '';
-
-		update_post_meta( $post_id, 'wp_featherlight_disable', $disable );
+		return update_post_meta( $post_id, 'wp_featherlight_disable', isset( $safe_data['wp_featherlight_disable'] ) ? 'yes' : '' );
 	}
 
 }
