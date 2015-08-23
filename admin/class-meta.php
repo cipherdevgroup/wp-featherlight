@@ -85,7 +85,7 @@ class WP_Featherlight_Admin_Meta {
 	/**
 	 * Outputs the content of our disable after-entry metabox.
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @access public
 	 * @return void
 	 */
