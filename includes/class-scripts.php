@@ -2,7 +2,7 @@
 /**
  * Methods used for filtering and displaying WP Featherlight images.
  *
- * @package   WPFeatherlight
+ * @package   WPFeatherlight\Scripts
  * @author    Robert Neu
  * @copyright Copyright (c) 2015, WP Site Care
  * @license   GPL-2.0+
@@ -41,7 +41,7 @@ class WP_Featherlight_Scripts {
 	 * Hook into WordPress.
 	 *
 	 * @since  0.1.0
-	 * @access public
+	 * @access protected
 	 * @return void
 	 */
 	protected function wp_hooks() {
