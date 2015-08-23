@@ -35,6 +35,7 @@ class WP_Featherlight_Admin_Meta {
 	protected function wp_hooks() {
 		add_action( 'add_meta_boxes',      array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post',           array( $this, 'save_meta_boxes' ) );
+		add_filter( 'wp_insert_post_data', array( $this, 'stop_multisite_save' ) );
 	}
 
 	/**
@@ -108,6 +109,22 @@ class WP_Featherlight_Admin_Meta {
 			return false;
 		}
 		return update_post_meta( $post_id, 'wp_featherlight_disable', isset( $safe_data['wp_featherlight_disable'] ) ? 'yes' : '' );
+	}
+
+	/**
+	 * Prevent unwanted extra calls to `save_post` on WordPress multisite.
+	 *
+	 * @since  0.3.0
+	 * @access public
+	 * @link   http://make.marketpress.com/multilingualpress/2014/10/how-to-disable-broken-save_post-callbacks/
+	 * @param  array $data the current sanitized post data
+	 * @return array $data the unmodified post data
+	 */
+	public function stop_multisite_save( $data ) {
+		if ( is_multisite() && ms_is_switched() ) {
+			remove_action( 'save_post', array( $this, 'save_meta_boxes' ) );
+		}
+		return $data;
 	}
 
 }
