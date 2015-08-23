@@ -22,6 +22,13 @@ class WP_Featherlight_Admin_Meta {
 	private $nonce_name = 'wp_featherlight_disable_nonce';
 
 	/**
+	 * Name for the nonce action
+	 *
+	 * @var string
+	 */
+	private $nonce_action = 'toggle_wp_featherlight';
+
+	/**
 	 * User submitted data.
 	 *
 	 * @var array
@@ -84,7 +91,7 @@ class WP_Featherlight_Admin_Meta {
 			return false;
 		}
 
-		if ( ! wp_verify_nonce( $this->user_data[ $this->nonce_name ] ) ) {
+		if ( ! wp_verify_nonce( $this->user_data[ $this->nonce_name ], $this->nonce_action ) ) {
 			return false;
 		}
 		// @link http://make.marketpress.com/multilingualpress/2014/10/how-to-disable-broken-save_post-callbacks/
