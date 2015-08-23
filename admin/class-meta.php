@@ -19,14 +19,14 @@ class WP_Featherlight_Admin_Meta {
 	 *
 	 * @var string
 	 */
-	private $nonce_name = 'wp_featherlight_disable_nonce';
+	private $nonce_name = 'wp_featherlight_metabox_nonce';
 
 	/**
 	 * Name for the nonce action
 	 *
 	 * @var string
 	 */
-	private $nonce_action = 'toggle_wp_featherlight';
+	private $nonce_action = 'save_wp_featherlight_metabox';
 
 	/**
 	 * User submitted data.
