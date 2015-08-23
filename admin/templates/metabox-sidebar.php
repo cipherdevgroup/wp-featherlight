@@ -15,4 +15,4 @@
 		<?php esc_html_e( 'Disable lightbox', 'wp-featherlight' ); ?>
 	</label>
 </p>
-<?php wp_nonce_field( 'toggle_wp_featherlight', 'wp_featherlight_disable_nonce' ); ?>
+<?php wp_nonce_field( $this->nonce_action, $this->nonce_name ); ?>
