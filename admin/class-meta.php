@@ -43,7 +43,7 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function run() {
-		self::wp_hooks();
+		$this->wp_hooks();
 	}
 
 	/**

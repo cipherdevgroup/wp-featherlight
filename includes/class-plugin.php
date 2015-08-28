@@ -86,8 +86,8 @@ class WP_Featherlight {
 	 * @return void
 	 */
 	public function run() {
-		self::includes();
-		self::instantiate();
+		$this->includes();
+		$this->instantiate();
 	}
 
 	/**
