@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Featherlight 0.3.0-beta\n"
 "Report-Msgid-Bugs-To: Robert Neu <translations@wpsitecare.com>\n"
-"POT-Creation-Date: 2015-08-22 17:05:06+00:00\n"
+"POT-Creation-Date: 2015-08-24 07:42:29+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: admin/class-meta.php:66
+#: admin/class-meta.php:118
 msgid "WP Featherlight Options"
 msgstr ""
 
