@@ -103,7 +103,7 @@ class WP_Featherlight_Admin_Meta {
 	}
 
 	/**
-	 * Adds a simple metabox to disable the after entry widget areas.
+	 * Add a metabox to control featherlight display options.
 	 *
 	 * @since  0.1.0
 	 * @access public
@@ -124,7 +124,7 @@ class WP_Featherlight_Admin_Meta {
 	}
 
 	/**
-	 * Outputs the content of our disable after-entry metabox.
+	 * Output the content of our metabox.
 	 *
 	 * @since  0.1.0
 	 * @access public
@@ -140,8 +140,7 @@ class WP_Featherlight_Admin_Meta {
 	}
 
 	/**
-	 * Callback function for saving our testimonial details meta box data.
-	 * Handles data validation and sanitization for our content label.
+	 * Callback function for saving our meta box data.
 	 *
 	 * @since  0.1.0
 	 * @access public
