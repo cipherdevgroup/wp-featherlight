@@ -18,9 +18,9 @@
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	position: fixed;
 	top: 0;
-	right: 0;
-	bottom: 0;
 	left: 0;
+	bottom: 0;
+	right: 0;
 	text-align: center;
 	white-space: nowrap;
 	z-index: 2147483647;
@@ -40,7 +40,7 @@
 	content: "";
 	display: inline-block;
 	height: 100%;
-	margin-right: -0.25em;
+	margin-left: -0.25em;
 	vertical-align: middle;
 }
 
@@ -55,7 +55,7 @@
 	overflow: visible;
 	padding: 0;
 	position: relative;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
 	white-space: normal;
 }
@@ -82,7 +82,7 @@
 	overflow: hidden;
 	position: fixed;
 	top: 25px;
-	right: 25px;
+	left: 25px;
 	text-align: center;
 	text-indent: 100%;
 	white-space: nowrap;
@@ -116,7 +116,7 @@
 	max-width: 100%;
 	overflow: hidden;
 	position: absolute;
-	text-align: left;
+	text-align: right;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -138,8 +138,8 @@
 	}
 
 	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
+		-webkit-transform: rotate(-360deg);
+		transform: rotate(-360deg);
 	}
 }
 
@@ -150,8 +150,8 @@
 	}
 
 	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
+		-webkit-transform: rotate(-360deg);
+		transform: rotate(-360deg);
 	}
 }
 
@@ -160,7 +160,7 @@
 	animation: featherlightLoader 1s infinite linear;
 	background: transparent;
 	border: 8px solid #909090;
-	border-left-color: #fff;
+	border-right-color: #fff;
 	font-size: 10px;
 }
 
@@ -214,15 +214,11 @@
 .featherlight-previous:focus {
 	opacity: 1;
 }
-
-/* rtl:ignore */
 .featherlight-next {
 	background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M8.59%2016.59L13.17%2012%208.59%207.41%2010%206l6%206-6%206-1.41-1.41z%22/%3E%0A%3C/svg%3E");
 	background-position: 0 0;
 	right: 10px;
 }
-
-/* rtl:ignore */
 .featherlight-previous {
 	background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%09%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M15.41%207.41L10.83%2012l4.58%204.59L14%2018l-6-6%206-6%201.41%201.41z%22/%3E%0A%3C/svg%3E");
 	background-position: -5px 0;

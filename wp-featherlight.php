@@ -3,9 +3,9 @@
  * Plugin Name:  WP Featherlight
  * Plugin URI:   http://www.wpsitecare.com/wp-featherlight/
  * Description:  An ultra lightweight jQuery lightbox for WordPress images and galleries.
- * Version:      0.2.0
- * Author:       Robert Neu
- * Author URI:   http://robneu.com
+ * Version:      0.3.0
+ * Author:       WP Site Care
+ * Author URI:   http://www.wpsitecare.com
  * License:      GPL-2.0+
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:  wp-featherlight
@@ -15,20 +15,11 @@
 // Prevent direct access.
 defined( 'ABSPATH' ) || exit;
 
-define( 'WP_FEATHERLIGHT_FILE', __FILE__ );
-define( 'WP_FEATHERLIGHT_VERSION', '0.2.0' );
-
-if ( ! defined( 'WP_FEATHERLIGHT_DIR' ) ) {
-	define( 'WP_FEATHERLIGHT_DIR', plugin_dir_path( WP_FEATHERLIGHT_FILE ) );
-}
-
-if ( ! defined( 'WP_FEATHERLIGHT_URL' ) ) {
-	define( 'WP_FEATHERLIGHT_URL', plugin_dir_url( WP_FEATHERLIGHT_FILE ) );
-}
-
 // Load the main plugin class.
-require_once WP_FEATHERLIGHT_DIR . 'includes/plugin.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/constants.php';
 
+add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
 /**
  * Allow themes and plugins to access WP_Featherlight methods and properties.
  *
@@ -38,7 +29,7 @@ require_once WP_FEATHERLIGHT_DIR . 'includes/plugin.php';
  *
  * Example:
  *
- * <?php wp_featherlight()->meta; ?>
+ * <?php wp_featherlight()->scripts; ?>
  *
  * @since  0.1.0
  * @access public
@@ -48,7 +39,7 @@ require_once WP_FEATHERLIGHT_DIR . 'includes/plugin.php';
 function wp_featherlight() {
 	static $plugin;
 	if ( null === $plugin ) {
-		$plugin = new WP_Featherlight;
+		$plugin = new WP_Featherlight( array( 'file' => __FILE__ ) );
 	}
 	return $plugin;
 }
@@ -60,10 +51,4 @@ function wp_featherlight() {
  * @access public
  * @return void
  */
-register_activation_hook(
-	WP_FEATHERLIGHT_FILE,
-	array( wp_featherlight(), 'activate' )
-);
-
-// Hook the main plugin class into WordPress to get things running.
-add_action( 'plugins_loaded', array( wp_featherlight(), 'run' ) );
+register_activation_hook( __FILE__, array( wp_featherlight(), 'activate' ) );

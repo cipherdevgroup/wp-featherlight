@@ -2,9 +2,9 @@
 /**
  * Methods used for filtering and displaying WP Featherlight images.
  *
- * @package   WPFeatherlight
+ * @package   WPFeatherlight\Scripts
  * @author    Robert Neu
- * @copyright Copyright (c) 2015, Robert Neu
+ * @copyright Copyright (c) 2015, WP Site Care
  * @license   GPL-2.0+
  * @since     0.1.0
  */
@@ -16,6 +16,16 @@ class WP_Featherlight_Scripts {
 
 	protected $suffix;
 
+	protected $url;
+
+	protected $version;
+
+	public function __construct() {
+		$this->suffix  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+		$this->url     = wp_featherlight()->get_url();
+		$this->version = wp_featherlight()->get_version();
+	}
+
 	/**
 	 * Get the class running!
 	 *
@@ -24,21 +34,21 @@ class WP_Featherlight_Scripts {
 	 * @return void
 	 */
 	public function run() {
-		$this->suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		self::wp_hooks();
+		$this->wp_hooks();
 	}
 
 	/**
 	 * Hook into WordPress.
 	 *
 	 * @since  0.1.0
-	 * @access public
+	 * @access protected
 	 * @return void
 	 */
 	protected function wp_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_css' ), 20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_js' ),  20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_disable' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_css' ),       20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_js' ),        20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_disable' ),  10 );
+		add_action( 'body_class',         array( $this, 'script_helpers' ), 10 );
 	}
 
 	/**
@@ -57,10 +67,12 @@ class WP_Featherlight_Scripts {
 		}
 		wp_enqueue_style(
 			'wp-featherlight',
-			WP_FEATHERLIGHT_URL . "css/wp-featherlight{$this->suffix}.css",
+			"{$this->url}css/wp-featherlight{$this->suffix}.css",
 			array(),
-			WP_FEATHERLIGHT_VERSION
+			$this->version
 		);
+		wp_style_add_data( 'wp-featherlight', 'rtl', 'replace' );
+		wp_style_add_data( 'wp-featherlight', 'suffix', $this->suffix );
 	}
 
 	/**
@@ -119,17 +131,15 @@ class WP_Featherlight_Scripts {
 		}
 		wp_enqueue_script(
 			'wp-featherlight',
-			WP_FEATHERLIGHT_URL . "js/dist/wpFeatherlight.pkgd{$this->suffix}.js",
+			"{$this->url}js/wpFeatherlight.pkgd{$this->suffix}.js",
 			array( 'jquery' ),
-			WP_FEATHERLIGHT_VERSION,
+			$this->version,
 			true
 		);
 	}
 
 	/**
 	 * Load all of our JS files individually to for maximum compatibility.
-	 *
-	 * @todo Add logic to use minified versions of scripts when not debugging.
 	 *
 	 * @since  0.1.0
 	 * @access public
@@ -139,33 +149,34 @@ class WP_Featherlight_Scripts {
 		if ( $this->enable_packed_js() ) {
 			return;
 		}
-		$url = WP_FEATHERLIGHT_URL . 'js/src/';
+		$suffix = $this->suffix;
+		$url    = "{$this->url}js/src/";
 		wp_enqueue_script(
 			'jquery-detect-swipe',
-			$url . 'vendor/jquery.detect_swipe.js',
+			"{$url}vendor/jquery.detect_swipe{$suffix}.js",
 			array( 'jquery' ),
-			'2.0.4',
+			'2.1.1',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight',
-			$url . 'vendor/featherlight.js',
+			"{$url}vendor/featherlight{$suffix}.js",
 			array( 'jquery-detect-swipe' ),
-			'1.2.3',
+			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight-gallery',
-			$url . 'vendor/featherlight.gallery.js',
+			"{$url}vendor/featherlight.gallery{$suffix}.js",
 			array( 'featherlight' ),
-			'1.2.3',
+			'1.3.2',
 			true
 		);
 		wp_enqueue_script(
 			'wp-featherlight',
-			$url . 'wpFeatherlight.js',
+			"{$url}wpFeatherlight{$suffix}.js",
 			array( 'featherlight-gallery' ),
-			WP_FEATHERLIGHT_VERSION,
+			$this->version,
 			true
 		);
 	}
@@ -183,6 +194,22 @@ class WP_Featherlight_Scripts {
 			add_filter( 'wp_featherlight_load_css', '__return_false' );
 			add_filter( 'wp_featherlight_load_js',  '__return_false' );
 		}
+	}
+
+	/**
+	 * Add custom body classes to help our script enable and disable features
+	 * without creating true plugin database options.
+	 *
+	 * @since  0.3.0
+	 * @access public
+	 * @param  array $classes the existing body classes.
+	 * @return array $classes the amended body classes.
+	 */
+	public function script_helpers( $classes ) {
+		if ( apply_filters( 'wp_featherlight_captions', true ) ) {
+			$classes[] = 'wp-featherlight-captions';
+		}
+		return $classes;
 	}
 
 }

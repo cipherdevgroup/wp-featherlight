@@ -1,23 +1,24 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @version   Version 0.2.0
- * @copyright Copyright 2015, Robert Neu (http://robneu.com)
+ * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
  * @license   MIT
  */
 (function( window, $, undefined ) {
 	'use strict';
 
+	var $body = $( 'body' );
+
 	/**
 	 * Checks href targets to see if a given anchor is linking to an image.
-	 *
-	 * Returns false if the anchor is pointing to an external URL.
 	 *
 	 * @since  0.1.0
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ).toLowerCase() );
+		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test(
+			$( element ).attr( 'href' ).toLowerCase().split( '?' )[0].split( '#' )[0]
+		);
 	}
 
 	/**
@@ -43,7 +44,7 @@
 		var $galleryObj   = $( element ),
 			$galleryItems = $galleryObj.find( '.gallery-item a' );
 
-		if ( $galleryItems.length === 0 ) {
+		if ( 0 === $galleryItems.length ) {
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
@@ -63,11 +64,39 @@
 	function findGalleries() {
 		var $gallery = $( '.gallery, .tiled-gallery' );
 
-		if ( $gallery.length === 0 ) {
+		if ( 0 === $gallery.length ) {
 			return;
 		}
 
 		$.each( $gallery, buildGalleries );
+	}
+
+	/**
+	 * Append image captions to the Featherlight content <div>.
+	 *
+	 * @since  0.3.0
+	 * @return void
+	 */
+	function addCaptions() {
+		$.featherlight.prototype.afterContent = function() {
+			var object    = this.$instance,
+				target    = this.$currentTarget,
+				parent    = target.parent(),
+				caption   = parent.find( '.wp-caption-text' ),
+				galParent = target.parents( '.gallery-item' ),
+				jetParent = target.parents( '.tiled-gallery-item' );
+
+			if ( 0 !== galParent.length ) {
+				caption = galParent.find( '.wp-caption-text' );
+			} else if ( 0 !== jetParent.length ) {
+				caption = jetParent.find( '.tiled-gallery-caption' );
+			}
+
+			object.find( '.caption' ).remove();
+			if ( 0 !== caption.length ) {
+				$( '<div class="caption">' ).text( caption.text() ).appendTo( object.find( '.featherlight-content' ) );
+			}
+		};
 	}
 
 	/**
@@ -79,6 +108,9 @@
 	function wpFeatherlightInit() {
 		findImages();
 		findGalleries();
+		if ( $body.hasClass( 'wp-featherlight-captions' ) ) {
+			addCaptions();
+		}
 	}
 
 	$( document ).ready(function() {

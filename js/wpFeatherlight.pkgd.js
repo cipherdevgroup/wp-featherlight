@@ -5,78 +5,75 @@
  * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)
  */
 (function($) {
-	'use strict';
 
-	$.detectSwipe = {
-		version: '2.1.1',
-		enabled: 'ontouchstart' in document.documentElement,
-		preventDefault: true,
-		threshold: 20
-	};
+  $.detectSwipe = {
+    version: '2.1.1',
+    enabled: 'ontouchstart' in document.documentElement,
+    preventDefault: true,
+    threshold: 20
+  };
 
-	var startX,
-		startY,
-		isMoving = false;
+  var startX,
+    startY,
+    isMoving = false;
 
-	function onTouchEnd() {
-		this.removeEventListener('touchmove', onTouchMove);
-		this.removeEventListener('touchend', onTouchEnd);
-		isMoving = false;
-	}
+  function onTouchEnd() {
+    this.removeEventListener('touchmove', onTouchMove);
+    this.removeEventListener('touchend', onTouchEnd);
+    isMoving = false;
+  }
 
-	function onTouchMove(e) {
-		if ($.detectSwipe.preventDefault) {
-			e.preventDefault();
-		}
-		if(isMoving) {
-			var x = e.touches[0].pageX,
-				y = e.touches[0].pageY,
-				dx = startX - x,
-				dy = startY - y,
-				dir;
-			if (Math.abs(dx) >= $.detectSwipe.threshold) {
-				dir = dx > 0 ? 'left' : 'right';
-			} else if (Math.abs(dy) >= $.detectSwipe.threshold) {
-				dir = dy > 0 ? 'down' : 'up';
-			}
-			if (dir) {
-				onTouchEnd.call(this);
-				$(this).trigger('swipe', dir).trigger('swipe' + dir);
-			}
-		}
-	}
+  function onTouchMove(e) {
+    if ($.detectSwipe.preventDefault) { e.preventDefault(); }
+    if(isMoving) {
+      var x = e.touches[0].pageX;
+      var y = e.touches[0].pageY;
+      var dx = startX - x;
+      var dy = startY - y;
+      var dir;
+      if(Math.abs(dx) >= $.detectSwipe.threshold) {
+        dir = dx > 0 ? 'left' : 'right'
+      }
+      else if(Math.abs(dy) >= $.detectSwipe.threshold) {
+        dir = dy > 0 ? 'down' : 'up'
+      }
+      if(dir) {
+        onTouchEnd.call(this);
+        $(this).trigger('swipe', dir).trigger('swipe' + dir);
+      }
+    }
+  }
 
-	function onTouchStart(e) {
-		if (e.touches.length == 1) {
-			startX = e.touches[0].pageX;
-			startY = e.touches[0].pageY;
-			isMoving = true;
-			this.addEventListener('touchmove', onTouchMove, false);
-			this.addEventListener('touchend', onTouchEnd, false);
-		}
-	}
+  function onTouchStart(e) {
+    if (e.touches.length == 1) {
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+      isMoving = true;
+      this.addEventListener('touchmove', onTouchMove, false);
+      this.addEventListener('touchend', onTouchEnd, false);
+    }
+  }
 
-	function setup() {
-		this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
-	}
+  function setup() {
+    this.addEventListener('touchstart', onTouchStart, false);
+  }
 
-	function teardown() {
-		this.removeEventListener('touchstart', onTouchStart);
-	}
+  function teardown() {
+    this.removeEventListener('touchstart', onTouchStart);
+  }
 
-	$.event.special.swipe = { setup: setup };
+  $.event.special.swipe = { setup: setup };
 
-	$.each(['left', 'up', 'down', 'right'], function() {
-		$.event.special['swipe' + this] = { setup: function() {
-			$(this).on('swipe', $.noop);
-		} };
-	});
+  $.each(['left', 'up', 'down', 'right'], function () {
+    $.event.special['swipe' + this] = { setup: function(){
+      $(this).on('swipe', $.noop);
+    } };
+  });
 })(jQuery);
-
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.2.3 - http://noelboss.github.io/featherlight/
+ * Version 1.3.3 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -185,6 +182,7 @@
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
 		loading:      '',                     /* Content to show while initial content is loading */
+		persist:      false,									/* If set, the content persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
@@ -237,6 +235,9 @@
 
 		/* this method prepares the content and converts it into a jQuery object or a promise */
 		getContent: function(){
+			if(this.persist !== false && this.$content) {
+				return this.$content;
+			}
 			var self = this,
 				filters = this.constructor.contentFilters,
 				readTargetAttr = function(name){ return self.$currentTarget && self.$currentTarget.attr(name); },
@@ -300,6 +301,7 @@
 			   this insures that featherlight-inner remain at the same relative
 				 position to any other items added to featherlight-content */
 			self.$instance.find('.'+self.namespace+'-inner')
+				.not($content)                /* excluded new content, important if persisted */
 				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
 				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
 
@@ -390,10 +392,10 @@
 			jquery: {
 				regex: /^[#.]\w/,         /* Anything that starts with a class name or identifiers */
 				test: function(elem)    { return elem instanceof $ && elem; },
-				process: function(elem) { return $(elem).clone(true); }
+				process: function(elem) { return this.persist !== false ? $(elem) : $(elem).clone(true); }
 			},
 			image: {
-				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
+				regex: /\.(png|jpg|jpeg|gif|tiff|bmp|svg)(\?\S*)?$/i,
 				process: function(url)  {
 					var self = this,
 						deferred = $.Deferred(),
@@ -507,7 +509,8 @@
 
 			/* Only for openTrigger and namespace... */
 			var namespace = config.namespace || Klass.defaults.namespace,
-				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config);
+				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
+				sharedPersist;
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
@@ -516,7 +519,14 @@
 					Klass.readElementConfig($source[0], tempConfig.namespace),
 					Klass.readElementConfig(this, tempConfig.namespace),
 					config);
-				new Klass($content, elemConfig).open(event);
+				var fl = sharedPersist || $(this).data('featherlight-persisted') || new Klass($content, elemConfig);
+				if(fl.persist === 'shared') {
+					sharedPersist = fl;
+				} else if(fl.persist !== false) {
+					$(this).data('featherlight-persisted', fl);
+				}
+				elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
+				fl.open(event);
 			});
 			return $source;
 		},
@@ -607,7 +617,7 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.2.3 - http://noelboss.github.io/featherlight/
+ * Version 1.3.3 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -627,7 +637,7 @@
 		return warn('Load the featherlight plugin before the gallery plugin');
 	}
 
-	var isTouchAware = 'ontouchstart' in document.documentElement,
+	var isTouchAware = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
 		hammerConstructor = window.Hammer && function($el){
 			var mc = new window.Hammer.Manager($el[0]);
@@ -706,20 +716,25 @@
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
 		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
 
-		images: function() {
+		slides: function() {
 			if (this.filter) {
 				return this.$source.find(this.filter);
 			}
 			return this.$source;
 		},
 
+		images: function() {
+			warn('images is deprecated, please use slides instead');
+			return this.slides();
+		},
+
 		currentNavigation: function() {
-			return this.images().index(this.$currentTarget);
+			return this.slides().index(this.$currentTarget);
 		},
 
 		navigateTo: function(index) {
 			var self = this,
-				source = self.images(),
+				source = self.slides(),
 				len = source.length,
 				$inner = self.$instance.find('.' + self.namespace + '-inner');
 			index = ((index % len) + len) % len; /* pin index to [0, len[ */
@@ -759,23 +774,24 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @version   Version 0.2.0
- * @copyright Copyright 2015, Robert Neu (http://robneu.com)
+ * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
  * @license   MIT
  */
 (function( window, $, undefined ) {
 	'use strict';
 
+	var $body = $( 'body' );
+
 	/**
 	 * Checks href targets to see if a given anchor is linking to an image.
-	 *
-	 * Returns false if the anchor is pointing to an external URL.
 	 *
 	 * @since  0.1.0
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test( $( element ).attr( 'href' ).toLowerCase() );
+		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test(
+			$( element ).attr( 'href' ).toLowerCase().split( '?' )[0].split( '#' )[0]
+		);
 	}
 
 	/**
@@ -801,7 +817,7 @@
 		var $galleryObj   = $( element ),
 			$galleryItems = $galleryObj.find( '.gallery-item a' );
 
-		if ( $galleryItems.length === 0 ) {
+		if ( 0 === $galleryItems.length ) {
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
@@ -821,11 +837,39 @@
 	function findGalleries() {
 		var $gallery = $( '.gallery, .tiled-gallery' );
 
-		if ( $gallery.length === 0 ) {
+		if ( 0 === $gallery.length ) {
 			return;
 		}
 
 		$.each( $gallery, buildGalleries );
+	}
+
+	/**
+	 * Append image captions to the Featherlight content <div>.
+	 *
+	 * @since  0.3.0
+	 * @return void
+	 */
+	function addCaptions() {
+		$.featherlight.prototype.afterContent = function() {
+			var object    = this.$instance,
+				target    = this.$currentTarget,
+				parent    = target.parent(),
+				caption   = parent.find( '.wp-caption-text' ),
+				galParent = target.parents( '.gallery-item' ),
+				jetParent = target.parents( '.tiled-gallery-item' );
+
+			if ( 0 !== galParent.length ) {
+				caption = galParent.find( '.wp-caption-text' );
+			} else if ( 0 !== jetParent.length ) {
+				caption = jetParent.find( '.tiled-gallery-caption' );
+			}
+
+			object.find( '.caption' ).remove();
+			if ( 0 !== caption.length ) {
+				$( '<div class="caption">' ).text( caption.text() ).appendTo( object.find( '.featherlight-content' ) );
+			}
+		};
 	}
 
 	/**
@@ -837,6 +881,9 @@
 	function wpFeatherlightInit() {
 		findImages();
 		findGalleries();
+		if ( $body.hasClass( 'wp-featherlight-captions' ) ) {
+			addCaptions();
+		}
 	}
 
 	$( document ).ready(function() {
