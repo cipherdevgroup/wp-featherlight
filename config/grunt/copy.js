@@ -132,6 +132,7 @@ module.exports = {
 					'!config/**',
 					'!release/**',
 					'!css/src/**',
+					'!languages/src/**',
 					'!bower_components/**',
 					'!node_modules/**',
 					'!tmp/**',
