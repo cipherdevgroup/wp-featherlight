@@ -76,9 +76,7 @@
 	background-repeat: no-repeat;
 	-webkit-background-size: 100% auto;
 	background-size: 100% auto;
-	cursor: -webkit-zoom-out;
-	cursor: -moz-zoom-out;
-	cursor: zoom-out;
+	cursor: pointer;
 	display: block;
 	height: 30px;
 	overflow: hidden;
