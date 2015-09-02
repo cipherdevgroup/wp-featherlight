@@ -14,6 +14,8 @@ tmp/
 !images/src/
 !images/src/*
 !images/src/**/*
+languages/*.pot
+languages/*.po
 
 # Third-party dependencies
 includes/vendor/*
