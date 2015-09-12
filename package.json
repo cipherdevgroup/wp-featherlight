@@ -41,7 +41,7 @@
     "url":  "https://github.com/wpsitecare/wp-featherlight.git"
   },
   "devDependencies": {
-    "sitecare-plugin-config":       "wpsitecare/sitecare-plugin-config",
+    "sitecare-plugin-config": "wpsitecare/sitecare-plugin-config",
     "load-cedaro-grunt-config": "cedaro/load-cedaro-grunt-config"
   }
 }

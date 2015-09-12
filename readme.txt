@@ -42,10 +42,12 @@ If you'd like to submit code patches or contribute in any other way, please fork
 There are quite a few internal changes in the plugin for this release, plus some nice new features and improvements on the front-end. We've streamlined everything as much as possible and also added support for some languages other than English! Here's a breakdown of everything that's changed:
 
 New Features
+
 - Automatic captioning for WordPress images and gallery items (Including Jetpack Galleries)
 - Spanish language translation
 
 Enhancements
+
 - Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.3.3`
 - Improved gallery styles on desktop and mobile devices
 - Streamlined overall styles
@@ -53,11 +55,13 @@ Enhancements
 - Simplified the text used in the admin metabox to ease translations (props @toscho)
 
 Bug Fixes
+
 - Improved handling of images when certain caching plugins are enabled
 - Prevented gallery arrows from being hijacked by WP Emoji
-- Fixed a bug which allowed multiple light boxes to be opened using keyboard commands
+- Fixed a bug which allowed multiple lightboxes to be opened using keyboard commands
 
 Developer Stuff
+
 - Reduced overhead by loading language files only when needed (props @toscho)
 - Improved the save routine for our admin metabox (props @toscho)
 - Added a `wp_featherlight_captions` filter to control auto-captioning. Filter it to false to disable captions.
@@ -65,6 +69,7 @@ Developer Stuff
 - Added Grunt and Bower the plugin to allow easier updates and releases in the future
 
 Added Language Support
+
 - German
 - Spanish
 - French
