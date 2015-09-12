@@ -42,6 +42,6 @@
   },
   "devDependencies": {
     "sitecare-plugin-config":       "wpsitecare/sitecare-plugin-config",
-    "sitecare-grunt-config-loader": "wpsitecare/sitecare-grunt-config-loader"
+    "load-cedaro-grunt-config": "cedaro/load-cedaro-grunt-config"
   }
 }

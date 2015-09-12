@@ -3,7 +3,7 @@
 module.exports = function( grunt ) {
 	'use strict';
 	var config = require( 'sitecare-plugin-config' );
-	require( 'sitecare-grunt-config-loader' )( grunt, config ).init({
+	require( 'load-cedaro-grunt-config' )( grunt, config ).init({
 		pkg: grunt.file.readJSON( 'package.json' )
 	});
 };
