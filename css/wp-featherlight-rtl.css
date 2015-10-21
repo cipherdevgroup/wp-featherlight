@@ -5,10 +5,6 @@
  * License:     GPL-2.0+
  */
 
-
-/* Base Styles
---------------------------------------------- */
-
 .featherlight {
 	background: transparent;
 	cursor: -webkit-zoom-out;
@@ -176,10 +172,6 @@
 .featherlight-loading .featherlight-inner {
 	display: none;
 }
-
-
-/* Gallery
---------------------------------------------- */
 
 .featherlight-next,
 .featherlight-previous {

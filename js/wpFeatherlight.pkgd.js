@@ -73,7 +73,7 @@
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.3.3 - http://noelboss.github.io/featherlight/
+ * Version 1.3.4 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -553,13 +553,20 @@
 		_onReady: function() {
 			var Klass = this;
 			if(Klass.autoBind){
-				/* First, bind click on document, so it will work for items added dynamically */
-				Klass.attach($(document), {filter: Klass.autoBind});
-				/* Auto bound elements with attr-featherlight-filter won't work
-				   (since we already used it to bind on document), so bind these
-				   directly. We can't easily support dynamically added element with filters */
-				$(Klass.autoBind).filter('[data-featherlight-filter]').each(function(){
+				/* Bind existing elements */
+				$(Klass.autoBind).each(function(){
 					Klass.attach($(this));
+				});
+				/* If a click propagates to the document level, then we have an item that was added later on */
+				$(document).on('click', Klass.autoBind, function(evt) {
+					if (evt.isDefaultPrevented()) {
+						return;
+					}
+					evt.preventDefault();
+					/* Bind featherlight */
+					Klass.attach($(evt.currentTarget));
+					/* Click again; this time our binding will catch it */
+					$(evt.target).click();
 				});
 			}
 		},
@@ -617,7 +624,7 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.3.3 - http://noelboss.github.io/featherlight/
+ * Version 1.3.4 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -789,7 +796,7 @@
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test(
+		return /(.png|.jpg|.jpeg|.gif|.tiff|.bmp)$/.test(
 			$( element ).attr( 'href' ).toLowerCase().split( '?' )[0].split( '#' )[0]
 		);
 	}
