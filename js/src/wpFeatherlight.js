@@ -16,7 +16,7 @@
 	 * @return mixed
 	 */
 	function testImages( index, element ) {
-		return /(png|jpg|jpeg|gif|tiff|bmp)$/.test(
+		return /(.png|.jpg|.jpeg|.gif|.tiff|.bmp)$/.test(
 			$( element ).attr( 'href' ).toLowerCase().split( '?' )[0].split( '#' )[0]
 		);
 	}
