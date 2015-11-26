@@ -1,6 +1,6 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.3.4 - http://noelboss.github.io/featherlight/
+ * Version 1.3.5 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -94,32 +94,32 @@
 		constructor: Featherlight,
 		/*** defaults ***/
 		/* extend featherlight with defaults and methods */
-		namespace:    'featherlight',         /* Name of the events and css class prefix */
-		targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
-		variant:      null,                   /* Class that will be added to change look of the lightbox */
-		resetCss:     false,                  /* Reset all css */
-		background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
-		openTrigger:  'click',                /* Event that triggers the lightbox */
-		closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
-		filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
-		root:         'body',                 /* Where to append featherlights */
-		openSpeed:    250,                    /* Duration of opening animation */
-		closeSpeed:   250,                    /* Duration of closing animation */
-		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
-		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
-		closeIcon:    '&#10005;',             /* Close icon */
-		loading:      '',                     /* Content to show while initial content is loading */
-		persist:      false,									/* If set, the content persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
-		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
-		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
-		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
-		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
-		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
-		onKeyUp:      $.noop,                 /* Called on key down for the frontmost featherlight */
-		onResize:     $.noop,                 /* Called after new content and when a window is resized */
-		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
+		namespace:      'featherlight',        /* Name of the events and css class prefix */
+		targetAttr:     'data-featherlight',   /* Attribute of the triggered element that contains the selector to the lightbox content */
+		variant:        null,                  /* Class that will be added to change look of the lightbox */
+		resetCss:       false,                 /* Reset all css */
+		background:     null,                  /* Custom DOM for the background, wrapper and the closebutton */
+		openTrigger:    'click',               /* Event that triggers the lightbox */
+		closeTrigger:   'click',               /* Event that triggers the closing of the lightbox */
+		filter:         null,                  /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
+		root:           'body',                /* Where to append featherlights */
+		openSpeed:      250,                   /* Duration of opening animation */
+		closeSpeed:     250,                   /* Duration of closing animation */
+		closeOnClick:   'background',          /* Close lightbox on click ('background', 'anywhere' or false) */
+		closeOnEsc:     true,                  /* Close lightbox when pressing esc */
+		closeIcon:      '&#10005;',            /* Close icon */
+		loading:        '',                    /* Content to show while initial content is loading */
+		persist:        false,                 /* If set, the content will persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
+		otherClose:     null,                  /* Selector for alternate close buttons (e.g. "a.close") */
+		beforeOpen:     $.noop,                /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		beforeContent:  $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
+		beforeClose:    $.noop,                /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		afterOpen:      $.noop,                /* Called after open. Gets event as parameter, this contains all data */
+		afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
+		afterClose:     $.noop,                /* Called after close. Gets event as parameter, this contains all data */
+		onKeyUp:        $.noop,                /* Called on key up for the frontmost featherlight */
+		onResize:       $.noop,                /* Called after new content and when a window is resized */
+		type:           null,                  /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'iframe', 'text'], /* List of content filters to use to determine the content */
 
 		/*** methods ***/
@@ -152,8 +152,8 @@
 				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
 					|| 'anywhere' === self.closeOnClick
 					|| $target.closest(closeButtonSelector).length ){
+					self.close(event);
 					event.preventDefault();
-					self.close();
 				}
 			});
 
@@ -229,7 +229,7 @@
 				 position to any other items added to featherlight-content */
 			self.$instance.find('.'+self.namespace+'-inner')
 				.not($content)                /* excluded new content, important if persisted */
-				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
+				.slice(1).remove().end()      /* In the unexpected event where there are many inner elements, remove all but the first one */
 				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
 
 			self.$content = $content.addClass(self.namespace+'-inner');
@@ -469,9 +469,9 @@
 			return $.grep(opened, function(fl) { return fl instanceof klass; } );
 		},
 
-		close: function() {
+		close: function(event) {
 			var cur = this.current();
-			if(cur) { return cur.close(); }
+			if(cur) { return cur.close(event); }
 		},
 
 		/* Does the auto binding on startup.
@@ -486,14 +486,14 @@
 				});
 				/* If a click propagates to the document level, then we have an item that was added later on */
 				$(document).on('click', Klass.autoBind, function(evt) {
-					if (evt.isDefaultPrevented()) {
+					if (evt.isDefaultPrevented() || evt.namespace === 'featherlight') {
 						return;
 					}
 					evt.preventDefault();
 					/* Bind featherlight */
 					Klass.attach($(evt.currentTarget));
 					/* Click again; this time our binding will catch it */
-					$(evt.target).click();
+					$(evt.target).trigger('click.featherlight');
 				});
 			}
 		},
@@ -505,7 +505,7 @@
 			onKeyUp: function(_super, event){
 				if(27 === event.keyCode) {
 					if (this.closeOnEsc) {
-						this.$instance.find('.'+this.namespace+'-close:first').click();
+						$.featherlight.close(event);
 					}
 					return false;
 				} else {
