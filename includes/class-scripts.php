@@ -189,14 +189,14 @@ class WP_Featherlight_Scripts {
 			'featherlight',
 			"{$url}vendor/featherlight{$suffix}.js",
 			array( 'jquery-detect-swipe' ),
-			'1.3.2',
+			'1.3.5',
 			true
 		);
 		wp_enqueue_script(
 			'featherlight-gallery',
 			"{$url}vendor/featherlight.gallery{$suffix}.js",
 			array( 'featherlight' ),
-			'1.3.2',
+			'1.3.5',
 			true
 		);
 		wp_enqueue_script(
