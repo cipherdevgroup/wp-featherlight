@@ -3,23 +3,50 @@
  * Methods used for filtering and displaying WP Featherlight images.
  *
  * @package   WPFeatherlight\Scripts
+ * @license   GPL-2.0+
  * @author    Robert Neu
  * @copyright Copyright (c) 2015, WP Site Care
- * @license   GPL-2.0+
  * @since     0.1.0
  */
 
-// Prevent direct access.
 defined( 'ABSPATH' ) || exit;
 
 class WP_Featherlight_Scripts {
 
+	/**
+	 * A suffix to specify whether or not minified scripts should be loaded.
+	 *
+	 * @since  0.1.0
+	 * @access protected
+	 * @var    string
+	 */
 	protected $suffix;
 
+	/**
+	 * The plugin's root URL.
+	 *
+	 * @since  0.1.0
+	 * @access protected
+	 * @var    string
+	 */
 	protected $url;
 
+	/**
+	 * The plugin's current version.
+	 *
+	 * @since  0.1.0
+	 * @access protected
+	 * @var    string
+	 */
 	protected $version;
 
+	/**
+	 * Set up required properties when the class is instantiated.
+	 *
+	 * @since  0.1.0
+	 * @access public
+	 * @return void
+	 */
 	public function __construct() {
 		$this->suffix  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 		$this->url     = wp_featherlight()->get_url();
@@ -211,5 +238,4 @@ class WP_Featherlight_Scripts {
 		}
 		return $classes;
 	}
-
 }
