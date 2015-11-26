@@ -2,14 +2,14 @@
 /**
  * WP Featherlight main plugin class.
  *
- * @package   WPFeatherlight
- * @author    Robert Neu
- * @copyright Copyright (c) 2015, WP Site Care
- * @license   GPL-2.0+
- * @since     0.1.0
+ * @package    WPFeatherlight
+ * @subpackage WPFeatherlight\Includes
+ * @author     Robert Neu
+ * @copyright  Copyright (c) 2015, WP Site Care
+ * @license    GPL-2.0+
+ * @since      0.1.0
  */
 
-// Prevent direct access.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -73,6 +73,14 @@ class WP_Featherlight {
 	 */
 	public $meta;
 
+	/**
+	 * Set up required properties when the class is instantiated.
+	 *
+	 * @since  0.1.0
+	 * @access public
+	 * @param  array $args Arguments to be used when setting up properties.
+	 * @return void
+	 */
 	public function __construct( $args ) {
 		$this->file = $args['file'];
 		$this->dir  = plugin_dir_path( $this->file );
@@ -179,5 +187,4 @@ class WP_Featherlight {
 	public function activate() {
 		// Nothing yet.
 	}
-
 }

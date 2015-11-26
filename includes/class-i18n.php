@@ -2,14 +2,14 @@
 /**
  * Load translations for the plugin.
  *
- * @package   WPFeatherlight\Internationalization
- * @author    Robert Neu
- * @copyright Copyright (c) 2015, WP Site Care
- * @license   GPL-2.0+
- * @since     0.3.0
+ * @package    WPFeatherlight
+ * @subpackage WPFeatherlight\Includes\Internationalization
+ * @author     Robert Neu
+ * @copyright  Copyright (c) 2015, WP Site Care
+ * @license    GPL-2.0+
+ * @since      0.3.0
  */
 
-// Prevent direct access.
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -37,7 +37,7 @@ class WP_Featherlight_Language_Loader {
 	 * Constructor.
 	 *
 	 * @param string $text_domain  Name of the text domain.
-	 * @param string $language_dir Path to language files.
+	 * @param string $plugin_file Path to language files.
 	 */
 	public function __construct( $text_domain, $plugin_file ) {
 		$this->text_domain = $text_domain;
@@ -102,5 +102,4 @@ class WP_Featherlight_Language_Loader {
 	public function is_loaded() {
 		return is_textdomain_loaded( $this->text_domain );
 	}
-
 }

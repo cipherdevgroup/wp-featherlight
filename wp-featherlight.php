@@ -12,7 +12,6 @@
  * Domain Path:  /languages
  */
 
-// Prevent direct access.
 defined( 'ABSPATH' ) || exit;
 
 // Load the main plugin class.

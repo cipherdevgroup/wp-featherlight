@@ -2,11 +2,12 @@
 /**
  * Methods used for filtering and displaying WP Featherlight images.
  *
- * @package   WPFeatherlight\Scripts
- * @license   GPL-2.0+
- * @author    Robert Neu
- * @copyright Copyright (c) 2015, WP Site Care
- * @since     0.1.0
+ * @package    WPFeatherlight
+ * @subpackage WPFeatherlight\Includes\Scripts
+ * @author     Robert Neu
+ * @copyright  Copyright (c) 2015, WP Site Care
+ * @license    GPL-2.0+
+ * @since      0.1.0
  */
 
 defined( 'ABSPATH' ) || exit;
