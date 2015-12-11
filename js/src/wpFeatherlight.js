@@ -1,3 +1,4 @@
+/* global wpFeatherlightObj */
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
@@ -58,7 +59,13 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $( '.gallery, .tiled-gallery' );
+		var $gallery;
+
+		if ( wpFeatherlightObj && wpFeatherlightObj.gallerySelectors ) {
+			$gallery = $( wpFeatherlightObj.gallerySelectors.join(', ') );
+		} else {
+			$gallery = $( '.gallery, .tiled-gallery' );
+		}
 
 		if ( 0 === $gallery.length ) {
 			return;

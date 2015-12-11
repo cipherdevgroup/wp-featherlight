@@ -42,6 +42,15 @@ class WP_Featherlight_Scripts {
 	protected $version;
 
 	/**
+	 * Array of CSS selectors which represent Featerlight gallery containers.
+	 *
+	 * @since  0.4.0
+	 * @access protected
+	 * @var    array
+	 */
+	protected $gallery_selectors;
+
+	/**
 	 * Set up required properties when the class is instantiated.
 	 *
 	 * @since  0.1.0
@@ -73,10 +82,22 @@ class WP_Featherlight_Scripts {
 	 * @return void
 	 */
 	protected function wp_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_css' ),       20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_js' ),        20 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_disable' ),  10 );
-		add_action( 'body_class',         array( $this, 'script_helpers' ), 10 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_css' ),              20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_js' ),               20 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_disable' ),         10 );
+		add_action( 'body_class',         array( $this, 'script_helpers' ),        10 );
+		add_action( 'after_setup_theme',  array( $this, 'set_gallery_selectors' ), 10 );
+	}
+
+	/**
+	 * Apply filter and initialize the gallery_selectors property.
+	 *
+	 * @since 0.4.0
+	 * @access public
+	 * @return void
+	 */
+	public function set_gallery_selectors() {
+		$this->gallery_selectors = apply_filters( 'wp_featherlight_gallery_selectors', array( '.gallery', '.tiled-gallery' ) );
 	}
 
 	/**
@@ -119,6 +140,7 @@ class WP_Featherlight_Scripts {
 		}
 		$this->load_packed_js();
 		$this->load_unpacked_js();
+		$this->pass_data_to_js();
 	}
 
 	/**
@@ -238,5 +260,16 @@ class WP_Featherlight_Scripts {
 			$classes[] = 'wp-featherlight-captions';
 		}
 		return $classes;
+	}
+
+	/**
+	 * Pass JS object with data from backend to the JS.
+	 *
+	 * @since  0.4.0
+	 * @access protected
+	 * @return void
+	 */
+	protected function pass_data_to_js() {
+		wp_localize_script( 'wp-featherlight', 'wpFeatherlightObj', array( 'gallerySelectors' => $this->gallery_selectors ) );
 	}
 }
