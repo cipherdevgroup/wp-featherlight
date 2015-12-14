@@ -1,3 +1,4 @@
+/* global wpFeatherlightObj */
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
@@ -42,11 +43,7 @@
 	 */
 	function buildGalleries( index, element ) {
 		var $galleryObj   = $( element ),
-			$galleryItems = $galleryObj.find( '.gallery-item a' );
-
-		if ( 0 === $galleryItems.length ) {
-			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
-		}
+			$galleryItems = $galleryObj.find( 'a[data-featherlight]' );
 
 		if ( ! $galleryItems.attr( 'data-featherlight' ) ) {
 			return;
@@ -62,7 +59,13 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $( '.gallery, .tiled-gallery' );
+		var $gallery;
+
+		if ( wpFeatherlightObj && wpFeatherlightObj.gallerySelectors ) {
+			$gallery = $( wpFeatherlightObj.gallerySelectors.join(', ') );
+		} else {
+			$gallery = $( '.gallery, .tiled-gallery' );
+		}
 
 		if ( 0 === $gallery.length ) {
 			return;

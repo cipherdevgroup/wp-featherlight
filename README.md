@@ -2,10 +2,10 @@
 
 An ultra lightweight jQuery lightbox for WordPress images and galleries.
 
-__Contributors:__ [Robert Neu](https://github.com/robneu)  
-__Requires:__ WordPress 4.3  
-__Tested up to:__ WordPress 4.3  
-__License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)  
+__Contributors:__ [Robert Neu](https://github.com/robneu)
+__Requires:__ WordPress 4.3
+__Tested up to:__ WordPress 4.3
+__License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
 ![nacin-at-loopconf](https://cloud.githubusercontent.com/assets/2184093/9426378/56c32f16-4902-11e5-9e57-75a4620cc51b.png)
 
@@ -36,6 +36,8 @@ The best way to install this plugin is to either [download a copy](https://wordp
 While there are no options in the plugin, there are some handy filters to modify the default behavior. As of `0.3.0` all images which use the default WordPress captions will also include a caption when the image is lightboxed. To disable this behavior, filter `wp_featherlight_captions` to false.
 
 You can also disable inclusion of the CSS and JavaScript conditionally using filters which can be found in the `/includes/class-scripts.php` file. If you have questions about how any part of the plugin works, please don't hesitate to [open an issue](https://github.com/wpsitecare/wp-featherlight/issues).
+
+Alongside the default WP galleries, you can set the container selectors of your own galleries. The filter which allows you to do that is `wp_featherlight_gallery_selectors`. It accepts one parameter (array) and your handler function should return array as well. Each item of an array is fully qualified CSS selector.
 
 ## Contributing ##
 
