@@ -93,7 +93,7 @@ class WP_Featherlight_Scripts {
 		if ( ! apply_filters( 'wp_featherlight_load_css', true ) ) {
 			return;
 		}
-		wp_enqueue_style(
+		wp_register_style(
 			'wp-featherlight',
 			"{$this->url}css/wp-featherlight{$this->suffix}.css",
 			array(),
@@ -101,6 +101,23 @@ class WP_Featherlight_Scripts {
 		);
 		wp_style_add_data( 'wp-featherlight', 'rtl', 'replace' );
 		wp_style_add_data( 'wp-featherlight', 'suffix', $this->suffix );
+
+		if ( apply_filters( 'wp_featherlight_load_css_in_head', false ) ) {
+			$this->enqueue_css();
+		} else {
+			add_action( 'wp_footer', array( $this, 'enqueue_css' ), 5 );
+		}
+	}
+
+	/**
+	 * Enqueue previously registered CSS.
+	 *
+	 * @since  0.4.0
+	 * @access public
+	 * @return void
+	 */
+	public function enqueue_css() {
+		wp_enqueue_style( 'wp-featherlight' );
 	}
 
 	/**
