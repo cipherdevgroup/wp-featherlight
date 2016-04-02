@@ -73,9 +73,9 @@
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.3.5 - http://noelboss.github.io/featherlight/
+ * Version 1.4.0 - http://noelboss.github.io/featherlight/
  *
- * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
+ * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
 (function($) {
@@ -369,6 +369,25 @@
 			return deferred.promise();
 		},
 
+		/* resizes the content so it fits in visible area and keeps the same aspect ratio.
+				Does nothing if either the width or the height is not specified.
+				Called automatically on window resize.
+				Override if you want different behavior. */
+		resize: function(w, h) {
+			if (w && h) {
+				/* Reset apparent image size first so container grows */
+				this.$content.css('width', '').css('height', '');
+				/* Calculate the worst ratio so that dimensions fit */
+				var ratio = Math.max(
+					w  / parseInt(this.$content.parent().css('width'),10),
+					h / parseInt(this.$content.parent().css('height'),10));
+				/* Resize content */
+				if (ratio > 1) {
+					this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+				}
+			}
+		},
+
 		/* Utility function to chain callbacks
 		   [Warning: guru-level]
 		   Used be extensions that want to let users specify callbacks but
@@ -587,19 +606,7 @@
 			},
 
 			onResize: function(_super, event){
-				if (this.$content.naturalWidth) {
-					var w = this.$content.naturalWidth, h = this.$content.naturalHeight;
-					/* Reset apparent image size first so container grows */
-					this.$content.css('width', '').css('height', '');
-					/* Calculate the worst ratio so that dimensions fit */
-					var ratio = Math.max(
-						w  / parseInt(this.$content.parent().css('width'),10),
-						h / parseInt(this.$content.parent().css('height'),10));
-					/* Resize content */
-					if (ratio > 1) {
-						this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
-					}
-				}
+				this.resize(this.$content.naturalWidth, this.$content.naturalHeight);
 				return _super(event);
 			},
 
@@ -624,9 +631,9 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.3.5 - http://noelboss.github.io/featherlight/
+ * Version 1.4.0 - http://noelboss.github.io/featherlight/
  *
- * Copyright 2015, Noël Raoul Bossart (http://www.noelboss.com)
+ * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
 (function($) {
@@ -686,6 +693,14 @@
 							.append(self.createNavigation('next'));
 					}
 					return _super(event);
+			},
+			beforeContent: function(_super, event) {
+				var index = this.currentNavigation();
+				var len = this.slides().length;
+				this.$instance
+					.toggleClass(this.namespace+'-first-slide', index === 0)
+					.toggleClass(this.namespace+'-last-slide', index === len - 1);
+				return _super(event);
 			},
 			onKeyUp: function(_super, event){
 				var dir = {
@@ -828,11 +843,9 @@
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
-		if ( ! $galleryItems.attr( 'data-featherlight' ) ) {
-			return;
+		if ( $galleryItems.attr( 'data-featherlight' ) ) {
+			$galleryItems.featherlightGallery();
 		}
-
-		$galleryItems.featherlightGallery();
 	}
 
 	/**
@@ -844,11 +857,9 @@
 	function findGalleries() {
 		var $gallery = $( '.gallery, .tiled-gallery' );
 
-		if ( 0 === $gallery.length ) {
-			return;
+		if ( 0 !== $gallery.length ) {
+			$.each( $gallery, buildGalleries );
 		}
-
-		$.each( $gallery, buildGalleries );
 	}
 
 	/**
