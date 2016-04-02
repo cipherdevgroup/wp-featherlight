@@ -48,11 +48,9 @@
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
-		if ( ! $galleryItems.attr( 'data-featherlight' ) ) {
-			return;
+		if ( $galleryItems.attr( 'data-featherlight' ) ) {
+			$galleryItems.featherlightGallery();
 		}
-
-		$galleryItems.featherlightGallery();
 	}
 
 	/**
@@ -64,11 +62,9 @@
 	function findGalleries() {
 		var $gallery = $( '.gallery, .tiled-gallery' );
 
-		if ( 0 === $gallery.length ) {
-			return;
+		if ( 0 !== $gallery.length ) {
+			$.each( $gallery, buildGalleries );
 		}
-
-		$.each( $gallery, buildGalleries );
 	}
 
 	/**
