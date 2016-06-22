@@ -8,5 +8,12 @@ module.exports = {
 			'<%= paths.jsSrc %>wpFeatherlight.js'
 		],
 		dest: 'js/<%= pkg.nameCamelLow %>.pkgd.js'
+	},
+	adminjs: {
+		src: [
+			'<%= paths.jsSrc %>admin/**/*.js',
+			'!<%= paths.jsSrc %>**/*.min.js'
+		],
+		dest: 'js/<%= pkg.nameCamelLow %>Admin.pkgd.js'
 	}
 };
