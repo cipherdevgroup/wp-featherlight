@@ -56,7 +56,6 @@ if ( ! defined( 'WP_FEATHERLIGHT_URL' ) ) {
 require_once WP_FEATHERLIGHT_DIR . 'includes/language.php';
 require_once WP_FEATHERLIGHT_DIR . 'includes/deprecated.php';
 require_once WP_FEATHERLIGHT_DIR . 'includes/scripts.php';
-
 require_once WP_FEATHERLIGHT_DIR . 'admin/meta.php';
 
 add_action( 'plugins_loaded', 'wp_featherlight' );

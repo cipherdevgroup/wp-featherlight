@@ -57,28 +57,6 @@ function _wp_featherlight_admin_meta_validate_request( $post_id ) {
 }
 
 /**
- * Add a metabox to control featherlight display options.
- *
- * @since  1.0.0
- * @access public
- * @param  string $post_type the current post type.
- * @return void
- */
-function wp_featherlight_admin_meta_add_boxes( $post_type ) {
-	$type = get_post_type_object( $post_type );
-
-	if ( is_object( $type ) && $type->public ) {
-		add_meta_box(
-			'wp_featherlight_options',
-			__( 'WP Featherlight Options', 'wp-featherlight' ),
-			'wp_featherlight_admin_meta_box_view',
-			null,
-			'side'
-		);
-	}
-}
-
-/**
  * Output the content of our metabox.
  *
  * @since  1.0.0
@@ -88,11 +66,17 @@ function wp_featherlight_admin_meta_add_boxes( $post_type ) {
  * @return void
  */
 function wp_featherlight_admin_meta_box_view( WP_Post $post ) {
-	if ( current_user_can( $type->cap->edit_post, get_the_ID() ) && $type->public ) {
+	$type = get_post_type_object( $post->post_type );
+
+	if ( ! is_object( $type ) ) {
+		return;
+	}
+
+	if ( current_user_can( $type->cap->edit_post, $post->ID ) && $type->public ) {
 		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
 		$checked = empty( $disable ) ? '' : $disable;
 
-		require_once WP_FEATHERLIGHT_DIR . 'admin/views/metabox-sidebar.php';
+		require_once WP_FEATHERLIGHT_DIR . 'admin/views/meta-box.php';
 	}
 }
 

@@ -23,14 +23,14 @@ add_action( 'admin_head-plugins.php', 'wp_featherlight_load_textdomain', 10 );
  *
  * @see wp_featherlight_load_textdomain
  */
-add_action( 'add_meta_boxes', 'wp_featherlight_load_textdomain', 5 );
+add_action( 'post_submitbox_misc_actions', 'wp_featherlight_load_textdomain', 5 );
 
 /**
  * Callback defined in admin/meta.php
  *
- * @see wp_featherlight_admin_meta_add_boxes
+ * @see wp_featherlight_admin_meta_box_view
  */
-add_action( 'add_meta_boxes', 'wp_featherlight_admin_meta_add_boxes', 10 );
+add_action( 'post_submitbox_misc_actions', 'wp_featherlight_admin_meta_box_view', 10 );
 
 /**
  * Callback defined in admin/meta.php
