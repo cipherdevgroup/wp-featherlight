@@ -2,12 +2,11 @@
 /**
  * Template to display the WP Featherlight admin sidebar meta box.
  *
- * @package    WPFeatherlight
- * @subpackage WPFeatherlight\Admin\Templates
- * @author     Robert Neu
- * @copyright  Copyright (c) 2015, WP Site Care
- * @license    GPL-2.0+
- * @since      0.1.0
+ * @package   WPFeatherlight\Admin\Templates
+ * @author    Robert Neu
+ * @copyright Copyright (c) 2016, WP Site Care
+ * @license   GPL-2.0+
+ * @since     0.1.0
  */
 ?>
 <p>

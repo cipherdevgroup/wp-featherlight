@@ -2,12 +2,11 @@
 /**
  * Load translations for the plugin.
  *
- * @package    WPFeatherlight
- * @subpackage WPFeatherlight\Includes\Internationalization
- * @author     Robert Neu
- * @copyright  Copyright (c) 2015, WP Site Care
- * @license    GPL-2.0+
- * @since      0.3.0
+ * @package   WPFeatherlight\Includes\Internationalization
+ * @author    Robert Neu
+ * @copyright Copyright (c) 2016, WP Site Care
+ * @license   GPL-2.0+
+ * @since     0.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
