@@ -54,7 +54,8 @@
 
 	.featherlight-close-icon {
 		cursor: pointer;
-		background: $close-icon;
+		background-image: $close-icon;
+		background-color: transparent;
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 100% auto;
