@@ -2,8 +2,9 @@
 
 module.exports = function( grunt ) {
 	'use strict';
-	var config = require( 'sitecare-plugin-config' );
-	require( 'load-project-config' )( grunt, config ).init({
-		pkg: grunt.file.readJSON( 'package.json' )
-	});
+
+	var loader = require( 'load-project-config' ),
+		config = require( 'sitecare-plugin-config' );
+
+	loader( grunt, config ).init();
 };
