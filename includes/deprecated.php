@@ -409,9 +409,7 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function add_meta_boxes( $post_type ) {
-		_deprecated_function( __METHOD__, '1.0.0', 'wp_featherlight_admin_meta_add_boxes()' );
-
-		wp_featherlight_admin_meta_add_boxes( $post_type );
+		_deprecated_function( __METHOD__, '1.0.0' );
 	}
 
 	/**
