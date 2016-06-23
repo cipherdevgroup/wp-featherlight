@@ -13,20 +13,20 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Provide reliable access to the plugin's functions and methods before
- * the plugin's global actions, filters, and functionality are initialized.
+ * the plugin's admin actions, filters, and functionality are initialized.
  *
  * @since  1.0.0
  * @access public
  */
-do_action( 'wp_featherlight_before_admin_init' );
+do_action( 'wp_featherlight_admin_before_init' );
 
 require_once WP_FEATHERLIGHT_DIR . 'admin/actions.php';
 
 /**
  * Provide reliable access to the plugin's functions and methods after
- * the plugin's global actions, filters, and functionality are initialized.
+ * the plugin's admin actions, filters, and functionality are initialized.
  *
  * @since  1.0.0
  * @access public
  */
-do_action( 'wp_featherlight_after_admin_init' );
+do_action( 'wp_featherlight_admin_after_init' );
