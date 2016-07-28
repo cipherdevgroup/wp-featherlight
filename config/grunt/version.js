@@ -24,7 +24,7 @@ module.exports = {
 			prefix: '\\s+\\*\\s+Version:\\s+'
 		},
 		src: [
-			'example-plugin.php',
+			'wp-featherlight.php',
 			'<%= paths.cssSrc %>wp-featherlight.scss'
 		]
 	}
