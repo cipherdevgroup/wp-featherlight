@@ -6,5 +6,7 @@ module.exports = function( grunt ) {
 	var loader = require( 'load-project-config' ),
 		config = require( 'sitecare-plugin-config' );
 
-	loader( grunt, config ).init();
+	loader( grunt, config ).init({
+		pkg: grunt.file.readJSON( 'package.json' )
+	});
 };
