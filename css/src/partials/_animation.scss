@@ -1,14 +1,22 @@
  @keyframes featherlightLoader {
 	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
+		transform: rotate( 0deg );
 	}
 
 	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
+		transform: rotate( 360deg );
 	}
- }
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
 
 .featherlight-loading {
 	.featherlight-content {
@@ -20,7 +28,7 @@
 	 }
 
 	.featherlight-content,
-	.featherlight-content:after {
+	.featherlight-content::after {
 		border-radius: 50%;
 		height: 10em;
 		width: 10em;

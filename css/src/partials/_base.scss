@@ -1,14 +1,14 @@
 .featherlight {
 	background: transparent;
+	bottom: 0;
 	cursor: zoom-out;
 	display: none;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
 	left: 0;
+	position: fixed;
+	right: 0;
 	text-align: center;
+	top: 0;
 	white-space: nowrap;
 	z-index: 2147483647;
 
@@ -20,7 +20,7 @@
 		background: $underlay-background-color;
 	}
 
-	&:before {
+	&::before {
 		content: "";
 		display: inline-block;
 		height: 100%;
@@ -29,6 +29,7 @@
 	}
 
 	.featherlight-content {
+		animation: fadein 0.5s;
 		background: $content-background-color;
 		border: 0;
 		cursor: auto;
@@ -43,32 +44,33 @@
 		vertical-align: middle;
 		white-space: normal;
 
-		@media screen and (min-width: 980px) {
+		@media screen and ( min-width: 980px ) {
 			max-height: 90%;
 		}
 	}
 
 	.featherlight-inner {
+		animation: fadein 0.5s;
 		display: block;
 	}
 
 	.featherlight-close-icon {
-		cursor: pointer;
-		background-image: $close-icon;
 		background-color: transparent;
-		background-repeat: no-repeat;
+		background-image: $close-icon;
 		background-position: center;
+		background-repeat: no-repeat;
 		background-size: 100% auto;
+		cursor: pointer;
 		display: block;
-		top: 25px;
+		height: 30px;
+		overflow: hidden;
+		position: fixed;
 		right: 25px;
 		text-align: center;
-		width: 30px;
-		height: 30px;
-		position: fixed;
 		text-indent: 100%;
+		top: 25px;
 		white-space: nowrap;
-		overflow: hidden;
+		width: 30px;
 		z-index: 9999;
 	}
 
@@ -95,8 +97,8 @@
 .featherlight-content .caption {
 	color: $caption-text-color;
 	font-size: 16px;
-	line-height: 1.25;
 	font-weight: lighter;
+	line-height: 1.25;
 	max-width: 100%;
 	overflow: hidden;
 	position: absolute;
@@ -106,7 +108,7 @@
 
 	&:hover,
 	&:focus {
-		white-space: normal;
 		overflow: visible;
+		white-space: normal;
 	}
 }
