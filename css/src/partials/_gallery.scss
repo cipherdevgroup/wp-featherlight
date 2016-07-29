@@ -1,20 +1,20 @@
 .featherlight-next,
 .featherlight-previous {
 	background-color: transparent;
-	background-size: 100% auto;
 	background-repeat: no-repeat;
-	text-indent: 100%;
-	white-space: nowrap;
-	overflow: hidden;
+	background-size: 100% auto;
 	cursor: pointer;
 	display: block;
-	position: fixed;
-	opacity: 0.4;
-	top: 50%;
 	height: 60px;
 	margin-top: -30px;
-	width: 60px;
+	opacity: 0.4;
+	overflow: hidden;
+	position: fixed;
+	text-indent: 100%;
+	top: 50%;
 	user-select: none;
+	white-space: nowrap;
+	width: 60px;
 
 	span {
 		display: none;
