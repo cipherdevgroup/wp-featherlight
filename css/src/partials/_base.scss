@@ -47,6 +47,25 @@
 		@media screen and ( min-width: 980px ) {
 			max-height: 90%;
 		}
+
+		.caption {
+			color: $caption-text-color;
+			font-size: 16px;
+			font-weight: lighter;
+			line-height: 1.25;
+			max-width: 100%;
+			overflow: hidden;
+			position: absolute;
+			text-align: left;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			&:hover,
+			&:focus {
+				overflow: visible;
+				white-space: normal;
+			}
+		}
 	}
 
 	.featherlight-inner {
@@ -89,26 +108,10 @@
 	}
 }
 
-.featherlight-iframe .featherlight-content {
-	border-bottom: 0;
-	padding: 0;
-}
+.featherlight-iframe {
 
-.featherlight-content .caption {
-	color: $caption-text-color;
-	font-size: 16px;
-	font-weight: lighter;
-	line-height: 1.25;
-	max-width: 100%;
-	overflow: hidden;
-	position: absolute;
-	text-align: left;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-
-	&:hover,
-	&:focus {
-		overflow: visible;
-		white-space: normal;
+	.featherlight-content {
+		border-bottom: 0;
+		padding: 0;
 	}
 }

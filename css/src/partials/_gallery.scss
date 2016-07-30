@@ -40,7 +40,10 @@
 	left: 10px;
 }
 
-.featherlight-loading .featherlight-previous,
-.featherlight-loading .featherlight-next {
-	display: none;
+.featherlight-loading {
+
+	.featherlight-previous,
+	.featherlight-next {
+		display: none;
+	}
 }
