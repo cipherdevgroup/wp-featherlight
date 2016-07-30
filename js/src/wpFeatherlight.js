@@ -7,7 +7,7 @@
 (function( window, $, undefined ) {
 	'use strict';
 
-	var $body = $( 'body' );
+	var $body = $( document.body );
 
 	/**
 	 * Checks href targets to see if a given anchor is linking to an image.
@@ -30,7 +30,7 @@
 	 * @return void
 	 */
 	function findImages() {
-		$( 'a[href]' ).filter( testImages ).attr( 'data-featherlight', 'image' );
+		$body.find( 'a[href]' ).filter( testImages ).attr( 'data-featherlight', 'image' );
 	}
 
 	/**
@@ -60,7 +60,7 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $( '.gallery, .tiled-gallery' );
+		var $gallery = $body.find( '.gallery, .tiled-gallery' );
 
 		if ( 0 !== $gallery.length ) {
 			$.each( $gallery, buildGalleries );
