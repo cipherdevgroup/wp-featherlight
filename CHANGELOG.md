@@ -1,3 +1,21 @@
+## 1.0.0
+Even though this is a major version change, this is primarily a maintenance release. The reason for the jump to 1.0.0 is because we've changed some code which could break backwards compatibility with custom extensions and integrations.
+
+If you're just using the plugin on your site and haven't customized it or paid anyone to customize it for you, you should be able to update without any issues.
+
+If you're a developer and have written custom code extending the PHP side of WP Featherlight, be sure to test your code before updating.
+
+Under the hood, we've [deprecated some internal methods](https://github.com/wpsitecare/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
+
+- Tweak: Improved transition between images within galleries
+- Tweak: Moved our disable lightbox checkbox into the publish meta box to streamline the admin
+- Tweak: Made styles more aggressive to ensure elements look consistent across different themes by default
+- Fix: Reduced false positives for URLs that use image extensions but don't actually link to an image
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.5.1`
+- Dev: Updated [jQuery Detect Swipe](http://github.com/marcandre/detect_swipe) to `2.1.3`
+- Dev: Deprecated some internal methods
+- Dev: Reorganized how classes are instantiated and plugin actions are fired
+
 ## 0.3.0
 
 There are quite a few internal changes in the plugin for this release, plus some nice new features and improvements on the front-end. We've streamlined everything as much as possible and also added support for some languages other than English! Here's a breakdown of everything that's changed:

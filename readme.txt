@@ -2,8 +2,8 @@
 
 Contributors: fatmedia, wpsitecare
 Tags: lightbox, jquery lightbox, jquery, gallery, image, lightbox images, image lightbox, lightbox gallery, lightbox image, lightbox popup, featherlight, photo gallery, popup image, popup images, popup lightbox, responsive lightbox, swipe, wordpress image lightbox, wordpress lightbox, wordpress slideshow lightbox, photography, images, minimal, responsive, photo, photos
-Requires at least: 4.3
-Tested up to: 4.3
+Requires at least: 4.6
+Tested up to: 4.6.1
 Stable tag: 0.3.0
 License: GPL-2.0+
 
@@ -29,7 +29,7 @@ You can also disable inclusion of the CSS and JavaScript conditionally using fil
 
 = Contributing =
 
-If you'd like to submit code patches or contribute in any other way, please fork the plugin on GitHub. https://github.com/wpsitecare/wp-featherlight
+If you'd like to submit code patches or contribute in any other way, please [fork the plugin on GitHub](https://github.com/wpsitecare/wp-featherlight).
 
 == Screenshots ==
 
@@ -37,58 +37,22 @@ If you'd like to submit code patches or contribute in any other way, please fork
 
 == Changelog ==
 
-= 0.3.0 =
+= 1.0.0 =
+Even though this is a major version change, this is primarily a maintenance release. The reason for the jump to 1.0.0 is because we've changed some code which could break backwards compatibility with custom extensions and integrations.
 
-There are quite a few internal changes in the plugin for this release, plus some nice new features and improvements on the front-end. We've streamlined everything as much as possible and also added support for some languages other than English! Here's a breakdown of everything that's changed:
+If you're just using the plugin on your site and haven't customized it or paid anyone to customize it for you, you should be able to update without any issues.
 
-New Features
+If you're a developer and have written custom code extending the PHP side of WP Featherlight, be sure to test your code before updating.
 
-- Automatic captioning for WordPress images and gallery items (Including Jetpack Galleries)
-- Spanish language translation
+Under the hood, we've [deprecated some internal methods](https://github.com/wpsitecare/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
 
-Enhancements
+- Tweak: Improved transition between images within galleries
+- Tweak: Moved our disable lightbox checkbox into the publish meta box to streamline the admin
+- Tweak: Made styles more aggressive to ensure elements look consistent across different themes by default
+- Fix: Reduced false positives for URLs that use image extensions but don't actually link to an image
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.5.1`
+- Dev: Updated [jQuery Detect Swipe](http://github.com/marcandre/detect_swipe) to `2.1.3`
+- Dev: Deprecated some internal methods
+- Dev: Reorganized how classes are instantiated and plugin actions are fired
 
-- Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.3.3`
-- Improved gallery styles on desktop and mobile devices
-- Streamlined overall styles
-- Added SVG icons for more visual consistency across various platforms
-- Simplified the text used in the admin metabox to ease translations (props @toscho)
-
-Bug Fixes
-
-- Improved handling of images when certain caching plugins are enabled
-- Prevented gallery arrows from being hijacked by WP Emoji
-- Fixed a bug which allowed multiple lightboxes to be opened using keyboard commands
-
-Developer Stuff
-
-- Reduced overhead by loading language files only when needed (props @toscho)
-- Improved the save routine for our admin metabox (props @toscho)
-- Added a `wp_featherlight_captions` filter to control auto-captioning. Filter it to false to disable captions.
-- Re-structured the plugin's internal code base and deprecated plugin constants
-- Added Grunt and Bower the plugin to allow easier updates and releases in the future
-
-Added Language Support
-
-- German
-- Spanish
-- French
-- Portuguese (Brazil)
-- Spanish (Peru)
-
-= 0.2.0 =
-The primary feature in this release is the addition of a visual loader and the automatic lightboxing of external images. In prior versions, only images from the WordPress host domain were lightboxed automatically. This caused some problems with people using a CDN as the URLs were treated as external.
-
-There have also been a handful of code improvements under the hood including:
-
-- Added gallery support for Jetpack Tiled Galleries
-- Improved URL handling to match more image instances automatically
-- Fixed a mistake in the textdomain path
-- Improved admin metabox markup
-- Fixed a typo in the main stylesheet's script handle
-
-= 0.1.1 =
-Fixed a bug that caused all WordPress galleries to open in a light box. Now only galleries which have been set to link to the media attachment are opened using Featherlight.
-
-= 0.1.0 =
-Initial release!
+[View the full changelog on GitHub](https://github.com/wpsitecare/wp-featherlight/blob/master/CHANGELOG.md)
