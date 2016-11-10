@@ -60,7 +60,7 @@ class WP_Featherlight_Scripts {
 	 * @access public
 	 * @return string
 	 */
-	function get_suffix() {
+	public function get_suffix() {
 		static $suffix;
 
 		if ( null === $suffix ) {
