@@ -11,7 +11,7 @@
 	"disallowSpacesInAnonymousFunctionExpression": {
 		"beforeOpeningRoundBrace": true
 	},
-	"requireMultipleVarDecl": "onevar",
+	"requireMultipleVarDecl": false,
 	"requireSpacesInsideObjectBrackets": "all",
 	"disallowSpaceAfterObjectKeys": true,
 	"requireSpaceAfterBinaryOperators": [
