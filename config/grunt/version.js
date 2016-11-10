@@ -13,10 +13,10 @@ module.exports = {
 	},
 	phpConstant: {
 		options: {
-			prefix: 'WP_FEATHERLIGHT_VERSION\'\,\\s+\''
+			prefix: 'VERSION\\s+=\\s+\''
 		},
 		src: [
-			'wp-featherlight.php'
+			'includes/class-plugin.php'
 		]
 	},
 	style: {
