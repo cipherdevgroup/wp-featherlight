@@ -148,7 +148,7 @@ function wp_featherlight_load_unpacked_js() {
 		'featherlight',
 		"{$url}vendor/featherlight{$suffix}.js",
 		array( 'jquery-detect-swipe' ),
-		'1.5.0',
+		'1.5.1',
 		true
 	);
 
@@ -156,7 +156,7 @@ function wp_featherlight_load_unpacked_js() {
 		'featherlight-gallery',
 		"{$url}vendor/featherlight.gallery{$suffix}.js",
 		array( 'featherlight' ),
-		'1.5.0',
+		'1.5.1',
 		true
 	);
 

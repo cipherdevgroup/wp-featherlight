@@ -85,7 +85,7 @@
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.5.0 - http://noelboss.github.io/featherlight/
+ * Version 1.5.1 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -466,8 +466,8 @@
 			iframe: {
 				process: function(url) {
 					var deferred = new $.Deferred();
-					var $content = $('<iframe/>')
-						.hide()
+					var $content = $('<iframe/>');
+					$content.hide()
 						.attr('src', url)
 						.css(structure(this, 'iframe'))
 						.on('load', function() { deferred.resolve($content.show()); })
@@ -499,7 +499,7 @@
 						if ($.inArray(name, Klass.functionAttributes) >= 0) {  /* jshint -W054 */
 							val = new Function(val);                           /* jshint +W054 */
 						} else {
-							try { val = $.parseJSON(val); }
+							try { val = JSON.parse(val); }
 							catch(e) {}
 						}
 						config[name] = val;
@@ -645,7 +645,7 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.5.0 - http://noelboss.github.io/featherlight/
+ * Version 1.5.1 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
