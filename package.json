@@ -6,7 +6,7 @@
   "nameUscoreCam": "WP_Featherlight",
   "nameCamel":     "WPFeatherlight",
   "nameCamelLow":  "wpFeatherlight",
-  "version":       "0.3.0",
+  "version":       "1.0.0",
   "copyright":     "2016",
   "license":       "GPL-2.0+",
   "private":       true,
