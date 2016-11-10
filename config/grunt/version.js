@@ -27,5 +27,13 @@ module.exports = {
 			'wp-featherlight.php',
 			'<%= paths.cssSrc %>wp-featherlight.scss'
 		]
+	},
+	readme: {
+		options: {
+			prefix: 'Stable tag:\\s+'
+		},
+		src: [
+			'readme.txt'
+		]
 	}
 };
