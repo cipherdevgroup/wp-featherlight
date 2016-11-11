@@ -222,28 +222,28 @@ class WP_Featherlight {
 		/**
 		 * Callback defined in includes/class-i18n.php
 		 *
-		 * @see wp_featherlight_load_textdomain
+		 * @see WP_Featherlight_Language_Loader::load
 		 */
 		add_action( 'admin_head-plugins.php', array( $this->i18n, 'load' ), 10 );
 
 		/**
 		 * Callback defined in includes/class-i18n.php
 		 *
-		 * @see wp_featherlight_load_textdomain
+		 * @see WP_Featherlight_Language_Loader::load
 		 */
 		add_action( 'post_submitbox_misc_actions', array( $this->i18n, 'load' ), 5 );
 
 		/**
 		 * Callback defined in admin/class-meta.php
 		 *
-		 * @see wp_featherlight_admin_meta_box_view
+		 * @see WP_Featherlight_Admin_Meta::meta_box_view
 		 */
 		add_action( 'post_submitbox_misc_actions', array( $this->meta, 'meta_box_view' ), 10 );
 
 		/**
 		 * Callback defined in admin/class-meta.php
 		 *
-		 * @see wp_featherlight_admin_meta_save
+		 * @see WP_Featherlight_Admin_Meta::save_meta_boxes
 		 */
 		add_action( 'save_post', array( $this->meta, 'save_meta_boxes' ), 10 );
 	}
