@@ -1,6 +1,6 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.5.1 - http://noelboss.github.io/featherlight/
+ * Version 1.6.0 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -136,9 +136,9 @@
 				$background = $(self.background || [
 					'<div class="'+css+'-loading '+css+'">',
 						'<div class="'+css+'-content">',
-							'<span class="'+css+'-close-icon '+ self.namespace + '-close">',
+							'<button class="'+css+'-close-icon '+ self.namespace + '-close" aria-label="Close">',
 								self.closeIcon,
-							'</span>',
+							'</button>',
 							'<div class="'+self.namespace+'-inner">' + self.loading + '</div>',
 						'</div>',
 					'</div>'].join('')),
@@ -534,6 +534,27 @@
 				}
 			},
 
+			beforeOpen: function(_super, event) {
+				// Remember focus:
+				this._previouslyActive = document.activeElement;
+
+				// Disable tabbing:
+				// See http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
+				this._$previouslyTabbable = $("a, input, select, textarea, iframe, button, iframe, [tabindex], [contentEditable=true]")
+					.not('[tabindex="-1"]')
+					.attr('tabindex', -1);
+
+				document.activeElement.blur();
+				return _super(event);
+			},
+
+			afterClose: function(_super, event) {
+				var r = _super(event);
+				this._previouslyActive.focus();
+				this._$previouslyTabbable.removeAttr('tabindex');
+				return r;
+			},
+
 			onResize: function(_super, event){
 				this.resize(this.$content.naturalWidth, this.$content.naturalHeight);
 				return _super(event);
@@ -541,6 +562,7 @@
 
 			afterContent: function(_super, event){
 				var r = _super(event);
+				this.$instance.find('[autofocus]:not([disabled])').focus();
 				this.onResize(event);
 				return r;
 			}

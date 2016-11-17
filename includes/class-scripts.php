@@ -182,7 +182,7 @@ class WP_Featherlight_Scripts {
 			'featherlight',
 			"{$this->url}js/src/vendor/featherlight{$this->suffix}.js",
 			array( 'jquery-detect-swipe' ),
-			'1.5.1',
+			'1.6.0',
 			true
 		);
 
@@ -190,7 +190,7 @@ class WP_Featherlight_Scripts {
 			'featherlight-gallery',
 			"{$this->url}js/src/vendor/featherlight.gallery{$this->suffix}.js",
 			array( 'featherlight' ),
-			'1.5.1',
+			'1.6.0',
 			true
 		);
 
