@@ -49,7 +49,10 @@
 		}
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
-			$galleryItems.featherlightGallery();
+			$galleryItems.featherlightGallery({
+				previousIcon: '',
+				nextIcon: ''
+			});
 		}
 	}
 
@@ -102,6 +105,7 @@
 	 * @return void
 	 */
 	function wpFeatherlightInit() {
+		$.featherlight.defaults.closeIcon = '';
 		findImages();
 		findGalleries();
 		if ( $body.hasClass( 'wp-featherlight-captions' ) ) {
