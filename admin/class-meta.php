@@ -83,6 +83,10 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function meta_box_view( $post ) {
+		if ( empty( $post ) ) {
+			$post = get_post();
+		}
+
 		if ( ! is_object( $post ) || ! isset( $post->post_type ) ) {
 			return;
 		}
