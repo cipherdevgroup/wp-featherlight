@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "featherlight": "~1.6.0",
+    "featherlight": "~1.6.1",
     "jquery-detect-swipe": "~2.1.3"
   },
   "devDependencies": {}
