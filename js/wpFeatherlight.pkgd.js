@@ -85,7 +85,7 @@
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.6.0 - http://noelboss.github.io/featherlight/
+ * Version 1.6.1 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -625,9 +625,16 @@
 
 				// Disable tabbing:
 				// See http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
-				this._$previouslyTabbable = $("a, input, select, textarea, iframe, button, iframe, [tabindex], [contentEditable=true]")
-					.not('[tabindex="-1"]')
-					.attr('tabindex', -1);
+				this._$previouslyTabbable = $("a, input, select, textarea, iframe, button, iframe, [contentEditable=true]")
+					.not('[tabindex]')
+					.not(this.$instance.find('button'));
+
+				this._$previouslyWithTabIndex = $('[tabindex]').not('[tabindex="-1"]');
+				this._previousWithTabIndices = this._$previouslyWithTabIndex.map(function(_i, elem) {
+					return $(elem).attr('tabindex');
+				});
+
+				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
 
 				document.activeElement.blur();
 				return _super(event);
@@ -635,8 +642,12 @@
 
 			afterClose: function(_super, event) {
 				var r = _super(event);
-				this._previouslyActive.focus();
+				var self = this;
 				this._$previouslyTabbable.removeAttr('tabindex');
+				this._$previouslyWithTabIndex.each(function(i, elem) {
+					$(elem).attr('tabindex', self._previousWithTabIndices[i]);
+				});
+				this._previouslyActive.focus();
 				return r;
 			},
 
@@ -667,7 +678,7 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.6.0 - http://noelboss.github.io/featherlight/
+ * Version 1.6.1 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
