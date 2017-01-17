@@ -7,7 +7,7 @@ module.exports = {
 	},
 	plugin: {
 		files: {
-			'<%= paths.tmp %>wp-featherlight.css': '<%= paths.cssSrc %>wp-featherlight.scss'
+			'<%= paths.cssDist %>wp-featherlight.css': '<%= paths.cssSrc %>wp-featherlight.scss'
 		}
 	}
 };

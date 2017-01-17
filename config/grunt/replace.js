@@ -1,24 +1,5 @@
 // https://github.com/outaTiME/grunt-replace
 module.exports = {
-	style: {
-		options: {
-			patterns: [
-				{
-					// Add line break between banner and minified
-					match: /\*\/(?=\S)/g,
-					replacement: '*/\n'
-				}
-			]
-		},
-		files: [
-			{
-				expand: true,
-				src: [
-					'<%= paths.tmp %>*.min.css'
-				]
-			}
-		]
-	},
 	// Useful when forking this project into a new project
 	packagename: {
 		options: {

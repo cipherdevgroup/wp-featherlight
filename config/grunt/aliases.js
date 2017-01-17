@@ -3,17 +3,14 @@ module.exports = function() {
 	var tasks = {
 		'build:dependencies:fonts': [
 			'clean:fonts',
-			'shell:bower',
 			'copy:bowerfonts'
 		],
 		'build:dependencies:css': [
 			'clean:css',
-			'shell:bower',
 			'copy:bowercss'
 		],
 		'build:dependencies:js': [
 			'clean:js',
-			'shell:bower',
 			'copy:bowerjs'
 		],
 		'build:fonts': [
@@ -26,12 +23,10 @@ module.exports = function() {
 			'newer:postcss',
 			'newer:rtlcss',
 			'newer:cssmin',
-			'newer:replace:style',
 			'newer:copy:css'
 		],
 		'build:images': [
-			'newer:imagemin:images',
-			'newer:copy:images'
+			'newer:imagemin:images'
 		],
 		'build:js': [
 			'build:dependencies:js',

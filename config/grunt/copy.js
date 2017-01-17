@@ -1,40 +1,18 @@
 // https://github.com/gruntjs/grunt-contrib-copy
 module.exports = {
 	css: {
-		files: [
-			{
-				expand: true,
-				flatten: true,
-				cwd: '<%= paths.tmp %>',
-				src: [
-					'*.css',
-					'**/*.css'
-				],
-				dest: 'css/',
-				filter: 'isFile'
-			}
-		]
+		files: []
 	},
 	fonts: {
 		files: [
 			{
 				expand: true,
 				flatten: true,
+				cwd: '<%= paths.fontsSrc %>',
 				src: [
-					'<%= paths.fontSrc %>fonts/**/*'
+					'**/*'
 				],
-				dest: 'fonts/'
-			}
-		]
-	},
-	images: {
-		files: [
-			{
-				expand: true,
-				flatten: true,
-				cwd: '<%= paths.tmp %>images',
-				src: [ '*' ],
-				dest: 'images',
+				dest: '<%= paths.fontsDist %>',
 				filter: 'isFile'
 			}
 		]
@@ -54,9 +32,10 @@ module.exports = {
 		files: [
 			{
 				expand: true,
-				cwd: 'bower_components/',
+				flatten: true,
+				cwd: '<%= paths.bower %>',
 				src: [],
-				dest: '<%= paths.cssSrc %>vendor'
+				dest: '<%= paths.cssVend %>'
 			}
 		]
 	},
@@ -65,13 +44,13 @@ module.exports = {
 			{
 				expand: true,
 				flatten: true,
-				cwd: 'bower_components/',
+				cwd: '<%= paths.bower %>',
 				src: [
 					'featherlight/src/featherlight.js',
 					'featherlight/src/featherlight.gallery.js',
 					'jquery-detect-swipe/jquery.detect_swipe.js'
 				],
-				dest: '<%= paths.jsSrc %>vendor'
+				dest: '<%= paths.jsVend %>'
 			}
 		]
 	},
