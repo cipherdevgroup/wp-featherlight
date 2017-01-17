@@ -2,22 +2,11 @@
 .sass-cache
 
 # Development files
-node_modules
-bower_components
+node_modules/
+bower_components/
 
 # Development directories
 release/
 docs/
-tmp/
-
-# Auto-Generated Files
-!images/src/
-!images/src/*
-!images/src/**/*
-languages/*.pot
-languages/*.po
-
-# Third-party dependencies
-includes/vendor/*
-js/vendor/*
-css/vendor/*
+assets/bower/
+assets/composer/
