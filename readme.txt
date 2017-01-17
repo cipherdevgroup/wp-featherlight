@@ -64,4 +64,4 @@ Under the hood, we've [deprecated some internal methods](https://github.com/wpsi
 - Dev: Deprecated some internal methods
 - Dev: Reorganized how classes are instantiated and plugin actions are fired
 
-[View the full changelog on GitHub](https://github.com/wpsitecare/wp-featherlight/blob/develop/CHANGELOG.md)
+[View the full changelog on GitHub](https://github.com/wpsitecare/wp-featherlight/blob/release/CHANGELOG.md)

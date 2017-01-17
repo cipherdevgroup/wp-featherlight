@@ -135,9 +135,7 @@ module.exports = {
 					'!.gitignore',
 					'!composer.lock',
 					'!gruntfile.js',
-					'!package.json',
-					'!CHANGELOG.md',
-					'!README.md'
+					'!package.json'
 				],
 				dest: '<%= paths.release %><%= pkg.version %>'
 			}
