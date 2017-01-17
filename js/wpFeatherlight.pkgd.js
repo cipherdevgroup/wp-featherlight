@@ -85,7 +85,7 @@
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.6.1 - http://noelboss.github.io/featherlight/
+ * Version 1.7.0 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -139,20 +139,38 @@
 			return opened;
 		};
 
-	// structure({iframeMinHeight: 44, foo: 0}, 'iframe')
-	//   #=> {min-height: 44}
-	var structure = function(obj, prefix) {
-		var result = {},
+	// Removes keys of `set` from `obj` and returns the removed key/values.
+	function slice(obj, set) {
+		var r = {};
+		for (var key in obj) {
+			if (key in set) {
+				r[key] = obj[key];
+				delete obj[key];
+			}
+		}
+		return r;
+	}
+
+	// NOTE: List of available [iframe attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+	var iFrameAttributeSet = {
+		allowfullscreen: 1, frameborder: 1, height: 1, longdesc: 1, marginheight: 1, marginwidth: 1,
+		name: 1, referrerpolicy: 1, scrolling: 1, sandbox: 1, src: 1, srcdoc: 1, width: 1
+	};
+
+	// Converts camelCased attributes to dasherized versions for given prefix:
+	//   parseAttrs({hello: 1, hellFrozeOver: 2}, 'hell') => {froze-over: 2}
+	function parseAttrs(obj, prefix) {
+		var attrs = {},
 			regex = new RegExp('^' + prefix + '([A-Z])(.*)');
 		for (var key in obj) {
 			var match = key.match(regex);
 			if (match) {
 				var dasherized = (match[1] + match[2].replace(/([A-Z])/g, '-$1')).toLowerCase();
-				result[dasherized] = obj[key];
+				attrs[dasherized] = obj[key];
 			}
 		}
-		return result;
-	};
+		return attrs;
+	}
 
 	/* document wide key handler */
 	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
@@ -467,9 +485,12 @@
 				process: function(url) {
 					var deferred = new $.Deferred();
 					var $content = $('<iframe/>');
+					var css = parseAttrs(this, 'iframe');
+					var attrs = slice(css, iFrameAttributeSet);
 					$content.hide()
 						.attr('src', url)
-						.css(structure(this, 'iframe'))
+						.attr(attrs)
+						.css(css)
 						.on('load', function() { deferred.resolve($content.show()); })
 						// We can't move an <iframe> and avoid reloading it,
 						// so let's put it in place ourselves right now:
@@ -678,7 +699,7 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.6.1 - http://noelboss.github.io/featherlight/
+ * Version 1.7.0 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -734,11 +755,15 @@
 						self._swiper = swipeAwareConstructor(self.$instance)
 							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
 							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
-					} else {
-						self.$instance.find('.'+self.namespace+'-content')
-							.append(self.createNavigation('previous'))
-							.append(self.createNavigation('next'));
+
+						self.$instance
+							.addClass(this.namespace+'-swipe-aware', swipeAwareConstructor);
 					}
+
+					self.$instance.find('.'+self.namespace+'-content')
+						.append(self.createNavigation('previous'))
+						.append(self.createNavigation('next'));
+
 					return _super(event);
 			},
 			beforeContent: function(_super, event) {

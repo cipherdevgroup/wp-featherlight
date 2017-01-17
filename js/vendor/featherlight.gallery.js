@@ -1,6 +1,6 @@
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.6.1 - http://noelboss.github.io/featherlight/
+ * Version 1.7.0 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -56,11 +56,15 @@
 						self._swiper = swipeAwareConstructor(self.$instance)
 							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
 							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
-					} else {
-						self.$instance.find('.'+self.namespace+'-content')
-							.append(self.createNavigation('previous'))
-							.append(self.createNavigation('next'));
+
+						self.$instance
+							.addClass(this.namespace+'-swipe-aware', swipeAwareConstructor);
 					}
+
+					self.$instance.find('.'+self.namespace+'-content')
+						.append(self.createNavigation('previous'))
+						.append(self.createNavigation('next'));
+
 					return _super(event);
 			},
 			beforeContent: function(_super, event) {
