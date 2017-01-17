@@ -121,6 +121,7 @@ module.exports = {
 					'!.sass-cache/**',
 					'!.jscsrc',
 					'!.jshintrc',
+					'!.bowerrc',
 					'!assets/**',
 					'!config/**',
 					'!release/**',
