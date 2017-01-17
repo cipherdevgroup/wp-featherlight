@@ -3,6 +3,19 @@ module.exports = {
 	css: {
 		files: []
 	},
+	js: {
+		files: [
+			{
+				expand: true,
+				flatten: true,
+				cwd: '<%= paths.jsSrc %>',
+				src: [
+					'wpFeatherlight.js'
+				],
+				dest: '<%= paths.jsDist %>'
+			}
+		]
+	},
 	fonts: {
 		files: [
 			{

@@ -30,6 +30,7 @@ module.exports = function() {
 		],
 		'build:js': [
 			'build:dependencies:js',
+			'newer:copy:js',
 			'newer:concat:js',
 			'newer:concat:adminjs',
 			'newer:uglify'
