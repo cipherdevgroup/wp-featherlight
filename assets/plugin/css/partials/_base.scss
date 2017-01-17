@@ -136,6 +136,8 @@
 
 	.featherlight-content {
 		border-bottom: 0;
+		-webkit-overflow-scrolling: touch;
+		overflow-y: scroll;
 		padding: 0;
 	}
 }
