@@ -172,7 +172,7 @@ class WP_Featherlight_Scripts {
 	public function load_unpacked_js() {
 		wp_enqueue_script(
 			'jquery-detect-swipe',
-			"{$this->url}js/src/vendor/jquery.detect_swipe{$this->suffix}.js",
+			"{$this->url}js/vendor/jquery.detect_swipe{$this->suffix}.js",
 			array( 'jquery' ),
 			'2.1.3',
 			true
@@ -180,23 +180,23 @@ class WP_Featherlight_Scripts {
 
 		wp_enqueue_script(
 			'featherlight',
-			"{$this->url}js/src/vendor/featherlight{$this->suffix}.js",
+			"{$this->url}js/vendor/featherlight{$this->suffix}.js",
 			array( 'jquery-detect-swipe' ),
-			'1.5.1',
+			'1.7.0',
 			true
 		);
 
 		wp_enqueue_script(
 			'featherlight-gallery',
-			"{$this->url}js/src/vendor/featherlight.gallery{$this->suffix}.js",
+			"{$this->url}js/vendor/featherlight.gallery{$this->suffix}.js",
 			array( 'featherlight' ),
-			'1.5.1',
+			'1.7.0',
 			true
 		);
 
 		wp_enqueue_script(
 			'wp-featherlight',
-			"{$this->url}js/src/wpFeatherlight{$this->suffix}.js",
+			"{$this->url}js/wpFeatherlight{$this->suffix}.js",
 			array( 'featherlight-gallery' ),
 			$this->version,
 			true

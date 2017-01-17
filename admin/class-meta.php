@@ -79,10 +79,18 @@ class WP_Featherlight_Admin_Meta {
 	 * @since  1.0.0
 	 * @access public
 	 *
-	 * @param WP_Post $post Post object.
+	 * @param  object $post Post object.
 	 * @return void
 	 */
-	public function meta_box_view( WP_Post $post ) {
+	public function meta_box_view( $post ) {
+		if ( empty( $post ) ) {
+			$post = get_post();
+		}
+
+		if ( ! is_object( $post ) || ! isset( $post->post_type ) ) {
+			return;
+		}
+
 		$type = get_post_type_object( $post->post_type );
 
 		if ( ! is_object( $type ) ) {

@@ -1,3 +1,12 @@
+## 1.1.0
+Thanks to some changes implemented in the core featherlight script, the accessibility of WP Featherlight is now significantly improved. Lightboxed elements now have more appropriate focus management for screen readers and the close button is more accessible.
+
+This update also fixes a potential plugin compatibly problem in the WordPress admin. In version 1.0, it was possible under unusual circumstances for the plugin to throw a fatal error when attempting to add the disable checkbox to the publish metabox.
+
+- Tweak: Improved accessibility (accessible close button, better focus management)
+- Fix: Prevented a fatal error that could happen when another plugin unsets the WP_Post object on the publish metabox.
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.0`
+
 ## 1.0.0
 Even though this is a major version change, this is primarily a maintenance release. The reason for the jump to 1.0.0 is because we've changed some code which could break backwards compatibility with custom extensions and integrations.
 
