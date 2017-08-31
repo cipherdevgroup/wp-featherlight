@@ -93,7 +93,7 @@
 
 			object.find( '.caption' ).remove();
 			if ( 0 !== caption.length ) {
-				$( '<div class="caption">' ).text( caption.text() ).appendTo( object.find( '.featherlight-content' ) );
+				$( '<div class="caption">' ).html( caption.html() ).appendTo( object.find( '.featherlight-content' ) );
 			}
 		};
 	}
