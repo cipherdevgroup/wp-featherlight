@@ -174,7 +174,7 @@ class WP_Featherlight_Scripts {
 			'jquery-detect-swipe',
 			"{$this->url}js/vendor/jquery.detect_swipe{$this->suffix}.js",
 			array( 'jquery' ),
-			'2.1.3',
+			'2.1.4',
 			true
 		);
 
