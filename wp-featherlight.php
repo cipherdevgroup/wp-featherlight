@@ -3,7 +3,7 @@
  * Plugin Name:  WP Featherlight
  * Plugin URI:   https://www.wpsitecare.com/wp-featherlight/
  * Description:  An ultra lightweight jQuery lightbox for WordPress images and galleries.
- * Version:      1.1.0
+ * Version:      1.2.0
  * Author:       WP Site Care
  * Author URI:   https://www.wpsitecare.com
  * License:      GPL-2.0+

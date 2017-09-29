@@ -4,7 +4,7 @@ Contributors: fatmedia, wpsitecare
 Tags: lightbox, jquery lightbox, jquery, gallery, image, lightbox images, image lightbox, lightbox gallery, lightbox image, lightbox popup, featherlight, photo gallery, popup image, popup images, popup lightbox, responsive lightbox, swipe, wordpress image lightbox, wordpress lightbox, wordpress slideshow lightbox, photography, images, minimal, responsive, photo, photos
 Requires at least: 4.7
 Tested up to: 4.7.1
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPL-2.0+
 
 An ultra lightweight jQuery lightbox for WordPress images and galleries.
