@@ -1,3 +1,12 @@
+## 1.2.0
+This is primarily a maintenance release, but one new feature has been added. HTML in captions is now supported!
+
+Here's a full list of what's changed since the last release:
+
+- Feature: Allowed HTML to be displayed in lightbox image captions
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.9`
+- Dev: Updated [jQuery Detect Swipe](http://github.com/marcandre/detect_swipe) to `2.1.4`
+
 ## 1.1.0
 Thanks to some changes implemented in the core featherlight script, the accessibility of WP Featherlight is now significantly improved. Lightboxed elements now have more appropriate focus management for screen readers and the close button is more accessible.
 

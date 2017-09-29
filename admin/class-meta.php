@@ -147,7 +147,7 @@ class WP_Featherlight_Admin_Meta {
 	public function options_callback( WP_Post $post ) {
 		_deprecated_function( __METHOD__, '1.0.0' );
 
-		$this-> meta_box_view( $post );
+		$this->meta_box_view( $post );
 	}
 
 	/**

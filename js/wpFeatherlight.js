@@ -93,7 +93,8 @@
 
 			object.find( '.caption' ).remove();
 			if ( 0 !== caption.length ) {
-				$( '<div class="caption">' ).text( caption.text() ).appendTo( object.find( '.featherlight-content' ) );
+				var $captionElm = $( '<div class="caption">' ).appendTo( object.find( '.featherlight-content' ) );
+				$captionElm[0].innerHTML = caption.html();
 			}
 		};
 	}

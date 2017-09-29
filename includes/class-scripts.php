@@ -174,7 +174,7 @@ class WP_Featherlight_Scripts {
 			'jquery-detect-swipe',
 			"{$this->url}js/vendor/jquery.detect_swipe{$this->suffix}.js",
 			array( 'jquery' ),
-			'2.1.3',
+			'2.1.4',
 			true
 		);
 
@@ -182,7 +182,7 @@ class WP_Featherlight_Scripts {
 			'featherlight',
 			"{$this->url}js/vendor/featherlight{$this->suffix}.js",
 			array( 'jquery-detect-swipe' ),
-			'1.7.0',
+			'1.7.9',
 			true
 		);
 
@@ -190,7 +190,7 @@ class WP_Featherlight_Scripts {
 			'featherlight-gallery',
 			"{$this->url}js/vendor/featherlight.gallery{$this->suffix}.js",
 			array( 'featherlight' ),
-			'1.7.0',
+			'1.7.9',
 			true
 		);
 
