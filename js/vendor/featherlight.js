@@ -1,8 +1,8 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.7.0 - http://noelboss.github.io/featherlight/
+ * Version 1.7.9 - http://noelboss.github.io/featherlight/
  *
- * Copyright 2016, Noël Raoul Bossart (http://www.noelboss.com)
+ * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
 (function($) {
@@ -236,7 +236,7 @@
 		setContent: function($content){
 			var self = this;
 			/* we need a special class for the iframe */
-			if($content.is('iframe') || $('iframe', $content).length > 0){
+			if($content.is('iframe')) {
 				self.$instance.addClass(self.namespace+'-iframe');
 			}
 
@@ -325,8 +325,8 @@
 				/* Calculate the worst ratio so that dimensions fit */
 				 /* Note: -1 to avoid rounding errors */
 				var ratio = Math.max(
-					w  / (parseInt(this.$content.parent().css('width'),10)-1),
-					h / (parseInt(this.$content.parent().css('height'),10)-1));
+					w  / (this.$content.parent().width()-1),
+					h / (this.$content.parent().height()-1));
 				/* Resize content */
 				if (ratio > 1) {
 					ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
@@ -480,24 +480,29 @@
 			var namespace = config.namespace || Klass.defaults.namespace,
 				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
 				sharedPersist;
-
-			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
+			var handler = function(event) {
+				var $target = $(event.currentTarget);
 				/* ... since we might as well compute the config on the actual target */
 				var elemConfig = $.extend(
-					{$source: $source, $currentTarget: $(this)},
+					{$source: $source, $currentTarget: $target},
 					Klass.readElementConfig($source[0], tempConfig.namespace),
-					Klass.readElementConfig(this, tempConfig.namespace),
+					Klass.readElementConfig(event.currentTarget, tempConfig.namespace),
 					config);
-				var fl = sharedPersist || $(this).data('featherlight-persisted') || new Klass($content, elemConfig);
+				var fl = sharedPersist || $target.data('featherlight-persisted') || new Klass($content, elemConfig);
 				if(fl.persist === 'shared') {
 					sharedPersist = fl;
 				} else if(fl.persist !== false) {
-					$(this).data('featherlight-persisted', fl);
+					$target.data('featherlight-persisted', fl);
 				}
-				elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
+				if (elemConfig.$currentTarget.blur) {
+					elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
+				}
 				fl.open(event);
-			});
-			return $source;
+			};
+
+			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, handler);
+
+			return handler;
 		},
 
 		current: function() {
@@ -528,14 +533,13 @@
 				});
 				/* If a click propagates to the document level, then we have an item that was added later on */
 				$(document).on('click', Klass.autoBind, function(evt) {
-					if (evt.isDefaultPrevented() || evt.namespace === 'featherlight') {
+					if (evt.isDefaultPrevented()) {
 						return;
 					}
-					evt.preventDefault();
 					/* Bind featherlight */
-					Klass.attach($(evt.currentTarget));
-					/* Click again; this time our binding will catch it */
-					$(evt.target).trigger('click.featherlight');
+					var handler = Klass.attach($(evt.currentTarget));
+					/* Dispatch event directly */
+					handler(evt);
 				});
 			}
 		},
@@ -556,6 +560,9 @@
 			},
 
 			beforeOpen: function(_super, event) {
+				// Used to disable scrolling
+				$(document.documentElement).addClass('with-featherlight');
+
 				// Remember focus:
 				this._previouslyActive = document.activeElement;
 
@@ -572,18 +579,25 @@
 
 				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
 
-				document.activeElement.blur();
+				if (document.activeElement.blur) {
+					document.activeElement.blur();
+				}
 				return _super(event);
 			},
 
 			afterClose: function(_super, event) {
 				var r = _super(event);
+				// Restore focus
 				var self = this;
 				this._$previouslyTabbable.removeAttr('tabindex');
 				this._$previouslyWithTabIndex.each(function(i, elem) {
 					$(elem).attr('tabindex', self._previousWithTabIndices[i]);
 				});
 				this._previouslyActive.focus();
+				// Restore scroll
+				if(Featherlight.opened().length === 0) {
+					$(document.documentElement).removeClass('with-featherlight');
+				}
 				return r;
 			},
 
@@ -605,7 +619,8 @@
 
 	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function($content, config) {
-		return Featherlight.attach(this, $content, config);
+		Featherlight.attach(this, $content, config);
+		return this;
 	};
 
 	/* bind featherlight on ready if config autoBind is set */
