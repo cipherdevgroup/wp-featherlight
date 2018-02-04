@@ -48,6 +48,10 @@
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
+                if (0 === $galleryItems.length) {
+                       $galleryItems = $galleryObj.find('.blocks-gallery-item a');
+                }                
+
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
 			$galleryItems.featherlightGallery({
 				previousIcon: '',
@@ -63,7 +67,7 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $body.find( '.gallery, .tiled-gallery' );
+		var $gallery = $body.find( '.gallery, .tiled-gallery, .wp-block-gallery' );
 
 		if ( 0 !== $gallery.length ) {
 			$.each( $gallery, buildGalleries );
