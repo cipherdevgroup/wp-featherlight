@@ -42,7 +42,7 @@
 	 */
 	function buildGalleries( index, element ) {
 		var $galleryObj   = $( element ),
-			$galleryItems = $galleryObj.find( '.gallery-item a' );
+			$galleryItems = $galleryObj.find( 'a[data-featherlight="image"]' );
 
 		if ( 0 === $galleryItems.length ) {
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
