@@ -49,7 +49,7 @@
 		}
 
                 if (0 === $galleryItems.length) {
-                    $galleryItems = $galleryObj.find('.blocks-gallery-item a');
+                       $galleryItems = $galleryObj.find('.blocks-gallery-item a');
                 }
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
