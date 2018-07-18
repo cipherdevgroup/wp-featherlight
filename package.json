@@ -29,7 +29,7 @@
     "url": "https://github.com/cipherdevgroup/wp-featherlight.git"
   },
   "devDependencies": {
-    "load-project-config": "~0.2.0",
-    "cipher-plugin-config": "cipherdevgroup/cipher-plugin-config"
+    "cipher-plugin-config": "cipherdevgroup/cipher-plugin-config",
+    "load-project-config": "~0.2.0"
   }
 }
