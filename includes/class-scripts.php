@@ -3,7 +3,7 @@
  * Methods used for filtering and displaying WP Featherlight images.
  *
  * @package   WPFeatherlight\Scripts
- * @copyright Copyright (c) 2016, WP Site Care
+ * @copyright Copyright (c) 2018, Cipher Development, LLC
  * @license   GPL-2.0+
  * @since     0.1.0
  */

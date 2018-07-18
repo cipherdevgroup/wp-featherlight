@@ -1,6 +1,6 @@
 === WP Featherlight - A Simple jQuery Lightbox ===
 
-Contributors: fatmedia, wpsitecare
+Contributors: fatmedia, cipherdevgroup
 Tags: lightbox, jquery lightbox, jquery, gallery, image, lightbox images, image lightbox, lightbox gallery, lightbox image, lightbox popup, featherlight, photo gallery, popup image, popup images, popup lightbox, responsive lightbox, swipe, wordpress image lightbox, wordpress lightbox, wordpress slideshow lightbox, photography, images, minimal, responsive, photo, photos
 Requires at least: 4.0
 Tested up to: 4.8.2
@@ -25,11 +25,11 @@ If you find a display problem, it may be related to your theme but please [open 
 
 While there are no options in the plugin, there are some handy filters to modify the default behavior. As of `0.3.0` all images which use the default WordPress captions will also include a caption when the image is lightboxed. To disable this behavior, filter `wp_featherlight_captions` to false.
 
-You can also disable inclusion of the CSS and JavaScript conditionally using filters which can be found in the `/includes/class-scripts.php` file. If you have questions about how any part of the plugin works, please don't hesitate to [open an issue on GitHub](https://github.com/wpsitecare/wp-featherlight/issues).
+You can also disable inclusion of the CSS and JavaScript conditionally using filters which can be found in the `/includes/class-scripts.php` file. If you have questions about how any part of the plugin works, please don't hesitate to [open an issue on GitHub](https://github.com/cipherdevgroup/wp-featherlight/issues).
 
 = Contributing =
 
-If you'd like to submit code patches or contribute in any other way, please [fork the plugin on GitHub](https://github.com/wpsitecare/wp-featherlight).
+If you'd like to submit code patches or contribute in any other way, please [fork the plugin on GitHub](https://github.com/cipherdevgroup/wp-featherlight).
 
 == Screenshots ==
 
@@ -62,7 +62,7 @@ If you're just using the plugin on your site and haven't customized it or paid a
 
 If you're a developer and have written custom code extending the PHP side of WP Featherlight, be sure to test your code before updating.
 
-Under the hood, we've [deprecated some internal methods](https://github.com/wpsitecare/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
+Under the hood, we've [deprecated some internal methods](https://github.com/cipherdevgroup/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
 
 - Tweak: Improved transition between images within galleries
 - Tweak: Moved our disable lightbox checkbox into the publish meta box to streamline the admin
@@ -73,4 +73,4 @@ Under the hood, we've [deprecated some internal methods](https://github.com/wpsi
 - Dev: Deprecated some internal methods
 - Dev: Reorganized how classes are instantiated and plugin actions are fired
 
-[View the full changelog on GitHub](https://github.com/wpsitecare/wp-featherlight/blob/release/CHANGELOG.md)
+[View the full changelog on GitHub](https://github.com/cipherdevgroup/wp-featherlight/blob/release/CHANGELOG.md)

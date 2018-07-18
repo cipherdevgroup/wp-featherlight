@@ -23,7 +23,7 @@ If you're just using the plugin on your site and haven't customized it or paid a
 
 If you're a developer and have written custom code extending the PHP side of WP Featherlight, be sure to test your code before updating.
 
-Under the hood, we've [deprecated some internal methods](https://github.com/wpsitecare/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
+Under the hood, we've [deprecated some internal methods](https://github.com/cipherdevgroup/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
 
 - Tweak: Improved transition between images within galleries
 - Tweak: Moved our disable lightbox checkbox into the publish meta box to streamline the admin

@@ -885,7 +885,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
+ * @copyright Copyright 2015, Cipher (https://cipherdevelopment.com)
  * @license   MIT
  */
 (function( window, $, undefined ) {

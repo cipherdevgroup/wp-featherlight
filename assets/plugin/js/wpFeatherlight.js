@@ -1,7 +1,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
+ * @copyright Copyright (c) 2018, Cipher Development, LLC
  * @license   MIT
  */
 (function( window, $, undefined ) {
@@ -50,7 +50,7 @@
 
                 if (0 === $galleryItems.length) {
                        $galleryItems = $galleryObj.find('.blocks-gallery-item a');
-                }                
+                }
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
 			$galleryItems.featherlightGallery({

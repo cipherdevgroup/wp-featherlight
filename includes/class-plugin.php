@@ -3,7 +3,7 @@
  * WP Featherlight main plugin class.
  *
  * @package   WPFeatherlight
- * @copyright Copyright (c) 2016, WP Site Care
+ * @copyright Copyright (c) 2018, Cipher Development, LLC
  * @license   GPL-2.0+
  * @since     0.1.0
  */

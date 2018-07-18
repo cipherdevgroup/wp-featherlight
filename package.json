@@ -11,25 +11,25 @@
   "license": "GPL-2.0+",
   "private": true,
   "bugs": {
-    "url": "http://www.wpsitecare.com/support/",
-    "email": "hello@wpsitecare.com"
+    "url": "https://cipherdevelopment.com/support/",
+    "email": "hello@cipherdevelopment.com"
   },
   "contributors": [
     {
       "name": "Robert Neu",
-      "url": "http://www.wpsitecare.com"
+      "url": "https://cipherdevelopment.com"
     },
     {
-      "name": "WP Site Care",
-      "url": "http://www.wpsitecare.com"
+      "name": "Cipher",
+      "url": "https://cipherdevelopment.com"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wpsitecare/wp-featherlight.git"
+    "url": "https://github.com/cipherdevgroup/wp-featherlight.git"
   },
   "devDependencies": {
     "load-project-config": "~0.2.0",
-    "sitecare-plugin-config": "wpsitecare/sitecare-plugin-config"
+    "cipher-plugin-config": "cipherdevgroup/cipher-plugin-config"
   }
 }
