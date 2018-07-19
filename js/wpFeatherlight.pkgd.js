@@ -940,15 +940,7 @@
 	 */
 	function buildGalleries( index, element ) {
 		var $galleryObj   = $( element ),
-			$galleryItems = $galleryObj.find( '.gallery-item a' );
-
-		if ( 0 === $galleryItems.length ) {
-			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
-		}
-
-		if ( 0 === $galleryItems.length ) {
-			$galleryItems = $galleryObj.find( '.blocks-gallery-item a' );
-		}
+			$galleryItems = $galleryObj.find( 'a[data-featherlight]' );
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
 			$galleryItems.featherlightGallery({
@@ -965,7 +957,7 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $body.find( '.gallery, .tiled-gallery, .wp-block-gallery' );
+		var $gallery = $body.find( '[class*="gallery"]' );
 
 		if ( 0 !== $gallery.length ) {
 			$.each( $gallery, buildGalleries );
