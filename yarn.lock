@@ -745,7 +745,7 @@ detect-libc@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
 
-detect_swipe@~2.1.3:
+detect_swipe@~2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/detect_swipe/-/detect_swipe-2.1.4.tgz#7fd155cf594cbc4e47c0b479959b4a91b6ff3c42"
   dependencies:
@@ -990,7 +990,7 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-featherlight@~1.7.0:
+featherlight@~1.7.13:
   version "1.7.13"
   resolved "https://registry.yarnpkg.com/featherlight/-/featherlight-1.7.13.tgz#500f53204ba7b5bb4650370dd94ae5965c556e94"
 
