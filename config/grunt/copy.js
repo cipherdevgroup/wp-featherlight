@@ -1,7 +1,15 @@
 // https://github.com/gruntjs/grunt-contrib-copy
 module.exports = {
 	css: {
-		files: []
+		files: [
+			{
+				expand: true,
+				flatten: true,
+				cwd: '<%= paths.node %>',
+				src: [],
+				dest: '<%= paths.cssVend %>'
+			}
+		]
 	},
 	js: {
 		files: [
@@ -13,6 +21,17 @@ module.exports = {
 					'wpFeatherlight.js'
 				],
 				dest: '<%= paths.jsDist %>'
+			},
+			{
+				expand: true,
+				flatten: true,
+				cwd: '<%= paths.node %>',
+				src: [
+					'featherlight/src/featherlight.js',
+					'featherlight/src/featherlight.gallery.js',
+					'detect_swipe/jquery.detect_swipe.js'
+				],
+				dest: '<%= paths.jsVend %>'
 			}
 		]
 	},
@@ -40,35 +59,6 @@ module.exports = {
 				filter: 'isFile'
 			}
 		]
-	},
-	bowercss: {
-		files: [
-			{
-				expand: true,
-				flatten: true,
-				cwd: '<%= paths.bower %>',
-				src: [],
-				dest: '<%= paths.cssVend %>'
-			}
-		]
-	},
-	bowerjs: {
-		files: [
-			{
-				expand: true,
-				flatten: true,
-				cwd: '<%= paths.bower %>',
-				src: [
-					'featherlight/src/featherlight.js',
-					'featherlight/src/featherlight.gallery.js',
-					'jquery-detect-swipe/jquery.detect_swipe.js'
-				],
-				dest: '<%= paths.jsVend %>'
-			}
-		]
-	},
-	bowerfonts: {
-		files: []
 	},
 	rename: {
 		files: [

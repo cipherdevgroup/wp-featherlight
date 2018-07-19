@@ -3,19 +3,18 @@ module.exports = function() {
 	var tasks = {
 		'build:dependencies:fonts': [
 			'clean:fonts',
-			'copy:bowerfonts'
+			'copy:fonts'
 		],
 		'build:dependencies:css': [
 			'clean:css',
-			'copy:bowercss'
+			'copy:css'
 		],
 		'build:dependencies:js': [
 			'clean:js',
-			'copy:bowerjs'
+			'copy:js'
 		],
 		'build:fonts': [
-			'build:dependencies:fonts',
-			'newer:copy:fonts'
+			'build:dependencies:fonts'
 		],
 		'build:css': [
 			'build:dependencies:css',

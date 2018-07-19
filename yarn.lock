@@ -414,7 +414,7 @@ chownr@^1.0.1:
 
 cipher-plugin-config@cipherdevgroup/cipher-plugin-config:
   version "3.0.0"
-  resolved "https://codeload.github.com/cipherdevgroup/cipher-plugin-config/tar.gz/160c6b6089f946a6b3dcec40d61de8f92dd2825c"
+  resolved "https://codeload.github.com/cipherdevgroup/cipher-plugin-config/tar.gz/0c5488aa8856b787a03e5580ede638b188a1d783"
   dependencies:
     autoprefixer "9.x"
     grunt "~1.x"
@@ -745,6 +745,12 @@ detect-libc@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
 
+detect_swipe@~2.1.3:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/detect_swipe/-/detect_swipe-2.1.4.tgz#7fd155cf594cbc4e47c0b479959b4a91b6ff3c42"
+  dependencies:
+    jquery ">=1.8.0"
+
 diff@^3.0.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
@@ -983,6 +989,10 @@ fd-slicer@~1.1.0:
   resolved "https://registry.yarnpkg.com/fd-slicer/-/fd-slicer-1.1.0.tgz#25c7c89cb1f9077f8891bbe61d8f390eae256f1e"
   dependencies:
     pend "~1.2.0"
+
+featherlight@~1.7.0:
+  version "1.7.13"
+  resolved "https://registry.yarnpkg.com/featherlight/-/featherlight-1.7.13.tgz#500f53204ba7b5bb4650370dd94ae5965c556e94"
 
 figures@^1.0.0, figures@^1.0.1, figures@^1.3.5:
   version "1.7.0"
@@ -1935,6 +1945,10 @@ jpegtran-bin@^3.0.0:
     bin-build "^2.0.0"
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
+
+jquery@>=1.8.0:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-yaml@^3.3.0:
   version "3.12.0"
