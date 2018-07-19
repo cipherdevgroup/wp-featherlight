@@ -946,9 +946,9 @@
 			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
 		}
 
-                if (0 === $galleryItems.length) {
-                       $galleryItems = $galleryObj.find('.blocks-gallery-item a');
-                }
+		if ( 0 === $galleryItems.length ) {
+			$galleryItems = $galleryObj.find( '.blocks-gallery-item a' );
+		}
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
 			$galleryItems.featherlightGallery({
