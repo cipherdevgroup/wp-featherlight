@@ -965,6 +965,34 @@
 	}
 
 	/**
+	 * Attempt to Find image captions using common WordPress caption markup.
+	 *
+	 * @since  1.3.0
+	 * @return void
+	 */
+	function findCaption( target ) {
+		var	caption = target.parent().find( '.wp-caption-text' );
+
+		if ( 0 !== caption.length ) {
+			return caption;
+		}
+
+		var galParent = target.parents( '.gallery-item' );
+
+		if ( 0 !== galParent.length ) {
+			return galParent.find( '.wp-caption-text' );
+		}
+
+		var jetParent = target.parents( '.tiled-gallery-item' );
+
+		if ( 0 !== jetParent.length ) {
+			return jetParent.find( '.tiled-gallery-caption' );
+		}
+
+		return '';
+	}
+
+	/**
 	 * Append image captions to the Featherlight content <div>.
 	 *
 	 * @since  0.3.0
@@ -972,20 +1000,11 @@
 	 */
 	function addCaptions() {
 		$.featherlight.prototype.afterContent = function() {
-			var object    = this.$instance,
-				target    = this.$currentTarget,
-				parent    = target.parent(),
-				caption   = parent.find( '.wp-caption-text' ),
-				galParent = target.parents( '.gallery-item' ),
-				jetParent = target.parents( '.tiled-gallery-item' );
-
-			if ( 0 !== galParent.length ) {
-				caption = galParent.find( '.wp-caption-text' );
-			} else if ( 0 !== jetParent.length ) {
-				caption = jetParent.find( '.tiled-gallery-caption' );
-			}
+			var object  = this.$instance,
+				caption = findCaption( this.$currentTarget );
 
 			object.find( '.caption' ).remove();
+
 			if ( 0 !== caption.length ) {
 				var $captionElm = $( '<div class="caption">' ).appendTo( object.find( '.featherlight-content' ) );
 				$captionElm[0].innerHTML = caption.html();
