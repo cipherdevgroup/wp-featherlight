@@ -66,6 +66,16 @@
 				white-space: normal;
 			}
 		}
+
+		a {
+			color: $caption-text-color;
+			text-decoration: underline;
+
+			&:hover,
+			&:focus {
+				text-decoration: none;
+			}
+		}
 	}
 
 	.featherlight-inner {
