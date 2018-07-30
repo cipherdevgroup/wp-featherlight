@@ -79,6 +79,12 @@
 			return caption;
 		}
 
+		var gutCaption = target.parent().find( 'figcaption' );
+
+		if ( 0 !== gutCaption.length ) {
+			return gutCaption;
+		}
+
 		var galParent = target.parents( '.gallery-item' );
 
 		if ( 0 !== galParent.length ) {
