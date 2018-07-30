@@ -989,6 +989,12 @@
 			return jetParent.find( '.tiled-gallery-caption' );
 		}
 
+		var gutParent = target.parents( '.blocks-gallery-item' );
+
+		if ( 0 !== gutParent.length ) {
+			return gutParent.find( 'figcaption' );
+		}
+
 		return '';
 	}
 
