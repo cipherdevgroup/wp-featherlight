@@ -989,16 +989,16 @@
 			return galParent.find( '.wp-caption-text' );
 		}
 
-		var jetParent = target.parents( '.tiled-gallery-item' );
-
-		if ( 0 !== jetParent.length ) {
-			return jetParent.find( '.tiled-gallery-caption' );
-		}
-
 		var gutParent = target.parents( '.blocks-gallery-item' );
 
 		if ( 0 !== gutParent.length ) {
 			return gutParent.find( 'figcaption' );
+		}
+
+		var jetParent = target.parents( '.tiled-gallery-item' );
+
+		if ( 0 !== jetParent.length ) {
+			return jetParent.find( '.tiled-gallery-caption' );
 		}
 
 		return '';
