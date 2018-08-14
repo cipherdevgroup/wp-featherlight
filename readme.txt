@@ -45,7 +45,6 @@ Here's a full list of what's changed since the last release:
 - Feature: Gutenberg support
 - Tweak: General code cleanup in plugin
 - Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.13`
-- Dev: Updated [jQuery Detect Swipe](http://github.com/marcandre/detect_swipe) to `2.1.4`
 - Change of ownership
 
 = 1.2.0 =
