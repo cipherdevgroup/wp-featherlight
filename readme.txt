@@ -3,7 +3,7 @@
 Contributors: fatmedia, cipherdevgroup, ozzyr
 Tags: lightbox, jquery lightbox, jquery, gallery, image, lightbox images, image lightbox, lightbox gallery, lightbox image, lightbox popup, featherlight, photo gallery, popup image, popup images, popup lightbox, responsive lightbox, swipe, wordpress image lightbox, wordpress lightbox, wordpress slideshow lightbox, photography, images, minimal, responsive, photo, photos
 Requires at least: 4.0
-Tested up to: 4.8.2
+Tested up to: 4.9.8
 Stable tag: 1.2.0
 License: GPL-2.0+
 
@@ -36,6 +36,17 @@ If you'd like to submit code patches or contribute in any other way, please [for
 1. A view of the jQuery lightbox in action.
 
 == Changelog ==
+
+= 1.3.0 =
+While primarily a maintenance release, one new feature has been added. WP Featherlight now supports Gutenberg galleries.
+
+Here's a full list of what's changed since the last release:
+
+- Feature: Gutenberg support
+- Tweak: General code cleanup in plugin
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.13`
+- Dev: Updated [jQuery Detect Swipe](http://github.com/marcandre/detect_swipe) to `2.1.4`
+- Change of ownership
 
 = 1.2.0 =
 This is primarily a maintenance release, but one new feature has been added. HTML in captions is now supported!
