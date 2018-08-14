@@ -1,3 +1,13 @@
+## 1.3.0
+While primarily a maintenance release, one new feature has been added. WP Featherlight now supports Gutenberg galleries.
+
+Here's a full list of what's changed since the last release:
+
+- Feature: Gutenberg support
+- Tweak: General code cleanup in plugin
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.13`
+- Change of ownership
+
 ## 1.2.0
 This is primarily a maintenance release, but one new feature has been added. HTML in captions is now supported!
 
@@ -23,7 +33,7 @@ If you're just using the plugin on your site and haven't customized it or paid a
 
 If you're a developer and have written custom code extending the PHP side of WP Featherlight, be sure to test your code before updating.
 
-Under the hood, we've [deprecated some internal methods](https://github.com/wpsitecare/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
+Under the hood, we've [deprecated some internal methods](https://github.com/cipherdevgroup/wp-featherlight/search?utf8=%E2%9C%93&q=_deprecated_function) which could potentially break custom code which extends WP Featherlight. The changes are primarily limited to class initialization, so unless you were doing something specific to that, it's unlikely that you'll run into issues.
 
 - Tweak: Improved transition between images within galleries
 - Tweak: Moved our disable lightbox checkbox into the publish meta box to streamline the admin

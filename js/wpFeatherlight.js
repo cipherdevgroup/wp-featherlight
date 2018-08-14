@@ -1,7 +1,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
+ * @copyright Copyright (c) 2018, Cipher Development, LLC
  * @license   MIT
  */
 (function( window, $, undefined ) {
@@ -42,11 +42,7 @@
 	 */
 	function buildGalleries( index, element ) {
 		var $galleryObj   = $( element ),
-			$galleryItems = $galleryObj.find( '.gallery-item a' );
-
-		if ( 0 === $galleryItems.length ) {
-			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
-		}
+			$galleryItems = $galleryObj.find( 'a[data-featherlight]' );
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
 			$galleryItems.featherlightGallery({
@@ -63,11 +59,51 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $body.find( '.gallery, .tiled-gallery' );
+		var $gallery = $body.find( '[class*="gallery"]' );
 
 		if ( 0 !== $gallery.length ) {
 			$.each( $gallery, buildGalleries );
 		}
+	}
+
+	/**
+	 * Attempt to Find image captions using common WordPress caption markup.
+	 *
+	 * @since  1.3.0
+	 * @return void
+	 */
+	function findCaption( target ) {
+		var	caption = target.parent().find( '.wp-caption-text' );
+
+		if ( 0 !== caption.length ) {
+			return caption;
+		}
+
+		var gutCaption = target.parent().find( 'figcaption' );
+
+		if ( 0 !== gutCaption.length ) {
+			return gutCaption;
+		}
+
+		var galParent = target.parents( '.gallery-item' );
+
+		if ( 0 !== galParent.length ) {
+			return galParent.find( '.wp-caption-text' );
+		}
+
+		var gutParent = target.parents( '.blocks-gallery-item' );
+
+		if ( 0 !== gutParent.length ) {
+			return gutParent.find( 'figcaption' );
+		}
+
+		var jetParent = target.parents( '.tiled-gallery-item' );
+
+		if ( 0 !== jetParent.length ) {
+			return jetParent.find( '.tiled-gallery-caption' );
+		}
+
+		return '';
 	}
 
 	/**
@@ -78,20 +114,11 @@
 	 */
 	function addCaptions() {
 		$.featherlight.prototype.afterContent = function() {
-			var object    = this.$instance,
-				target    = this.$currentTarget,
-				parent    = target.parent(),
-				caption   = parent.find( '.wp-caption-text' ),
-				galParent = target.parents( '.gallery-item' ),
-				jetParent = target.parents( '.tiled-gallery-item' );
-
-			if ( 0 !== galParent.length ) {
-				caption = galParent.find( '.wp-caption-text' );
-			} else if ( 0 !== jetParent.length ) {
-				caption = jetParent.find( '.tiled-gallery-caption' );
-			}
+			var object  = this.$instance,
+				caption = findCaption( this.$currentTarget );
 
 			object.find( '.caption' ).remove();
+
 			if ( 0 !== caption.length ) {
 				var $captionElm = $( '<div class="caption">' ).appendTo( object.find( '.featherlight-content' ) );
 				$captionElm[0].innerHTML = caption.html();

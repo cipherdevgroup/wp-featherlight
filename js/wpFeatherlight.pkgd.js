@@ -86,9 +86,9 @@
 
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.7.9 - http://noelboss.github.io/featherlight/
+ * Version 1.7.13 - http://noelboss.github.io/featherlight/
  *
- * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
+ * Copyright 2018, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
 (function($) {
@@ -98,7 +98,10 @@
 		if('console' in window){ window.console.info('Too much lightness, Featherlight needs jQuery.'); }
 		return;
 	}
-
+	if($.fn.jquery.match(/-ajax/)) {
+		if('console' in window){ window.console.info('Featherlight needs regular jQuery, not the slim version.'); }
+		return;
+	}
 	/* Featherlight is exported as $.featherlight.
 	   It is a function used to open a featherlight lightbox.
 
@@ -154,8 +157,9 @@
 
 	// NOTE: List of available [iframe attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
 	var iFrameAttributeSet = {
-		allowfullscreen: 1, frameborder: 1, height: 1, longdesc: 1, marginheight: 1, marginwidth: 1,
-		name: 1, referrerpolicy: 1, scrolling: 1, sandbox: 1, src: 1, srcdoc: 1, width: 1
+		allow: 1, allowfullscreen: 1, frameborder: 1, height: 1, longdesc: 1, marginheight: 1, marginwidth: 1,
+		mozallowfullscreen: 1, name: 1, referrerpolicy: 1, sandbox: 1, scrolling: 1, src: 1, srcdoc: 1, style: 1,
+		webkitallowfullscreen: 1, width: 1
 	};
 
 	// Converts camelCased attributes to dasherized versions for given prefix:
@@ -252,6 +256,9 @@
 
 			/* close when click on background/anywhere/null or closebox */
 			self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
+				if(event.isDefaultPrevented()) {
+					return;
+				}
 				var $target = $(event.target);
 				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
 					|| 'anywhere' === self.closeOnClick
@@ -320,25 +327,22 @@
 
 		/* sets the content of $instance to $content */
 		setContent: function($content){
-			var self = this;
-			/* we need a special class for the iframe */
-			if($content.is('iframe')) {
-				self.$instance.addClass(self.namespace+'-iframe');
-			}
+      this.$instance.removeClass(this.namespace+'-loading');
 
-			self.$instance.removeClass(self.namespace+'-loading');
+      /* we need a special class for the iframe */
+      this.$instance.toggleClass(this.namespace+'-iframe', $content.is('iframe'));
 
-			/* replace content by appending to existing one before it is removed
-			   this insures that featherlight-inner remain at the same relative
-				 position to any other items added to featherlight-content */
-			self.$instance.find('.'+self.namespace+'-inner')
-				.not($content)                /* excluded new content, important if persisted */
-				.slice(1).remove().end()      /* In the unexpected event where there are many inner elements, remove all but the first one */
-				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
+      /* replace content by appending to existing one before it is removed
+         this insures that featherlight-inner remain at the same relative
+         position to any other items added to featherlight-content */
+      this.$instance.find('.'+this.namespace+'-inner')
+        .not($content)                /* excluded new content, important if persisted */
+        .slice(1).remove().end()      /* In the unexpected event where there are many inner elements, remove all but the first one */
+        .replaceWith($.contains(this.$instance[0], $content[0]) ? '' : $content);
 
-			self.$content = $content.addClass(self.namespace+'-inner');
+      this.$content = $content.addClass(this.namespace+'-inner');
 
-			return self;
+      return this;
 		},
 
 		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config.
@@ -447,7 +451,7 @@
 				process: function(elem) { return this.persist !== false ? $(elem) : $(elem).clone(true); }
 			},
 			image: {
-				regex: /\.(png|jpg|jpeg|gif|tiff|bmp|svg)(\?\S*)?$/i,
+				regex: /\.(png|jpg|jpeg|gif|tiff?|bmp|svg)(\?\S*)?$/i,
 				process: function(url)  {
 					var self = this,
 						deferred = $.Deferred(),
@@ -562,7 +566,7 @@
 			/* make a copy */
 			config = $.extend({}, config);
 
-			/* Only for openTrigger and namespace... */
+			/* Only for openTrigger, filter & namespace... */
 			var namespace = config.namespace || Klass.defaults.namespace,
 				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
 				sharedPersist;
@@ -588,7 +592,7 @@
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, handler);
 
-			return handler;
+			return {filter: tempConfig.filter, handler: handler};
 		},
 
 		current: function() {
@@ -613,8 +617,9 @@
 		_onReady: function() {
 			var Klass = this;
 			if(Klass.autoBind){
+				var $autobound = $(Klass.autoBind);
 				/* Bind existing elements */
-				$(Klass.autoBind).each(function(){
+				$autobound.each(function(){
 					Klass.attach($(this));
 				});
 				/* If a click propagates to the document level, then we have an item that was added later on */
@@ -622,10 +627,18 @@
 					if (evt.isDefaultPrevented()) {
 						return;
 					}
+					var $cur = $(evt.currentTarget);
+					var len = $autobound.length;
+					$autobound = $autobound.add($cur);
+					if(len === $autobound.length) {
+						return; /* already bound */
+					}
 					/* Bind featherlight */
-					var handler = Klass.attach($(evt.currentTarget));
+					var data = Klass.attach($cur);
 					/* Dispatch event directly */
-					handler(evt);
+					if (!data.filter || $(evt.target).parentsUntil($cur, data.filter).length > 0) {
+						data.handler(evt);
+					}
 				});
 			}
 		},
@@ -715,9 +728,9 @@
 
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 1.7.9 - http://noelboss.github.io/featherlight/
+ * Version 1.7.13 - http://noelboss.github.io/featherlight/
  *
- * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
+ * Copyright 2018, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
 (function($) {
@@ -863,8 +876,9 @@
 
 		createNavigation: function(target) {
 			var self = this;
-			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(){
+			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(evt){
 				$(this).trigger(target+'.'+self.namespace);
+				evt.preventDefault();
 			});
 		}
 	});
@@ -885,7 +899,7 @@
 /**
  * WP Featherlight - Loader and helpers for the Featherlight WordPress plugin
  *
- * @copyright Copyright 2015, WP Site Care (http://www.wpsitecare.com)
+ * @copyright Copyright (c) 2018, Cipher Development, LLC
  * @license   MIT
  */
 (function( window, $, undefined ) {
@@ -926,11 +940,7 @@
 	 */
 	function buildGalleries( index, element ) {
 		var $galleryObj   = $( element ),
-			$galleryItems = $galleryObj.find( '.gallery-item a' );
-
-		if ( 0 === $galleryItems.length ) {
-			$galleryItems = $galleryObj.find( '.tiled-gallery-item a' );
-		}
+			$galleryItems = $galleryObj.find( 'a[data-featherlight]' );
 
 		if ( $galleryItems.attr( 'data-featherlight' ) ) {
 			$galleryItems.featherlightGallery({
@@ -947,11 +957,51 @@
 	 * @return void
 	 */
 	function findGalleries() {
-		var $gallery = $body.find( '.gallery, .tiled-gallery' );
+		var $gallery = $body.find( '[class*="gallery"]' );
 
 		if ( 0 !== $gallery.length ) {
 			$.each( $gallery, buildGalleries );
 		}
+	}
+
+	/**
+	 * Attempt to Find image captions using common WordPress caption markup.
+	 *
+	 * @since  1.3.0
+	 * @return void
+	 */
+	function findCaption( target ) {
+		var	caption = target.parent().find( '.wp-caption-text' );
+
+		if ( 0 !== caption.length ) {
+			return caption;
+		}
+
+		var gutCaption = target.parent().find( 'figcaption' );
+
+		if ( 0 !== gutCaption.length ) {
+			return gutCaption;
+		}
+
+		var galParent = target.parents( '.gallery-item' );
+
+		if ( 0 !== galParent.length ) {
+			return galParent.find( '.wp-caption-text' );
+		}
+
+		var gutParent = target.parents( '.blocks-gallery-item' );
+
+		if ( 0 !== gutParent.length ) {
+			return gutParent.find( 'figcaption' );
+		}
+
+		var jetParent = target.parents( '.tiled-gallery-item' );
+
+		if ( 0 !== jetParent.length ) {
+			return jetParent.find( '.tiled-gallery-caption' );
+		}
+
+		return '';
 	}
 
 	/**
@@ -962,20 +1012,11 @@
 	 */
 	function addCaptions() {
 		$.featherlight.prototype.afterContent = function() {
-			var object    = this.$instance,
-				target    = this.$currentTarget,
-				parent    = target.parent(),
-				caption   = parent.find( '.wp-caption-text' ),
-				galParent = target.parents( '.gallery-item' ),
-				jetParent = target.parents( '.tiled-gallery-item' );
-
-			if ( 0 !== galParent.length ) {
-				caption = galParent.find( '.wp-caption-text' );
-			} else if ( 0 !== jetParent.length ) {
-				caption = jetParent.find( '.tiled-gallery-caption' );
-			}
+			var object  = this.$instance,
+				caption = findCaption( this.$currentTarget );
 
 			object.find( '.caption' ).remove();
+
 			if ( 0 !== caption.length ) {
 				var $captionElm = $( '<div class="caption">' ).appendTo( object.find( '.featherlight-content' ) );
 				$captionElm[0].innerHTML = caption.html();

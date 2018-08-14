@@ -3,7 +3,7 @@
  * WP Featherlight main plugin class.
  *
  * @package   WPFeatherlight
- * @copyright Copyright (c) 2016, WP Site Care
+ * @copyright Copyright (c) 2018, Cipher Development, LLC
  * @license   GPL-2.0+
  * @since     0.1.0
  */
@@ -23,7 +23,7 @@ class WP_Featherlight {
 	 * @since 0.3.0
 	 * @var   string
 	 */
-	const VERSION = '1.2.0';
+	const VERSION = '1.3.0';
 
 	/**
 	 * Property for storing a reference to the main plugin file.

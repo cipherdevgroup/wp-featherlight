@@ -25,7 +25,7 @@ Here's an example of the plugin being used to load a large (5mb) external image 
 
 ![Loader in Action](https://cloud.githubusercontent.com/assets/2184093/7943635/5ba2155e-092b-11e5-8b97-be5ca8cc77d8.gif)
 
-If you find a display problem, it may be related to your theme but please [open an issue](https://github.com/wpsitecare/wp-featherlight/issues) about it so we can look into it. For more information about the Featherlight script itself, check out their [GitHub plugin page](http://noelboss.github.io/featherlight/).
+If you find a display problem, it may be related to your theme but please [open an issue](https://github.com/cipherdevgroup/wp-featherlight/issues) about it so we can look into it. For more information about the Featherlight script itself, check out their [GitHub plugin page](http://noelboss.github.io/featherlight/).
 
 ## Installation ##
 
@@ -35,8 +35,8 @@ The best way to install this plugin is to either [download a copy](https://wordp
 
 While there are no options in the plugin, there are some handy filters to modify the default behavior. As of `0.3.0` all images which use the default WordPress captions will also include a caption when the image is lightboxed. To disable this behavior, filter `wp_featherlight_captions` to false.
 
-You can also disable inclusion of the CSS and JavaScript conditionally using filters which can be found in the `/includes/class-scripts.php` file. If you have questions about how any part of the plugin works, please don't hesitate to [open an issue](https://github.com/wpsitecare/wp-featherlight/issues).
+You can also disable inclusion of the CSS and JavaScript conditionally using filters which can be found in the `/includes/class-scripts.php` file. If you have questions about how any part of the plugin works, please don't hesitate to [open an issue](https://github.com/cipherdevgroup/wp-featherlight/issues).
 
 ## Contributing ##
 
-If you're a developer, the most current version can be found on the [develop branch](https://github.com/wpsitecare/wp-featherlight/tree/develop). Pull requests, issues, and any feedback are all more than welcome. If you would like to contribute code, please make your pull requests against the develop branch rather than the master.
+If you're a developer, the most current version can be found on the [develop branch](https://github.com/cipherdevgroup/wp-featherlight/tree/develop). Pull requests, issues, and any feedback are all more than welcome. If you would like to contribute code, please make your pull requests against the develop branch rather than the master.
