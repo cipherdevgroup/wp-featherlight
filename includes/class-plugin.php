@@ -174,6 +174,7 @@ class WP_Featherlight {
 	protected function admin_instantiate() {
 		$this->i18n = new WP_Featherlight_Language_Loader( 'wp-featherlight', $this->file );
 		$this->meta = new WP_Featherlight_Admin_Meta;
+		$this->meta->run();
 	}
 
 	/**
