@@ -37,6 +37,14 @@ If you'd like to submit code patches or contribute in any other way, please [for
 
 == Changelog ==
 
+= 1.3.1 =
+This is primarily a maintenance release, but one new feature has been added. Display the option to disable the lightbox in Gutenberg!
+
+Here's a full list of what's changed since the last release:
+
+- Feature: Add back metabox in sidebar
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.14`
+
 = 1.3.0 =
 While primarily a maintenance release, one new feature has been added. WP Featherlight now supports Gutenberg galleries.
 
