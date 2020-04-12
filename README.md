@@ -2,10 +2,10 @@
 
 An ultra lightweight jQuery lightbox for WordPress images and galleries.
 
-__Contributors:__ [Robert Neu](https://github.com/robneu), [Ozzy Rodriguez](https://github.com/ozzyrod), [Cipher Development](https://github.com/cipherdevgroup)  
-__Requires:__ WordPress 4.0  
-__Tested up to:__ WordPress 4.9.8  
-__License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)  
+__Contributors:__ [Robert Neu](https://github.com/robneu), [Ozzy Rodriguez](https://github.com/ozzyrod), [Cipher Development](https://github.com/cipherdevgroup)
+__Requires:__ WordPress 4.0
+__Tested up to:__ WordPress 5.4.0
+__License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
 ![nacin-at-loopconf](https://cloud.githubusercontent.com/assets/2184093/9426378/56c32f16-4902-11e5-9e57-75a4620cc51b.png)
 
