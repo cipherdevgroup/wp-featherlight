@@ -933,7 +933,7 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-featherlight@~1.7.13:
+featherlight@~1.7.14:
   version "1.7.14"
   resolved "https://registry.yarnpkg.com/featherlight/-/featherlight-1.7.14.tgz#7896909d0d7ac4672c334ba018363e519d31e4db"
   integrity sha512-4R0Vk0pTN5IPCuMABPtXJ6hgGgoK1qwbxGB4Nf06gXovw/i+r3s/f94ksZYjsW3c2oMEAS9A8exdlNaX9YSSRQ==

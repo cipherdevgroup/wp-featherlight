@@ -19,7 +19,7 @@
       "name": "Robert Neu",
       "url": "https://cipherdevelopment.com"
     },
-	{
+    {
       "name": "Ozzy Rodriguez",
       "url": "https://cipherdevelopment.com"
     },
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "detect_swipe": "~2.1.4",
-    "featherlight": "~1.7.13"
+    "featherlight": "~1.7.14"
   },
   "devDependencies": {
     "cipher-plugin-config": "cipherdevgroup/cipher-plugin-config",
