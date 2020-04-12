@@ -132,7 +132,16 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function add_meta_boxes( $post_type ) {
-		_deprecated_function( __METHOD__, '1.0.0' );
+		$type = get_post_type_object( $post_type );
+		if ( is_object( $type ) && $type->public ) {
+			add_meta_box(
+				'wp_featherlight_options',
+				__( 'WP Featherlight Options', 'wp-featherlight' ),
+				array( $this, 'options_callback' ),
+				null,
+				'side'
+			);
+		}
 	}
 
 	/**
@@ -145,9 +154,26 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function options_callback( WP_Post $post ) {
-		_deprecated_function( __METHOD__, '1.0.0' );
+		wp_featherlight()->i18n->load();
+		$disable = get_post_meta( $post->ID, 'wp_featherlight_disable', true );
+		$checked = empty( $disable ) ? '' : $disable;
+		require_once wp_featherlight()->get_dir() . 'admin/views/meta-box.php';
+	}
 
-		$this->meta_box_view( $post );
+	/**
+	 * Hook into WordPress.
+	 *
+	 * @since  1.3.1
+	 * @access protected
+	 * @return void
+	 */
+	protected function wp_hooks() {
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+
+		if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+			$this->user_data = $_POST;
+			add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
+		}
 	}
 
 	/**
@@ -159,6 +185,6 @@ class WP_Featherlight_Admin_Meta {
 	 * @return void
 	 */
 	public function run() {
-		_deprecated_function( __METHOD__, '1.0.0' );
+		$this->wp_hooks();
 	}
 }
