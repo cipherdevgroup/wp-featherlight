@@ -23,7 +23,7 @@ class WP_Featherlight {
 	 * @since 0.3.0
 	 * @var   string
 	 */
-	const VERSION = '1.3.0';
+	const VERSION = '1.3.1';
 
 	/**
 	 * Property for storing a reference to the main plugin file.
@@ -174,6 +174,7 @@ class WP_Featherlight {
 	protected function admin_instantiate() {
 		$this->i18n = new WP_Featherlight_Language_Loader( 'wp-featherlight', $this->file );
 		$this->meta = new WP_Featherlight_Admin_Meta;
+		$this->meta->run();
 	}
 
 	/**
