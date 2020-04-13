@@ -1,3 +1,8 @@
+## 1.3.2
+Release to downgrade Featherlight verison until all bugs are worked out.
+
+- Dev: Updated [Featherlight](https://github.com/noelboss/featherlight/) to `1.7.13`
+
 ## 1.3.1
 This is primarily a maintenance release, but one new feature has been added. Display the option to disable the lightbox in Gutenberg!
 
