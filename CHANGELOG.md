@@ -1,3 +1,10 @@
+## 1.3.3
+This is primarily a maintenance release.
+
+Here's a full list of what's changed since the last release:
+- Tweak: Change metabox title
+
+
 ## 1.3.2
 Release to downgrade Featherlight verison until all bugs are worked out.
 
