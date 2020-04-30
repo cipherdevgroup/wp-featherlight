@@ -37,6 +37,11 @@ If you'd like to submit code patches or contribute in any other way, please [for
 
 == Changelog ==
 
+= 1.3.3 =
+This is primarily a maintenance release, but one tweak was made.
+
+- Tweak: Changed name of meta box title
+
 = 1.3.2 =
 Release to downgrade Featherlight verison until all bugs are worked out.
 
