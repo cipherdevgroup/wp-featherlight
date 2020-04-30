@@ -1,36 +1,11 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.7.14-UMD - http://noelboss.github.io/featherlight/
+ * Version 1.7.13 - http://noelboss.github.io/featherlight/
  *
- * Copyright 2019, Noël Raoul Bossart (http://www.noelboss.com)
+ * Copyright 2018, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
-(function (factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD. Register as an anonymous module.
-		define(['jquery'], factory);
-	} else if (typeof module === 'object' && module.exports) {
-		// Node/CommonJS
-		module.exports = function (root, jQuery) {
-			if (jQuery === undefined) {
-				// require('jQuery') returns a factory that requires window to
-				// build a jQuery instance, we normalize how we use modules
-				// that require this pattern but the window provided is a noop
-				// if it's defined (how jquery works)
-				if (typeof window !== 'undefined') {
-					jQuery = require('jquery');
-				} else {
-					jQuery = require('jquery')(root);
-				}
-			}
-			factory(jQuery);
-			return jQuery;
-		};
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-})(function($) {
+(function($) {
 	"use strict";
 
 	if('undefined' === typeof $) {
@@ -160,7 +135,7 @@
 		otherClose:     null,                  /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:     $.noop,                /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeContent:  $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
-		beforeClose:    $.noop,                /* Called before close. can return false to prevent closing of lightbox. Gets event as parameter, this contains all data */
+		beforeClose:    $.noop,                /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:      $.noop,                /* Called after open. Gets event as parameter, this contains all data */
 		afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:     $.noop,                /* Called after close. Gets event as parameter, this contains all data */
@@ -307,11 +282,9 @@
 
 					/* Set content and show */
 					return $.when($content)
-						.always(function($openendContent){
-							if($openendContent) {
-								self.setContent($openendContent);
-								self.afterContent(event);
-							}
+						.always(function($content){
+							self.setContent($content);
+							self.afterContent(event);
 						})
 						.then(self.$instance.promise())
 						/* Call afterOpen after fadeIn is done */
@@ -422,7 +395,7 @@
 						if ( status !== "error" ) {
 							deferred.resolve($container.contents());
 						}
-						deferred.reject();
+						deferred.fail();
 					});
 					return deferred.promise();
 				}
@@ -665,4 +638,4 @@
 
 	/* bind featherlight on ready if config autoBind is set */
 	$(document).ready(function(){ Featherlight._onReady(); });
-});
+}(jQuery));

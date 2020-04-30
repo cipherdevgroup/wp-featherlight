@@ -136,7 +136,7 @@ class WP_Featherlight_Admin_Meta {
 		if ( is_object( $type ) && $type->public ) {
 			add_meta_box(
 				'wp_featherlight_options',
-				__( 'WP Featherlight Options', 'wp-featherlight' ),
+				__( 'WP Featherlight', 'wp-featherlight' ),
 				array( $this, 'options_callback' ),
 				null,
 				'side'
