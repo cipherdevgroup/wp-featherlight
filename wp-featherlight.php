@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:  WP Featherlight
- * Plugin URI:   https://cipherdevelopment.com/wp-featherlight/
+ * Plugin URI:   https://wpfeatherlight.cipherdevelopment.com
  * Description:  An ultra lightweight jQuery lightbox for WordPress images and galleries.
  * Version:      1.3.3
  * Author:       Cipher
