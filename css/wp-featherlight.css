@@ -71,6 +71,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.caption {
+  margin-top: 5px;
+}
 .featherlight .featherlight-content .caption:hover, .featherlight .featherlight-content .caption:focus {
   overflow: visible;
   white-space: normal;
