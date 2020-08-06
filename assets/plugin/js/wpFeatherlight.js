@@ -30,7 +30,7 @@
 	 * @return void
 	 */
 	function findImages() {
-		$body.find( 'a[href]' ).filter( testImages ).attr( 'data-featherlight', 'image' );
+		$body.find( 'a[href]' ).filter( testImages ).attr( { 'data-featherlight': 'image', 'aria-hidden': 'true' } );
 	}
 
 	/**
