@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "detect_swipe": "~2.1.4",
-    "featherlight": "~1.7.13"
+    "featherlight": "1.7.13"
   },
   "devDependencies": {
     "cipher-plugin-config": "cipherdevgroup/cipher-plugin-config",
