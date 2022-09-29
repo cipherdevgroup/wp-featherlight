@@ -23,7 +23,7 @@ class WP_Featherlight {
 	 * @since 0.3.0
 	 * @var   string
 	 */
-	const VERSION = '1.3.4';
+	const VERSION = '1.3.5';
 
 	/**
 	 * Property for storing a reference to the main plugin file.
