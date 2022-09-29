@@ -1,3 +1,6 @@
+## 1.3.5
+Added WebP image format support.
+
 ## 1.3.4
 This is a maintenance release.
 
