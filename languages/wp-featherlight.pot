@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Featherlight 1.3.4\n"
+"Project-Id-Version: WP Featherlight 1.3.5\n"
 "Report-Msgid-Bugs-To: https://cipherdevelopment.com/contact/\n"
 "POT-Creation-Date: 2020-08-08 17:45:15+00:00\n"
 "MIME-Version: 1.0\n"

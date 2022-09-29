@@ -1,11 +1,11 @@
 === WP Featherlight - A Simple jQuery Lightbox ===
 
 Contributors: fatmedia, cipherdevgroup, ozzyr
-Tags: lightbox, jquery lightbox, jquery, gallery, image, lightbox images, image lightbox, lightbox gallery, lightbox image, lightbox popup, featherlight, photo gallery, popup image, popup images, popup lightbox, responsive lightbox, swipe, wordpress image lightbox, wordpress lightbox, wordpress slideshow lightbox, photography, images, minimal, responsive, photo, photos  
-Requires at least: 4.0  
-Tested up to: 5.5.0  
-Stable tag: 1.3.4  
-License: GPL-2.0+  
+Tags: lightbox, jquery lightbox, jquery, gallery, image, lightbox images, image lightbox, lightbox gallery, lightbox image, lightbox popup, featherlight, photo gallery, popup image, popup images, popup lightbox, responsive lightbox, swipe, wordpress image lightbox, wordpress lightbox, wordpress slideshow lightbox, photography, images, minimal, responsive, photo, photos
+Requires at least: 4.0
+Tested up to: 5.5.0
+Stable tag: 1.3.5  
+License: GPL-2.0+
 
 An ultra lightweight jQuery lightbox for WordPress images and galleries.
 
